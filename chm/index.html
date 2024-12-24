@@ -2,29 +2,59 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <style>
       * {margin: 0;padding: 0;box-sizing: border-box;font-family: "Microsoft JhengHei", Arial, sans-serif;}
       .logo-container {height: 50px;width: 100%;background-color: #54d6f4;display: flex;justify-content: center;align-items: center;}
       .logo {color: white;font-size: 24px;font-weight: bold;}
       .logo img {height: 100%;width: auto;}
 
-      /* 走馬燈 */
+      /* 走馬燈  qqq 修改每段停一下 qqq */
       .marquee-container {height: 30px;width: 100%;position: relative;overflow: hidden;background: #343434;}
       .marquee-container:hover .marquee-content {animation-play-state: paused;}
       .marquee-content {position: absolute;width: 100%;display: flex;flex-direction: column;animation: scrollUp 10s linear infinite;}      
       .marquee-item {padding: 5px;text-align: center;  height: 30px;display: flex;align-items: center;justify-content: center;}
-      .marquee-item a {text-decoration: none;color: #333;}
+      .marquee-item a {text-decoration: none;}
       .marquee-item a:hover {text-decoration: underline;}
+
+
+/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+          :::        :::::::::        :::::::::       ::::::::           :::        :::::::::       :::::::::
+       :+: :+:      :+:    :+:       :+:    :+:     :+:    :+:        :+: :+:      :+:    :+:      :+:    :+:
+     +:+   +:+     +:+    +:+       +:+    +:+     +:+    +:+       +:+   +:+     +:+    +:+      +:+    +:+
+   +#++:++#++:    +#+    +:+       +#++:++#+      +#+    +:+      +#++:++#++:    +#++:++#:       +#+    +:+
+  +#+     +#+    +#+    +#+       +#+    +#+     +#+    +#+      +#+     +#+    +#+    +#+      +#+    +#+
+ #+#     #+#    #+#    #+#       #+#    #+#     #+#    #+#      #+#     #+#    #+#    #+#      #+#    #+#
+###     ###    #########        #########       ########       ###     ###    ###    ###      #########
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+      .marquee-item a {color: #ecfd55;} /* 走馬燈 文字顏色 */
+/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+          :::        :::::::::        :::::::::       ::::::::           :::        :::::::::       :::::::::
+       :+: :+:      :+:    :+:       :+:    :+:     :+:    :+:        :+: :+:      :+:    :+:      :+:    :+:
+     +:+   +:+     +:+    +:+       +:+    +:+     +:+    +:+       +:+   +:+     +:+    +:+      +:+    +:+
+   +#++:++#++:    +#+    +:+       +#++:++#+      +#+    +:+      +#++:++#++:    +#++:++#:       +#+    +:+
+  +#+     +#+    +#+    +#+       +#+    +#+     +#+    +#+      +#+     +#+    +#+    +#+      +#+    +#+
+ #+#     #+#    #+#    #+#       #+#    #+#     #+#    #+#      #+#     #+#    #+#    #+#      #+#    #+#
+###     ###    #########        #########       ########       ###     ###    ###    ###      #########
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+
 
       .close-marquee {position: absolute;right: 10px;top: 5px;cursor: pointer;z-index: 2;}
 
       .image-container {width: 100%;text-align: center;}
       .responsive-image {max-width: 100%;height: auto;}
       
-      @media (min-width: 768px) {
-        .responsive-image {  height: auto;  width: 50%;max-width: 760px;}
-      }
+      @media (min-width: 768px) {.responsive-image {  height: auto;  width: 50%;max-width: 760px;}}
       
       .company-intro {width: 90%;max-width: 760px;margin: 20px auto;padding: 20px;line-height: 2;text-align: center;}
 
@@ -45,6 +75,16 @@
       @keyframes scrollUp {0% { transform: translateY(100%); }
         100% { transform: translateY(-100%); }
       }
+
+      .btn {border: none; padding: 10px 20px; cursor: pointer; border-radius: 5px; margin-top: 10px; width: auto; text-align: center;}
+      .section,nav { display: none;}
+      .active { display: block;}
+      .container {max-width: 760px;margin: 2rem auto;padding: 0 1rem;}
+    
+      h1,h2,h3,label {display: block;margin-bottom: 0.5rem;color: var(--標題色);}
+      input, select {width: 100%;padding: 0.8rem;border: 1px solid #ddd;border-radius: 5px;font-size: 1rem;}
+    
+      
     </style>
 
     <title>精緻型專業搬遷、廠房辦公室搬運最優解｜誠鑫搬家｜北部地區首選、台北市、新北市、桃園市、基隆市</title>
@@ -61,13 +101,39 @@
 
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://64071181.github.io/mokJsapi/mokJsApi.js"></script>
-
-  </head>
-<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js">// 加密/解密處理</script>
 
 
+<!--
+/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+      ::::::::   :::::::::::         :::   :::         :::
+    :+:    :+:      :+:            :+:+: :+:+:      :+:+:
+   +:+             +:+           +:+ +:+:+ +:+       +:+
+  :#:             +#+           +#+  +:+  +#+       +#+
+ +#+   +#+#      +#+           +#+       +#+       +#+
+#+#    #+#      #+#           #+#       #+#       #+#
+########       ###           ###       ###     #######
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+-->
+<!--GTM 1 code start-->
 
 
+<!--GTM 1 code end-->
+<!--
+/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+      ::::::::   :::::::::::         :::   :::         :::
+    :+:    :+:      :+:            :+:+: :+:+:      :+:+:
+   +:+             +:+           +:+ +:+:+ +:+       +:+
+  :#:             +#+           +#+  +:+  +#+       +#+
+ +#+   +#+#      +#+           +#+       +#+       +#+
+#+#    #+#      #+#           #+#       #+#       #+#
+########       ###           ###       ###     #######
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+-->
 
 
 
@@ -87,61 +153,134 @@
 <!--
 /* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-
-      :::::::::       ::::::::       :::::::::    :::   :::
-     :+:    :+:     :+:    :+:      :+:    :+:   :+:   :+:
-    +:+    +:+     +:+    +:+      +:+    +:+    +:+ +:+
-   +#++:++#+      +#+    +:+      +#+    +:+     +#++:
-  +#+    +#+     +#+    +#+      +#+    +#+      +#+
- #+#    #+#     #+#    #+#      #+#    #+#      #+#
-#########       ########       #########       ###
+      ::::::::       ::::::::       ::::::::
+    :+:    :+:     :+:    :+:     :+:    :+:
+   +:+            +:+            +:+
+  :#:            +#++:++#++     +#+
+ +#+   +#+#            +#+     +#+
+#+#    #+#     #+#    #+#     #+#    #+#
+########       ########       ########
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
 -->
-<div class="logo-container">
-  <div class="logo"><img src="//gs.liteshop.tw/public/logos/4cFJZCxH9xndRKyC9YEHDDWy/54946d78-0cac-4250-808e-17d3342f62ca.png" alt="誠鑫搬家"></div>
-</div>
+<!--GSC code start-->
 
-<div class="marquee-container" id="marqueeContainer">
-  <div class="close-marquee" onclick="closeMarquee()">×</div>
-  <div id="走馬燈" class="marquee-content"><!-- JS 走馬燈內容 --></div>
-</div>
 
-<div id="產品展示"><!-- JS 產品展示內容 --></div>
 
-<div id="關於我們" class="company-intro"><!-- JS 關於我們內容 --></div>
+<!--GSC code end-->
+<!--
+/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+      ::::::::       ::::::::       ::::::::
+    :+:    :+:     :+:    :+:     :+:    :+:
+   +:+            +:+            +:+
+  :#:            +#++:++#++     +#+
+ +#+   +#+#            +#+     +#+
+#+#    #+#     #+#    #+#     #+#    #+#
+########       ########       ########
 
-<div class="contact-section">
-  <div class="contact-title">
-    客服與聯絡資訊
-    <span class="toggle-btn" onclick="toggleContact()">+</span>
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+-->
+
+
+  </head>
+<body>
+
+
+
+
+<!--
+/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+      ::::::::   :::::::::::         :::   :::        ::::::::
+    :+:    :+:      :+:            :+:+: :+:+:      :+:    :+:
+   +:+             +:+           +:+ +:+:+ +:+           +:+
+  :#:             +#+           +#+  +:+  +#+         +#+
+ +#+   +#+#      +#+           +#+       +#+       +#+
+#+#    #+#      #+#           #+#       #+#      #+#
+########       ###           ###       ###     ##########
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+-->
+<!--GTM 2 code start-->
+
+<!--GTM 2 code end-->
+<!--
+/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+      ::::::::   :::::::::::         :::   :::        ::::::::
+    :+:    :+:      :+:            :+:+: :+:+:      :+:    :+:
+   +:+             +:+           +:+ +:+:+ +:+           +:+
+  :#:             +#+           +#+  +:+  +#+         +#+
+ +#+   +#+#      +#+           +#+       +#+       +#+
+#+#    #+#      #+#           #+#       #+#      #+#
+########       ###           ###       ###     ##########
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+-->
+
+<nav style="text-align: center;">
+  <button class="btn" id="主頁btn" onclick="_導航換頁('主頁')" >主頁</button>
+  <button class="btn" id="設置btn" onclick="_導航換頁('設置')" >設置</button>
+</nav>
+<br>
+
+<section id="主頁page" class="section active">
+
+  <div class="logo-container">
+    <div class="logo"><img src="//gs.liteshop.tw/public/logos/4cFJZCxH9xndRKyC9YEHDDWy/54946d78-0cac-4250-808e-17d3342f62ca.png" alt="誠鑫搬家"></div>
   </div>
-  <div id="聯絡資訊" class="contact-content" ><!-- JS 聯絡資訊內容 --></div>
-</div>
 
-<div id="社交帳號"  class="social-links"><!-- JS 社交帳號內容 --></div>
+  <div class="marquee-container" id="marqueeContainer">
+    <div class="close-marquee" onclick="closeMarquee()">×</div>
+    <div id="走馬燈" class="marquee-content"><!-- JS 走馬燈內容 --></div>
+  </div>
+
+  <div id="產品展示"><!-- JS 產品展示內容 --></div>
+
+  <div id="關於我們" class="company-intro"><!-- JS 關於我們內容 --></div>
+
+  <div class="contact-section">
+    <div class="contact-title">
+      客服與聯絡資訊
+      <span class="toggle-btn" onclick="toggleContact()">+</span>
+    </div>
+    <div id="聯絡資訊" class="contact-content" ><!-- JS 聯絡資訊內容 --></div>
+  </div>
+
+  <div id="社交帳號"  class="social-links"><!-- JS 社交帳號內容 --></div>
+
+  <div class="copyright">  
+    <script> $('.copyright').text(`© ${new Date().getFullYear()} All rights reserved by 誠鑫搬家`)</script>
+  </div>
+
+  <div class="scroll-top" id="scrollTop" onclick="scrollToTop()">↑</div>
+
+</section>
 
 
 
 
 
 
-<div class="copyright">
-  <script> $('.copyright').text(`© ${new Date().getFullYear()} All rights reserved by 誠鑫搬家`)</script>
-</div>
+<section id="設置page" class="section">
 
-<div class="scroll-top" id="scrollTop" onclick="scrollToTop()">↑</div>
+  <div class="container">
 
-
-
+    <h2>您的公司名稱</h2>
+    <input type="text" id="公司名Input" placeholder="請修改您的公司名稱" title="請修改您的公司名稱" >
 
 
+    <button class="btn" onclick="_更222新野('公司資料', ['公司名Input','公司簡介Input', '公司wsInput', '公司地址Input', '營業時間Input', '打烊時間Input', '每時段Input', '時段做客上限Input', '主題色Input', '按鈕色Input', '標題色Input', '文字色Input'])" >更新公司資料</button>
+  </div>
 
-
-
-
-
+</section>
 
 
 
@@ -162,21 +301,6 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 
     <script>
-
-      /* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-      $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-
-            ::::::::       ::::::::       ::::::::
-          :+:    :+:     :+:    :+:     :+:    :+:
-        +:+            +:+            +:+
-        +#+            +#++:++#++     +#++:++#++
-      +#+                   +#+            +#+
-      #+#    #+#     #+#    #+#     #+#    #+#
-      ########       ########       ########
-
-      @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-      @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
-
 
 
 
@@ -251,22 +375,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 
 
-
-
-      /* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-      $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-
-            :::::::::           :::    :::::::::::           :::
-          :+:    :+:        :+: :+:      :+:             :+: :+:
-          +:+    +:+       +:+   +:+     +:+            +:+   +:+
-        +#+    +:+      +#++:++#++:    +#+           +#++:++#++:
-        +#+    +#+      +#+     +#+    +#+           +#+     +#+
-      #+#    #+#      #+#     #+#    #+#           #+#     #+#
-      #########       ###     ###    ###           ###     ###
-
-      @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-      @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
-
+      const adp = '7dda0cabd1fdf46e34f8cac123db4471addc49761b6a2a48184ed824d614cad0'
       // 取data並解密
       const 產品展示內容 = [
         {'圖': '//gs.liteshop.tw/public/store_landing_layout_photos/4cFJZCxH9xndRKyC9YEHDDWy-6e4a99ee-cc58-4b63-b91b-b02ea8ddc935.webp', 'url': ''},
@@ -296,7 +405,6 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
         {'圖': '//gs.liteshop.tw/public/store_landing_layout_photos/4cFJZCxH9xndRKyC9YEHDDWy-1a8bed55-ebf4-4186-87c2-9db948a6840b.webp', 'url': 'https://lin.ee/exeQ2Yx'},
         {'圖': '//gs.liteshop.tw/public/store_landing_layout_photos/4cFJZCxH9xndRKyC9YEHDDWy-ae58eea2-a130-44a8-aa1d-2978f759bc85.webp', 'url': ''}
       ];
-      //eval(CryptoJS.AES.decrypt(產品展示1217內容, 摸老婆).toString(CryptoJS.enc.Utf8))
 
 
       
@@ -328,16 +436,33 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       // 顯示內容
       function _顯示內容(data,sel) {
 
+        cont = 0;
         for (let 內容 of data){
           let 單個內容, all內容
 
           /***************** 走馬燈 ******************/
           if (sel == '走馬燈') all內容 = `<div class="marquee-item"><a href="${內容.url}" target="_blank" rel="noopener noreferrer">${內容.字}</a></div>`;
           
-
           /***************** 產品展示 ******************/
           if (sel == '產品展示'){
             單個內容 = `<img class="responsive-image" src="${內容.圖}" >`;
@@ -358,25 +483,101 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
           /***************** 聯絡資訊 ******************/
           if (sel == '聯絡資訊') all內容 = `<p>${內容.字}</p>`;
 
-
           /***************** 社交帳號 ******************/
           if (sel == '社交帳號') all內容 = 內容.html;
           
-
-
           // 加入DOM
           $(`#${sel}`).append(all內容);
         }
       }
 
 
+      
 
 
-      _顯示內容(產品展示內容,'產品展示')
-      _顯示內容(走馬燈內容,'走馬燈')
-      _顯示內容(關於我們,'關於我們')
-      _顯示內容(聯絡資訊,'聯絡資訊')
-      _顯示內容(社交帳號,'社交帳號')
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      function _去後台() {
+        admin明文 = false;
+        if ((location.href).indexOf('???') != -1) admin明文 = decodeURIComponent(location.href.split('???')[1])
+        if (sha256(admin明文) == adp) $('nav').addClass('active');
+      }
+
+      function _導航換頁(page) {
+        // 隱頁 - .active
+        $('.section').removeClass('active');
+        // 顯頁 + .active
+        $(`#${page}page`).addClass('active');
+      }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  _顯示內容(產品展示內容,'產品展示')
+  _顯示內容(走馬燈內容,'走馬燈')
+  _顯示內容(關於我們,'關於我們')
+  _顯示內容(聯絡資訊,'聯絡資訊')
+  _顯示內容(社交帳號,'社交帳號')
+
+  _去後台()
+
+
+
+
+
+
+
+
+
+
 
     </script>
   </body>
