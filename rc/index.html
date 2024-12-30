@@ -1,0 +1,708 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+      * {margin: 0;padding: 0;box-sizing: border-box;font-family: "Microsoft JhengHei", Arial, sans-serif;}
+      .logo-container {height: 50px;width: 100%;background-color: #1e2973;display: flex;justify-content: center;align-items: center;}
+      .logo {color: white;font-size: 24px;font-weight: bold;}
+      .logo img {height: 100%;width: auto;}
+
+      /* 走馬燈  qqq 修改每段停一下 qqq */
+      .marquee-container {height: 30px;width: 100%;position: relative;overflow: hidden;background: #343434;}
+      .marquee-container:hover .marquee-content {animation-play-state: paused;}
+      .marquee-content {position: absolute;width: 100%;display: flex;flex-direction: column;animation: scrollUp 10s linear infinite;}      
+      .marquee-item {padding: 5px;text-align: center;  height: 30px;display: flex;align-items: center;justify-content: center;}
+      .marquee-item a {text-decoration: none;color: #edff66;}
+      .marquee-item a:hover {text-decoration: underline;}
+
+      .close-marquee {position: absolute;right: 10px;top: 5px;cursor: pointer;z-index: 2;}
+
+      .image-container {width: 100%;text-align: center;}
+      .responsive-image {max-width: 100%;height: auto;}
+      
+      @media (min-width: 768px) {.responsive-image {  height: auto;  width: 50%;max-width: 760px;}}
+      
+      .company-intro {width: 90%;max-width: 760px;margin: 20px auto;padding: 20px;line-height: 2;text-align: center;}
+
+      .contact-section {width: auto;margin: 0 2% ;padding: 20px;line-height: 2;}
+
+      .contact-title {font-size: 24px;height: 50px;display: flex;justify-content: space-between;align-items: center;}
+      .toggle-btn {cursor: pointer;font-size: 24px;}
+      .contact-content {height: 0;overflow: hidden;transition: height 0.3s ease-in-out;}
+
+      /* line圖示 */
+      .social-links {margin: 20px ;}
+      .line-icon {width: 40px;height: 40px;}
+      .line-icon:hover > path{fill: #00B900;}
+
+      .copyright {text-align: center;padding: 20px;background: #f8f8f8;}
+      .scroll-top {position: fixed;bottom: 20px;right: 20px;background: #54d6f4;color: white;width: 40px;height: 40px;border-radius: 50%;display: none;justify-content: center;align-items: center;cursor: pointer;box-shadow: 0 2px 5px rgba(0,0,0,0.2);}
+      
+      @keyframes scrollUp {0% { transform: translateY(100%); }
+        100% { transform: translateY(-100%); }
+      }
+
+      /* admin */
+      .btn {border: none; padding: 10px 20px; cursor: pointer; border-radius: 5px; margin-top: 10px; width: auto; text-align: center;}
+      .section,nav { display: none;}
+      nav{padding: 1%;}
+      .active { display: block;}
+      .container {max-width: 760px;margin: 2rem auto;padding: 0 1rem;}
+    
+      h1,h2,h3,label {display: block;margin-bottom: 0.5rem;color: var(--標題色);}
+      input, select {width: 100%;padding: 0.8rem;border: 1px solid #ddd;border-radius: 5px;font-size: 1rem;}
+    
+      
+    </style>
+
+<title>鼎味寶藍菠雞，台灣知名美食連鎖品牌加盟，美味餐點小額創業的首選。美味餐點如：油雞、醉雞、雞湯滷味、鮮雞飯盒...等。創業、加盟、開加盟店、創業加盟、小額創業。97%加盟主好滿意超推薦。以最高的品質提供給加盟主最美味的珍饗。最低只要25萬立馬加盟，瞬間擺脫苦逼勞工身分，1秒變成大老闆。</title>
+
+<meta name="description" content="鼎味寶藍菠雞，台灣知名美食連鎖品牌加盟，美味餐點小額創業的首選。美味餐點如：油雞、醉雞、雞湯滷味、鮮雞飯盒...等。創業、加盟、開加盟店、創業加盟、小額創業。97%加盟主好滿意超推薦。以最高的品質提供給加盟主最美味的珍饗。最低只要25萬立馬加盟，瞬間擺脫苦逼勞工身分，1秒變成大老闆。">
+
+<meta content="鼎味寶藍菠雞" name="copyright">
+
+<meta property="og:site_name" content="鼎味寶藍菠雞">
+<meta property="og:title" content="鼎味寶藍菠雞，台灣知名美食連鎖品牌加盟，美味餐點小額創業的首選。美味餐點如：油雞、醉雞、雞湯滷味、鮮雞飯盒...等。創業、加盟、開加盟店、創業加盟、小額創業。97%加盟主好滿意超推薦。以最高的品質提供給加盟主最美味的珍饗。最低只要25萬立馬加盟，瞬間擺脫苦逼勞工身分，1秒變成大老闆。">
+<meta property="og:description" content="鼎味寶藍菠雞，台灣知名美食連鎖品牌加盟，美味餐點小額創業的首選。美味餐點如：油雞、醉雞、雞湯滷味、鮮雞飯盒...等。創業、加盟、開加盟店、創業加盟、小額創業。97%加盟主好滿意超推薦。以最高的品質提供給加盟主最美味的珍饗。最低只要25萬立馬加盟，瞬間擺脫苦逼勞工身分，1秒變成大老闆。">
+
+<meta property="og:url" content="https://huokeads.github.io/rc">
+
+<meta property="og:image" content="https://huokeads.github.io/rc/C-og-image.jpg">
+<meta property="og:image:alt" content="鼎味寶藍菠雞，台灣知名美食連鎖品牌加盟，美味餐點小額創業的首選。美味餐點如：油雞、醉雞、雞湯滷味、鮮雞飯盒...等。創業、加盟、開加盟店、創業加盟、小額創業。97%加盟主好滿意超推薦。以最高的品質提供給加盟主最美味的珍饗。最低只要25萬立馬加盟，瞬間擺脫苦逼勞工身分，1秒變成大老闆。">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:type" content="website">
+<meta property="fb:app_id" content="你的FacebookAppID">
+
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://64071181.github.io/mokJsapi/mokJsApi.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js">// 加密/解密處理</script>
+
+
+
+<!-- Google Tag Manager --> <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-THKXDH63');</script> <!-- End Google Tag Manager -->
+    
+
+
+  </head>
+<body>
+
+<!-- Google Tag Manager (noscript) --> <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-THKXDH63" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript> <!-- End Google Tag Manager (noscript) -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+      :::::::::       ::::::::       :::::::::    :::   :::
+     :+:    :+:     :+:    :+:      :+:    :+:   :+:   :+:
+    +:+    +:+     +:+    +:+      +:+    +:+    +:+ +:+
+   +#++:++#+      +#+    +:+      +#+    +:+     +#++:
+  +#+    +#+     +#+    +#+      +#+    +#+      +#+
+ #+#    #+#     #+#    #+#      #+#    #+#      #+#
+#########       ########       #########       ###
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+-->
+
+<nav style="text-align: center;">
+  <button class="btn" id="主頁btn" onclick="_導航換頁('主頁')" >主頁</button>
+  <button class="btn" id="設置btn" onclick="_導航換頁('設置')" >設置</button>
+</nav>
+
+
+<section id="主頁page" class="section active">
+
+  <div class="logo-container">
+    <div class="logo"><img id="logo" alt="鼎味寶藍菠雞"></div>
+  </div>
+
+  <div class="marquee-container" id="marqueeContainer">
+    <div class="close-marquee" onclick="closeMarquee()">×</div>
+    <div id="走馬燈" class="marquee-content"><!-- JS 走馬燈內容 --></div>
+  </div>
+
+  <div id="產品展示"><!-- JS 產品展示內容 --></div>
+
+  <div id="關於我們" class="company-intro"><!-- JS 關於我們內容 --></div>
+
+  <div class="contact-section">
+    <div class="contact-title">
+      客服與聯絡資訊
+      <span class="toggle-btn" onclick="toggleContact()">+</span>
+    </div>
+    <div id="聯絡資訊" class="contact-content" ><!-- JS 聯絡資訊內容 --></div>
+  </div>
+
+  <div id="社交帳號"  class="social-links"><!-- JS 社交帳號內容 --></div>
+
+  <div class="copyright">  
+    <script> $('.copyright').text(`© ${new Date().getFullYear()} All rights reserved by 鼎味寶藍菠雞`)</script>
+  </div>
+
+  <div class="scroll-top" id="scrollTop" onclick="scrollToTop()">↑</div>
+
+</section>
+
+
+
+
+
+<section id="設置page" class="section">
+
+  <div class="container">
+
+    <h2>您的商家名稱</h2>
+    <input type="text" id="公司名Input" placeholder="請修改您的商家名稱" title="請修改您的商家名稱" >
+
+
+    <button class="btn" onclick="_更222新野('公司資料', ['公司名Input','公司簡介Input', '公司wsInput', '公司地址Input', '營業時間Input', '打烊時間Input', '每時段Input', '時段做客上限Input', '主題色Input', '按鈕色Input', '標題色Input', '文字色Input'])" >更新公司資料</button>
+  </div>
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+
+      /* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+      $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+            ::::::::       ::::::::       ::::::::
+          :+:    :+:     :+:    :+:     :+:    :+:
+        +:+            +:+            +:+
+        +#+            +#++:++#++     +#++:++#++
+      +#+                   +#+            +#+
+      #+#    #+#     #+#    #+#     #+#    #+#
+      ########       ########       ########
+
+      @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+      @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+
+
+
+
+      // 關走馬燈
+      function closeMarquee() {
+        document.getElementById('marqueeContainer').style.display = 'none';
+      }
+
+      // 開闢 聯絡卡
+      function toggleContact() {
+        const content = document.getElementById('聯絡資訊');
+        const btn = document.querySelector('.toggle-btn');
+
+        if (content.style.height === '0px' || content.style.height === '') {
+          // 開啟
+          content.style.height = 'auto';
+          const height = content.offsetHeight + 'px'; // 取得實際高度
+          content.style.height = '0px'; // 先設定為 0 以便觸發過渡
+          setTimeout(() => {
+            content.style.height = height; // 再設定為實際高度
+          }, 0);
+          btn.textContent = '-';
+        } else {
+          // 關閉
+          content.style.height = content.offsetHeight + 'px'; // 設定為當前高度以觸發過渡
+          setTimeout(() => {
+            content.style.height = '0px'; // 再設定為 0
+          }, 0);
+          btn.textContent = '+';
+        }
+      }
+
+      // 回頁頂
+      function scrollToTop() {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      }
+
+      // 捲動顯示回頂鍵
+      window.onscroll = function() {
+        const scrollTop = document.getElementById('scrollTop');
+        const logo = document.querySelector('.logo-container');
+        const logoBottom = logo.offsetTop + logo.offsetHeight;
+        
+        if (window.pageYOffset > logoBottom) {
+          scrollTop.style.display = 'flex';
+        } else {
+          scrollTop.style.display = 'none';
+        }
+      };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      /* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+      $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+            :::::::::           :::    :::::::::::           :::
+          :+:    :+:        :+: :+:      :+:             :+: :+:
+          +:+    +:+       +:+   +:+     +:+            +:+   +:+
+        +#+    +:+      +#++:++#++:    +#+           +#++:++#++:
+        +#+    +#+      +#+     +#+    +#+           +#+     +#+
+      #+#    #+#      #+#     #+#    #+#           #+#     #+#
+      #########       ###     ###    ###           ###     ###
+
+      @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+      @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+
+
+
+      const adp = '7dda0cabd1fdf46e34f8cac123db4471addc49761b6a2a48184ed824d614cad0'
+      // 取data並解密
+
+      /*
+      const 原圖頭 = '//gs.liteshop.tw/public/store_landing_layout_photos/4cFJZCxH9xndRKyC9YEHDDWy-'
+      let 產品展示內容 = [
+        {'圖': `${原圖頭}6e4a99ee-cc58-4b63-b91b-b02ea8ddc935.webp`, 'url': ''},
+        {'圖': `${原圖頭}b19445c5-b21c-4c65-b94c-b0a79cec62a3.webp`, 'url': 'https://lin.ee/DOBspNI'},
+        {'圖': `${原圖頭}e2b0ac34-7d0a-49e5-a648-04408e803353.webp`, 'url': 'https://lin.ee/FfeP6SA'},
+        {'圖': `${原圖頭}933cc30f-153a-4582-b9ac-cad57e27f6fd.webp`, 'url': ''},
+        {'圖': `${原圖頭}e310ee29-f6a5-4875-9bcd-34d6e32144a7.webp`, 'url': 'https://lin.ee/DOBspNI'},
+        {'圖': `${原圖頭}f716aa22-6d80-465d-8095-5019459972b5.webp`, 'url': ''},
+        {'圖': `${原圖頭}557bc8f3-4a6a-4192-a346-78fa83e7ed89.webp`, 'url': 'https://lin.ee/DOBspNI'},
+        {'圖': `${原圖頭}bf68e2be-66e7-424a-86da-060d0b9f93a0.webp`, 'url': ''},
+        {'圖': `${原圖頭}8c903573-e9c6-48a2-9e69-46b7ca8b76e5.webp`, 'url': 'https://lin.ee/DOBspNI'},
+        {'圖': `${原圖頭}80edffac-a2c7-4d31-b8ef-967977b772ba.webp`, 'url': ''},
+        {'圖': `${原圖頭}7a733175-f9e6-4b21-8669-ceecc2f787e9.webp`, 'url': 'https://lin.ee/DOBspNI'},
+        {'圖': `${原圖頭}be56719b-d180-4891-9fda-1c932ae3f503.webp`, 'url': ''},
+        {'圖': `${原圖頭}1b04530a-df99-44c6-9e5a-2c4fd72e2393.webp`, 'url': 'https://lin.ee/DOBspNI'},
+        {'圖': `${原圖頭}a10aa07b-fe9d-4c8e-b9b1-1091f09e4fee.webp`, 'url': ''},
+        {'圖': `${原圖頭}e1f90752-5fd3-481e-97c5-fa41d0830472.webp`, 'url': 'https://lin.ee/DOBspNI'},
+        {'圖': `${原圖頭}7ab6b0cc-d0fa-41ae-bd3e-9a10a8fd3b42.webp`, 'url': ''},
+        {'圖': `${原圖頭}0b0617ee-c9ca-4c69-a547-6536bc6601b3.webp`, 'url': 'https://lin.ee/DOBspNI'},
+        {'圖': `${原圖頭}bb0dcbf6-d1b3-4ef7-a462-147f545ccfd9.webp`, 'url': ''},
+        {'圖': `${原圖頭}087cbf17-54fa-4aa2-8e73-af4a6f233f01.webp`, 'url': 'https://lin.ee/DOBspNI'},
+        {'圖': `${原圖頭}31308f55-4b9f-473b-a2bf-67c786eb9d5d.webp`, 'url': ''},
+        {'圖': `${原圖頭}1f49be94-d64a-41a0-9e05-2e6302a91360.webp`, 'url': 'https://lin.ee/DOBspNI'},
+        {'圖': `${原圖頭}73d2790d-ec64-42aa-a773-470e70f8f1ae.webp`, 'url': ''},
+        {'圖': `${原圖頭}568d44a9-b37c-4451-9875-8fce19d79904.webp`, 'url': 'https://lin.ee/DOBspNI'},
+        {'圖': `${原圖頭}ce304a78-2fef-4b9c-8f78-413db9e901cd.webp`, 'url': ''},
+        {'圖': `${原圖頭}1a8bed55-ebf4-4186-87c2-9db948a6840b.webp`, 'url': 'https://lin.ee/DOBspNI'},
+        {'圖': `${原圖頭}ae58eea2-a130-44a8-aa1d-2978f759bc85.webp`, 'url': ''}
+      ];
+      */
+
+let 產品展示內容 = [
+    {'圖': '001.webp', 'url': ''},
+    {'圖': '002.webp', 'url': 'https://lin.ee/DOBspNI'},
+    {'圖': '003.webp', 'url': 'https://lin.ee/FfeP6SA'},
+    {'圖': '004.webp', 'url': ''},
+    {'圖': '005.webp', 'url': 'https://lin.ee/DOBspNI'},
+    {'圖': '006.webp', 'url': ''},
+    {'圖': '007.webp', 'url': 'https://lin.ee/DOBspNI'},
+    {'圖': '008.webp', 'url': ''},
+    {'圖': '009.webp', 'url': 'https://lin.ee/DOBspNI'},
+    {'圖': '010.webp', 'url': ''},
+    {'圖': '011.webp', 'url': 'https://lin.ee/DOBspNI'},
+    {'圖': '012.webp', 'url': ''},
+    {'圖': '013.webp', 'url': 'https://lin.ee/DOBspNI'},
+    {'圖': '014.webp', 'url': ''},
+    {'圖': '015.webp', 'url': 'https://lin.ee/DOBspNI'},
+    {'圖': '016.webp', 'url': ''},
+    {'圖': '017.webp', 'url': 'https://lin.ee/DOBspNI'},
+    {'圖': '018.webp', 'url': ''},
+    {'圖': '019.webp', 'url': 'https://lin.ee/DOBspNI'},
+    {'圖': '020.webp', 'url': ''},
+    {'圖': '021.webp', 'url': 'https://lin.ee/DOBspNI'},
+    {'圖': '022.webp', 'url': ''},
+    {'圖': '023.webp', 'url': 'https://lin.ee/DOBspNI'},
+    {'圖': '024.webp', 'url': ''},
+    {'圖': '025.webp', 'url': 'https://lin.ee/DOBspNI'},
+    {'圖': '026.webp', 'url': ''},
+    {'圖': '027.webp', 'url': 'https://lin.ee/DOBspNI'},
+    {'圖': '028.webp', 'url': ''},
+    {'圖': '029.webp', 'url': 'https://lin.ee/DOBspNI'},
+    {'圖': '030.webp', 'url': ''},
+    {'圖': '031.webp', 'url': 'https://lin.ee/DOBspNI'},
+    {'圖': '032.webp', 'url': ''},
+    {'圖': '033.webp', 'url': 'https://lin.ee/DOBspNI'},
+    {'圖': '034.webp', 'url': ''},
+    {'圖': '035.webp', 'url': 'https://lin.ee/DOBspNI'},
+    {'圖': '036.webp', 'url': ''},
+    {'圖': '037.webp', 'url': 'https://lin.ee/DOBspNI'},
+    {'圖': '038.webp', 'url': ''},
+    {'圖': '039.webp', 'url': 'https://lin.ee/DOBspNI'},
+    {'圖': '040.webp', 'url': ''},
+    {'圖': '041.webp', 'url': 'https://lin.ee/DOBspNI'},
+    {'圖': '042.webp', 'url': ''},
+    {'圖': '043.webp', 'url': 'https://lin.ee/DOBspNI'},
+    {'圖': '044.webp', 'url': ''},
+    {'圖': '045.webp', 'url': 'https://lin.ee/DOBspNI'},
+    {'圖': '046.webp', 'url': ''},
+    {'圖': '047.webp', 'url': 'https://lin.ee/DOBspNI'},
+    {'圖': '048.webp', 'url': ''},
+    {'圖': '049.webp', 'url': 'https://lin.ee/DOBspNI'},
+    {'圖': '050.webp', 'url': ''},
+    {'圖': '051.webp', 'url': 'https://lin.ee/DOBspNI'},
+    {'圖': '052.webp', 'url': ''},
+    {'圖': '053.webp', 'url': 'https://lin.ee/DOBspNI'},
+    {'圖': '054.webp', 'url': ''},
+    {'圖': '055.webp', 'url': 'https://lin.ee/DOBspNI'},
+    {'圖': '056.webp', 'url': ''},
+    {'圖': '057.webp', 'url': 'https://lin.ee/DOBspNI'},
+    {'圖': '058.webp', 'url': ''},
+    {'圖': '059.webp', 'url': 'https://lin.ee/DOBspNI'},
+    {'圖': '060.webp', 'url': ''},
+    {'圖': '061.webp', 'url': 'https://lin.ee/DOBspNI'},
+    {'圖': '062.webp', 'url': ''},
+    {'圖': '063.webp', 'url': 'https://lin.ee/DOBspNI'},
+    {'圖': '064.webp', 'url': ''},
+    {'圖': '065.webp', 'url': 'https://lin.ee/DOBspNI'},
+    {'圖': '066.webp', 'url': ''},
+    {'圖': '067.webp', 'url': 'https://lin.ee/DOBspNI'},
+    {'圖': '068.webp', 'url': ''},
+    {'圖': '069.webp', 'url': 'https://lin.ee/DOBspNI'},
+    {'圖': '070.webp', 'url': ''},
+    {'圖': '071.webp', 'url': 'https://lin.ee/DOBspNI'},
+    {'圖': '072.webp', 'url': ''},
+    {'圖': '073.webp', 'url': 'https://lin.ee/DOBspNI'},
+    {'圖': '074.webp', 'url': ''},
+    {'圖': '075.webp', 'url': 'https://lin.ee/DOBspNI'},
+    {'圖': '076.webp', 'url': ''},
+    {'圖': '077.webp', 'url': 'https://lin.ee/DOBspNI'},
+    {'圖': '078.webp', 'url': ''},
+    {'圖': '079.webp', 'url': 'https://lin.ee/DOBspNI'},
+
+    {'圖': 'C-og-image.jpg', 'url': ''},
+
+];
+
+
+
+      const 走馬燈內容 = [
+        {'字': '🌟 加LINE立即諮詢加盟創業 ✨', 'url': 'https://lin.ee/DOBspNI'},
+        {'字': '🌟 點這裡！即可快速加LINE使用最高優惠 ✨', 'url': 'https://lin.ee/DOBspNI'}
+      ];
+      
+      const 關於我們 = [
+        {'字':`
+
+台灣知名美食連鎖品牌加盟	<br>
+美味餐點小額創業的首選	<br>
+美味餐點如：油雞、醉雞	<br>
+雞湯滷味、鮮雞飯盒...等	<br>
+97%加盟主好滿意超推薦	<br>
+以最高的品質提供給加盟主	<br>
+最美味的珍饗	<br>
+最低只要25萬立馬加盟	<br>
+瞬間擺脫苦逼勞工身分	<br>
+瞬間讓你也變成大老闆	<br>
+創業、加盟、開加盟店	<br>
+創業加盟、小額創業	<br>
+
+
+`}
+      ];
+
+      const 聯絡資訊 = [
+        {'字':`LINE ID：<a href="https://lin.ee/DOBspNI" target="_blank" rel="noreferrer noopener">@811sdlxw</a>`},
+        {'字':`營業時間：週一 至 週日｜08:00 - 23:00｜24H皆可加LINE留言盡速回應`},
+        
+        {'字':`聯絡電話：0918-862-628`},
+      
+        {'字':`客服信箱：dale_0822az009@yahoo.com.tw`},
+
+        {'字':`可加盟縣市範圍：全台`}];
+
+        
+      const 社交帳號 = [
+        {'html': `<a href="https://lin.ee/DOBspNI">
+          <svg class="line-icon" viewBox="0 0 24 24">
+            <path fill="#888" d="M24 10.304c0-5.369-5.383-9.738-12-9.738-6.616 0-12 4.369-12 9.738 0 4.814 4.269 8.846 10.036 9.608.391.084.922.258 1.057.592.121.303.079.778.039 1.085l-.171 1.027c-.053.303-.242 1.186 1.039.647 1.281-.54 6.911-4.069 9.428-6.967 1.739-1.907 2.572-3.843 2.572-5.992zm-18.988-2.595c.129 0 .234.105.234.234v4.153h2.287c.129 0 .233.104.233.233v.842c0 .129-.104.234-.233.234h-3.363c-.063 0-.119-.025-.161-.065-.043-.043-.072-.1-.072-.169v-5.229c0-.129.104-.233.233-.233h.842zm14.992 0c.129 0 .233.105.233.234v.842c0 .129-.104.234-.233.234h-2.287v.883h2.287c.129 0 .233.105.233.234v.842c0 .129-.104.234-.233.234h-2.287v.884h2.287c.129 0 .233.105.233.233v.842c0 .129-.104.234-.233.234h-3.363c-.063 0-.12-.025-.162-.065-.043-.043-.071-.1-.071-.169v-5.229c0-.129.104-.233.233-.233h3.363zm-10.442.001c.129 0 .234.105.234.234v5.229c0 .129-.105.234-.234.234h-.842c-.129 0-.234-.105-.234-.234v-5.229c0-.129.105-.234.234-.234h.842zm2.127 0h.891l2.368 3.354v-3.354c0-.129.105-.234.234-.234h.842c.129 0 .234.105.234.234v5.229c0 .129-.105.234-.234.234h-.841l-2.421-3.354v3.354c0 .129-.105.234-.234.234h-.839c-.129 0-.234-.105-.234-.234v-5.229c0-.129.105-.234.234-.234z"/>
+          </svg>
+        </a>`
+        }
+      ];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+      :::::::::           :::        ::::::::       ::::::::::
+     :+:    :+:        :+: :+:     :+:    :+:      :+:
+    +:+    +:+       +:+   +:+    +:+             +:+
+   +#++:++#+       +#++:++#++:   :#:             +#++:++#
+  +#+             +#+     +#+   +#+   +#+#      +#+
+ #+#             #+#     #+#   #+#    #+#      #+#
+###             ###     ###    ########       ##########
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+
+      // 顯示內容
+      function _顯示內容(data,sel) {
+
+        cont = 0;
+        for (let 內容 of data){
+          let 單個內容, all內容
+
+          /***************** 走馬燈 ******************/
+          if (sel == '走馬燈') all內容 = `<div class="marquee-item"><a href="${內容.url}" target="_blank" rel="noopener noreferrer">${內容.字}</a></div>`;
+          
+          /***************** 產品展示 ******************/
+          if (sel == '產品展示'){
+            $內容圖 = $(`<img class="responsive-image" src="${內容.圖}" >`);
+            單個內容 = $內容圖
+
+            if (內容.url != '') 單個內容 = $(`<a href="${內容.url}" target="_blank"></a>`).append($內容圖); // 包裹連結並插入圖片
+
+            all內容 = $(`<div class="image-container"></div>`).append(單個內容); // 包裹圖片容器
+            // 加載錯誤時隱藏該圖片
+            $內容圖.on("error", function () {
+              all內容.remove(); // 移除整個容器
+            });
+          }
+
+          /***************** 關於我們 ******************/
+          if (sel == '關於我們') all內容 = `<p>${內容.字}</p>`;
+          
+          /***************** 聯絡資訊 ******************/
+          if (sel == '聯絡資訊') all內容 = `<p>${內容.字}</p>`;
+
+          /***************** 社交帳號 ******************/
+          if (sel == '社交帳號') all內容 = 內容.html;
+          
+          // 加入DOM
+          $(`#${sel}`).append(all內容);
+        }
+      }
+
+
+
+      function _顯示LogoIcon() {
+
+            // LOGO
+            const defaultImage = "//gs.liteshop.tw/public/logos/4cFJZCxH9xndRKyC9YEHDDWy/54946d78-0cac-4250-808e-17d3342f62ca.png"; // 預設圖片路徑
+            // 原始分頁圖示的檔案名稱
+            const originalFavicon = "https://gs.liteshop.tw/public/favicons/4cFJZCxH9xndRKyC9YEHDDWy-e28fda11-1ae9-48e8-b2e9-5097dbfbae7f.ico";
+            
+            const logoImage = "A-頁首LOGO.png"; // LOGO 圖片路徑
+            const newFavicon = "B-Favicon分頁圖示.png";// 新的分頁圖示檔案名稱
+
+            // 將 LOGO 圖片設置到 <img> 標籤
+            $("#logo").attr("src", logoImage).on("error", function () {
+                // 如果圖片加載失敗，替換為預設圖片
+                $(this).attr("src", defaultImage);
+            });
+
+            // Icon
+            // 檢查是否已存在 <link rel="icon">
+            let $favicon = $("link[rel='icon'], link[rel='shortcut icon'], link[rel='alternate icon'], link[rel='apple-touch-icon']");
+            if ($favicon.length) {
+                // 替換現有的分頁圖示
+                $favicon.attr("href", newFavicon).attr("type", "image/x-icon");
+            } else {
+                // 如果不存在，新增 <link rel="icon">
+                $("head").append(
+                    `<link rel="icon" type="image/x-icon" href="${newFavicon}">`
+                );
+            }
+
+      }
+
+
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+          :::        :::::::::         :::   :::       :::::::::::       ::::    :::
+       :+: :+:      :+:    :+:       :+:+: :+:+:          :+:           :+:+:   :+:
+     +:+   +:+     +:+    +:+      +:+ +:+:+ +:+         +:+           :+:+:+  +:+
+   +#++:++#++:    +#+    +:+      +#+  +:+  +#+         +#+           +#+ +:+ +#+
+  +#+     +#+    +#+    +#+      +#+       +#+         +#+           +#+  +#+#+#
+ #+#     #+#    #+#    #+#      #+#       #+#         #+#           #+#   #+#+#
+###     ###    #########       ###       ###     ###########       ###    ####
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+
+      function _去後台() {
+        admin明文 = false;
+        if ((location.href).indexOf('???') != -1) admin明文 = decodeURIComponent(location.href.split('???')[1])
+        if (sha256(admin明文) == adp) $('nav').addClass('active');
+      }
+
+      function _導航換頁(page) {
+        // 隱頁 - .active
+        $('.section').removeClass('active');
+        // 顯頁 + .active
+        $(`#${page}page`).addClass('active');
+      }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+      ::::::::   :::::::::::           :::        :::::::::   :::::::::::
+    :+:    :+:      :+:             :+: :+:      :+:    :+:      :+:
+   +:+             +:+            +:+   +:+     +:+    +:+      +:+
+  +#++:++#++      +#+           +#++:++#++:    +#++:++#:       +#+
+        +#+      +#+           +#+     +#+    +#+    +#+      +#+
+#+#    #+#      #+#           #+#     #+#    #+#    #+#      #+#
+########       ###           ###     ###    ###    ###      ###
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+
+
+
+  _顯示LogoIcon()
+
+
+  //_產品展示BBB()
+  _顯示內容(產品展示內容,'產品展示')
+
+
+
+  _顯示內容(走馬燈內容,'走馬燈')
+  _顯示內容(關於我們,'關於我們')
+  _顯示內容(聯絡資訊,'聯絡資訊')
+  _顯示內容(社交帳號,'社交帳號')
+
+  _去後台()
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+  </body>
+</html>
+
+
