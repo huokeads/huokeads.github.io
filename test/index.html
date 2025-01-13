@@ -37,23 +37,10 @@
       
       /* 產品展示 */
       
-    .image-container {
-        width: 100%;
-        text-align: center;
-    }
-
-    .image-container iframe {
-        display: block;
-        width: 100%;
-        max-width: 760px;
-        aspect-ratio: 16 / 9;
-    }
-
-    @media (min-width: 768px) {
-        .image-container iframe {
-            width: 50%;
-        }
-    }
+      /* 產品展示 */
+      .image-container {width: 100%;text-align: center;}
+      .responsive-image {max-width: 100%;height: auto;}
+      @media (min-width: 768px) {.responsive-image , .輪播圖, .image-container iframe{  height: auto;  width: 50%;max-width: 760px;}}
 
       
       .company-intro {width: 90%;max-width: 760px;margin: 20px auto;padding: 20px;line-height: 2;text-align: center;}
@@ -456,7 +443,7 @@ let 產品展示內容 = [
 
       const 聯絡資訊 = [
         {'字':`LINE ID：<a href="https://lin.ee/3mRv2Sp" target="_blank" rel="noreferrer noopener">@052zowjf</a>`},
-        {'字':`營業時間：週一 至 週3日｜08:00 - 23:00｜24H皆可加LINE留言盡速回應`},
+        {'字':`營業時間：週一 至 週4日｜08:00 - 23:00｜24H皆可加LINE留言盡速回應`},
         
 
 
