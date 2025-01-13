@@ -19,43 +19,43 @@
 
       .close-marquee {position: absolute;right: 10px;top: 5px;cursor: pointer;z-index: 2;}
 
-
-      
 /* 產品展示 */
 #產品展示 {
     max-width: 100%;
     margin: 0 auto;
-    padding: 0; /* 移除 #產品展示 的 padding */
+    padding: 0;
+    display: flex; /* 使用 flexbox 佈局 */
+    flex-direction: column; /* 垂直排列 */
 }
 
 #產品展示 .image-container {
     width: 100%;
-    margin: 0; /* 移除 .image-container 的 margin */
-    padding: 0; /* 移除 .image-container 的 padding */
-    position: relative; /* 讓 aspect-ratio 正確運作 */
-    overflow: hidden; /* 處理可能的內容溢出 */
+    margin: 0;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
 }
 
 #產品展示 .image-container iframe {
-    position: absolute; /* 絕對定位，填滿容器 */
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    border: 0; /* 移除 iframe 的邊框 */
+    border: 0;
 }
 
-#產品展示 .image-container::before { /* 使用偽元素維持 16:9 比例 */
+#產品展示 .image-container::before {
     content: "";
     display: block;
-    padding-top: 56.25%; /* 16:9 比例 (9/16 * 100%) */
+    padding-top: 56.25%; /* 16:9 比例 */
 }
 
 #產品展示 .image-container img {
     max-width: 100%;
     height: auto;
     display: block;
-    margin: 0 auto;
+    margin: 0; /* 移除圖片的 margin */
 }
 
 @media (min-width: 768px) {
@@ -63,7 +63,6 @@
         width: 50%;
     }
 }
-      
 
       
       .company-intro {width: 90%;max-width: 760px;margin: 20px auto;padding: 20px;line-height: 2;text-align: center;}
