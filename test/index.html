@@ -24,8 +24,9 @@
     max-width: 100%;
     margin: 0 auto;
     padding: 0;
-    display: flex; /* 使用 flexbox 佈局 */
-    flex-direction: column; /* 垂直排列 */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
 }
 
 #產品展示 .image-container {
@@ -34,6 +35,9 @@
     padding: 0;
     position: relative;
     overflow: hidden;
+    display: flex; /* 確保圖片在容器內垂直置中 */
+    align-items: center;
+    justify-content: center;
 }
 
 #產品展示 .image-container iframe {
@@ -55,7 +59,11 @@
     max-width: 100%;
     height: auto;
     display: block;
-    margin: 0; /* 移除圖片的 margin */
+    margin: 0;
+    padding: 0;
+    border: 0;
+    vertical-align: top; /* 關鍵：設定垂直對齊方式 */
+    object-fit: contain; /* 推薦：控制圖片縮放方式 */
 }
 
 @media (min-width: 768px) {
@@ -63,7 +71,6 @@
         width: 50%;
     }
 }
-
       
       .company-intro {width: 90%;max-width: 760px;margin: 20px auto;padding: 20px;line-height: 2;text-align: center;}
       .contact-section {width: auto;margin: 0 2% ;padding: 20px;line-height: 2;}
@@ -465,7 +472,7 @@ let 產品展示內容 = [
 
       const 聯絡資訊 = [
         {'字':`LINE ID：<a href="https://lin.ee/3mRv2Sp" target="_blank" rel="noreferrer noopener">@052zowjf</a>`},
-        {'字':`營業時間：週一 至 週5日｜08:00 - 23:00｜24H皆可加LINE留言盡速回應`},
+        {'字':`營業時間：週一 至 週6日｜08:00 - 23:00｜24H皆可加LINE留言盡速回應`},
         
 
 
