@@ -19,18 +19,20 @@
 
       .close-marquee {position: absolute;right: 10px;top: 5px;cursor: pointer;z-index: 2;}
 
+      /* 產品展示 */
       .image-container {width: 100%;text-align: center;}
       .responsive-image {max-width: 100%;height: auto;}
+      @media (min-width: 768px) {.responsive-image , .輪播圖, .image-container iframe{  height: auto;  width: 50%;max-width: 760px;}}
       
-      @media (min-width: 768px) {.responsive-image {  height: auto;  width: 50%;max-width: 760px;}}
-      
+      .image-container iframe{height: auto;min-height: 300px;}
       .company-intro {width: 90%;max-width: 760px;margin: 20px auto;padding: 20px;line-height: 2;text-align: center;}
-
       .contact-section {width: auto;margin: 0 2% ;padding: 20px;line-height: 2;}
-
       .contact-title {font-size: 24px;height: 50px;display: flex;justify-content: space-between;align-items: center;}
       .toggle-btn {cursor: pointer;font-size: 24px;}
       .contact-content {height: 0;overflow: hidden;transition: height 0.3s ease-in-out;}
+
+
+
 
       /* line圖示 */
       .social-links {margin: 20px ;}
@@ -314,6 +316,7 @@ let 產品展示內容 = [
     {'圖': '005.webp', 'url': ''},
     {'圖': '006.webp', 'url': ''},
     {'圖': '007.webp', 'url': 'https://lin.ee/0twDNyU'},
+{'產品展示圖': '<iframe width="100%" height="auto" src="https://www.youtube.com/embed/Ko-NaqUA6vc?autoplay=1&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>', '產品展示url': '' },
     {'圖': '008.webp', 'url': ''},
     {'圖': '009.webp', 'url': 'https://lin.ee/0twDNyU'},
     {'圖': '010.webp', 'url': ''},
@@ -431,46 +434,50 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
 
-      // 顯示內容
-      function _顯示內容(data,sel) {
+            // 顯示內容
+function _顯示內容(data, sel) {
+    cont = 0;
+    for (let 內容 of data) {
+        let all內容; // 只宣告 all內容，不賦值
 
-        cont = 0;
-        for (let 內容 of data){
-          let 單個內容, all內容
+        /***************** 走馬燈 ******************/
+        if (sel == '走馬燈') {
+            all內容 = `<div class="marquee-item"><a href="${內容.url}" target="_blank" rel="noopener noreferrer">${內容.字}</a></div>`;
+        }
+        /***************** 產品展示 ******************/
+        else if (sel == '產品展示') { // 使用 else if
+            if (內容.產品展示圖) { // 判斷是否有 產品展示圖 屬性
+                all內容 = $(`<div class="image-container"></div>`).append(內容.產品展示圖); // 直接將 HTML 字串 append
+            } else if (內容.圖) { // 處理圖片的情況
+                $內容圖 = $(`<img class="responsive-image" src="${內容.圖}">`);
+                let 單個內容 = $內容圖;
+                if (內容.url) {
+                    單個內容 = $(`<a href="${內容.url}" target="_blank"></a>`).append($內容圖);
+                }
+                all內容 = $(`<div class="image-container"></div>`).append(單個內容);
+                $內容圖.on("error", function () {
+                    all內容.remove();
+                });
+            }
+        }
+        /***************** 關於我們 ******************/
+        else if (sel == '關於我們') { // 使用 else if
+            all內容 = `<p>${內容.字}</p>`;
+        }
+        /***************** 聯絡資訊 ******************/
+        else if (sel == '聯絡資訊') { // 使用 else if
+            all內容 = `<p>${內容.字}</p>`;
+        }
+        /***************** 社交帳號 ******************/
+        else if (sel == '社交帳號') { // 使用 else if
+            all內容 = 內容.html;
+        }
 
-          /***************** 走馬燈 ******************/
-          if (sel == '走馬燈') all內容 = `<div class="marquee-item"><a href="${內容.url}" target="_blank" rel="noopener noreferrer">${內容.字}</a></div>`;
-          
-          /***************** 產品展示 ******************/
-          if (sel == '產品展示'){
-            $內容圖 = $(`<img class="responsive-image" src="${內容.圖}" >`);
-            單個內容 = $內容圖
-
-            if (內容.url != '') 單個內容 = $(`<a href="${內容.url}" target="_blank"></a>`).append($內容圖); // 包裹連結並插入圖片
-
-            all內容 = $(`<div class="image-container"></div>`).append(單個內容); // 包裹圖片容器
-            // 加載錯誤時隱藏該圖片
-            $內容圖.on("error", function () {
-              all內容.remove(); // 移除整個容器
-            });
-          }
-
-          /***************** 關於我們 ******************/
-          if (sel == '關於我們') all內容 = `<p>${內容.字}</p>`;
-          
-          /***************** 聯絡資訊 ******************/
-          if (sel == '聯絡資訊') all內容 = `<p>${內容.字}</p>`;
-
-          /***************** 社交帳號 ******************/
-          if (sel == '社交帳號') all內容 = 內容.html;
-          
-          // 加入DOM
+        if (all內容) { // 確保 all內容 不是 undefined 才 append
           $(`#${sel}`).append(all內容);
         }
-      }
-
-
-
+    }
+}
       function _顯示LogoIcon() {
 
 
