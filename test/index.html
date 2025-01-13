@@ -21,29 +21,37 @@
 
 
       
-      /* 產品展示 */
-
+/* 產品展示 */
 #產品展示 {
     max-width: 100%;
     margin: 0 auto;
-    padding: 0 10px;
+    padding: 0; /* 移除 #產品展示 的 padding */
 }
 
 #產品展示 .image-container {
     width: 100%;
-    text-align: center;
-    margin-bottom: 20px; /* 圖片/影片間距 */
+    margin: 0; /* 移除 .image-container 的 margin */
+    padding: 0; /* 移除 .image-container 的 padding */
+    position: relative; /* 讓 aspect-ratio 正確運作 */
+    overflow: hidden; /* 處理可能的內容溢出 */
 }
 
 #產品展示 .image-container iframe {
-    display: block;
+    position: absolute; /* 絕對定位，填滿容器 */
+    top: 0;
+    left: 0;
     width: 100%;
-    max-width: 760px;
-    aspect-ratio: 16 / 9;
-    margin: 0 auto;
+    height: 100%;
+    border: 0; /* 移除 iframe 的邊框 */
 }
 
-#產品展示 .image-container img { /* 圖片樣式 */
+#產品展示 .image-container::before { /* 使用偽元素維持 16:9 比例 */
+    content: "";
+    display: block;
+    padding-top: 56.25%; /* 16:9 比例 (9/16 * 100%) */
+}
+
+#產品展示 .image-container img {
     max-width: 100%;
     height: auto;
     display: block;
@@ -55,7 +63,6 @@
         width: 50%;
     }
 }
-
       
 
       
