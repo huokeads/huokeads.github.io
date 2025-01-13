@@ -19,29 +19,45 @@
 
       .close-marquee {position: absolute;right: 10px;top: 5px;cursor: pointer;z-index: 2;}
 
-      .image-container {width: 100%;text-align: center;}
-      .responsive-image {max-width: 100%;height: auto;}
-      
-      @media (min-width: 768px) {.responsive-image {  height: auto;  width: 50%;max-width: 760px;}}
-      
-      .company-intro {width: 90%;max-width: 760px;margin: 20px auto;padding: 20px;line-height: 2;text-align: center;}
-
-      .contact-section {width: auto;margin: 0 2% ;padding: 20px;line-height: 2;}
-
-      .contact-title {font-size: 24px;height: 50px;display: flex;justify-content: space-between;align-items: center;}
-      .toggle-btn {cursor: pointer;font-size: 24px;}
-      .contact-content {height: 0;overflow: hidden;transition: height 0.3s ease-in-out;}
-
-
 
       
       /* 產品展示 */
+
+#產品展示 {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 10px;
+}
+
+#產品展示 .image-container {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px; /* 圖片/影片間距 */
+}
+
+#產品展示 .image-container iframe {
+    display: block;
+    width: 100%;
+    max-width: 760px;
+    aspect-ratio: 16 / 9;
+    margin: 0 auto;
+}
+
+#產品展示 .image-container img { /* 圖片樣式 */
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+    #產品展示 .image-container iframe {
+        width: 50%;
+    }
+}
+
       
-      /* 產品展示 */
-      .image-container {width: 100%;text-align: center;}
-      .responsive-image {max-width: 100%;height: auto;}
-      @media (min-width: 768px) {.responsive-image , .輪播圖, .image-container iframe{  height: auto;  width: 50%;max-width: 760px;}}
-     .image-container iframe{height: auto;min-height: 300px;}
+
       
       .company-intro {width: 90%;max-width: 760px;margin: 20px auto;padding: 20px;line-height: 2;text-align: center;}
       .contact-section {width: auto;margin: 0 2% ;padding: 20px;line-height: 2;}
@@ -443,7 +459,7 @@ let 產品展示內容 = [
 
       const 聯絡資訊 = [
         {'字':`LINE ID：<a href="https://lin.ee/3mRv2Sp" target="_blank" rel="noreferrer noopener">@052zowjf</a>`},
-        {'字':`營業時間：週一 至 週4日｜08:00 - 23:00｜24H皆可加LINE留言盡速回應`},
+        {'字':`營業時間：週一 至 週5日｜08:00 - 23:00｜24H皆可加LINE留言盡速回應`},
         
 
 
