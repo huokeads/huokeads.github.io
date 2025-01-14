@@ -81,8 +81,19 @@
 
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 
+    
 <!-- 加載 YouTube Iframe API -->
+<script src="https://www.youtube.com/iframe_api"></script>
+
 <script>
+  var player;
+
+  // 等待 YouTube API 初始化
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player('video1');
+  }
+
+  // 滾動監聽器，檢查影片是否進入視窗
   window.addEventListener('scroll', function() {
     var iframe = document.getElementById('video1');
     var rect = iframe.getBoundingClientRect();
@@ -91,15 +102,13 @@
     // 判斷影片是否進入視窗
     if (rect.top <= windowHeight && rect.bottom >= 0) {
       // 影片進入視窗，開始播放
-      var src = iframe.src;
-      if (!src.includes("autoplay=1")) {
-        iframe.src = src.replace("autoplay=0", "autoplay=1");  // 設置 autoplay=1 開始播放
+      if (player && player.getPlayerState() != YT.PlayerState.PLAYING) {
+        player.playVideo();  // 播放影片
       }
     } else {
       // 影片離開視窗，暫停播放
-      var src = iframe.src;
-      if (src.includes("autoplay=1")) {
-        iframe.src = src.replace("autoplay=1", "autoplay=0");  // 設置 autoplay=0 停止播放
+      if (player && player.getPlayerState() == YT.PlayerState.PLAYING) {
+        player.pauseVideo();  // 暫停影片
       }
     }
   });
@@ -412,8 +421,8 @@ let 產品展示內容 = [
   
 
     {'圖': 'C-og-image.jpg', 'url': ''},
-  
-{'產品展示圖': '<iframe id="video1" width="100%" height="auto" src="https://www.youtube.com/embed/w2hcMFbr14w?autoplay=0&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>', '產品展示url': '' }
+
+  {'產品展示圖': '<iframe id="video1" width="100%" height="auto" src="https://www.youtube.com/embed/w2hcMFbr14w?autoplay=0&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>', '產品展示url': '' }
 
 
 ];
