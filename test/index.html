@@ -436,7 +436,7 @@ let 產品展示內容 = [
 
       const 聯絡資訊 = [
         {'字':`LINE ID：<a href="https://lin.ee/3mRv2Sp" target="_blank" rel="noreferrer noopener">@052zowjf</a>`},
-        {'字':`營業時間：週一 至 週4日｜08:00 - 23:00｜24H皆可加LINE留言盡速回應`},
+        {'字':`營業時間：週一 至 週1日｜08:00 - 23:00｜24H皆可加LINE留言盡速回應`},
         
 
 
@@ -488,6 +488,34 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
 
+// 初始化 Intersection Observer
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    const iframe = entry.target;
+    const player = iframe.contentWindow;
+
+    // 當影片進入可視範圍
+    if (entry.isIntersecting) {
+      player.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+    } else {
+      player.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+    }
+  });
+}, { threshold: 0.5 }); // 當影片 50% 進入視窗時觸發
+
+// 對所有 iframe 進行監控
+document.querySelectorAll('iframe').forEach(iframe => {
+  // 啟用 YouTube API 功能
+  const src = iframe.src;
+  if (!src.includes('enablejsapi=1')) {
+    iframe.src = src.includes('?') ? `${src}&enablejsapi=1` : `${src}?enablejsapi=1`;
+  }
+  observer.observe(iframe);
+});
+
+
+
+      
             // 顯示內容
 function _顯示內容(data, sel) {
     cont = 0;
