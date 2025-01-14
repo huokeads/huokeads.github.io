@@ -481,7 +481,27 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
 
+<script>
+  // 監聽視窗滾動事件
+  window.addEventListener('scroll', function() {
+    var iframe = document.getElementById('video1');
+    var rect = iframe.getBoundingClientRect();
+    var windowHeight = window.innerHeight;
 
+    // 判斷影片是否進入視窗
+    if (rect.top <= windowHeight && rect.bottom >= 0) {
+      // 影片進入視窗，啟動自動播放
+      if (!iframe.src.includes("autoplay=1")) {
+        iframe.src = iframe.src.replace("autoplay=0", "autoplay=1");
+      }
+    } else {
+      // 影片離開視窗，停止播放
+      if (iframe.src.includes("autoplay=1")) {
+        iframe.src = iframe.src.replace("autoplay=1", "autoplay=0");
+      }
+    }
+  });
+</script>
       
             // 顯示內容
 function _顯示內容(data, sel) {
