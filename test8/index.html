@@ -84,6 +84,38 @@
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     
 
+    <!-- JavaScript 部分 -->
+<script>
+  window.addEventListener('scroll', function() {
+    var iframe = document.getElementById('video1');
+    var rect = iframe.getBoundingClientRect();
+    var windowHeight = window.innerHeight;
+
+    // 判斷影片是否進入視窗
+    if (rect.top <= windowHeight && rect.bottom >= 0) {
+      // 影片進入視窗，啟動自動播放
+      var src = iframe.src;
+      if (!src.includes("autoplay=1")) {
+        iframe.src = src.replace("autoplay=0", "autoplay=1"); // 設置 autoplay=1 開始播放
+      }
+    } else {
+      // 影片離開視窗，停止播放
+      var src = iframe.src;
+      if (src.includes("autoplay=1")) {
+        iframe.src = src.replace("autoplay=1", "autoplay=0"); // 設置 autoplay=0 停止播放
+      }
+    }
+  });
+</script>
+
+
+
+
+
+
+
+
+    
 
 
 <!-- Google Tag Manager --> <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-N79KC82C');</script> <!-- End Google Tag Manager -->
@@ -305,7 +337,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 
 let 產品展示內容 = [
-    {'圖': '0001.webp', 'url': ''},
+    {'圖': '001.webp', 'url': ''},
     {'圖': '002.webp', 'url': 'https://lin.ee/0twDNyU'},
     {'圖': '003.webp', 'url': 'https://lin.ee/r9kq7O5'},
     {'圖': '004.webp', 'url': ''},
@@ -530,28 +562,6 @@ function _顯示內容(data, sel) {
 
 
       
-
-$(document).on('scroll', function() {
-    $('iframe').each(function() {
-        var iframe = $(this);
-        var id = iframe.attr('id');
-        var offset = iframe.offset().top;
-        var windowHeight = $(window).height();
-        var scrollTop = $(window).scrollTop();
-
-        // 檢查影片是否進入視窗範圍
-        if (offset < scrollTop + windowHeight && offset + iframe.height() > scrollTop) {
-            // 檢查影片是否已經開始播放過，避免重複播放
-            if (!iframe.hasClass('played')) {
-                var src = iframe.attr('src');
-                var newSrc = src.replace(/autoplay=0/, 'autoplay=1').replace(/start=[0-9]+/, 'start=0');
-                iframe.attr('src', newSrc);  // 更新影片 src，這會重新啟動影片播放
-                iframe.addClass('played');   // 記錄影片已經播放過
-            }
-        }
-    });
-});
-
 
 
 
