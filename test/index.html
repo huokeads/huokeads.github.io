@@ -390,9 +390,8 @@ let 產品展示內容 = [
 
     {'圖': 'C-og-image.jpg', 'url': ''},
 
-  
-    {'產品展示圖': '<iframe width="100%" height="auto" src="https://www.youtube.com/embed/WWgYmdGEsWI?autoplay=1&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>', '產品展示url': '' },
- 
+  {'產品展示圖': '<iframe id="video1" width="100%" height="auto" src="https://www.youtube.com/embed/w2hcMFbr14w?autoplay=0&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>', '產品展示url': '' }
+
 
 ];
 
@@ -428,7 +427,7 @@ let 產品展示內容 = [
 
       const 聯絡資訊 = [
         {'字':`LINE ID：<a href="https://lin.ee/3mRv2Sp" target="_blank" rel="noreferrer noopener">@052zowjf</a>`},
-        {'字':`營業時間：週一 至 週11日｜08:00 - 23:00｜24H皆可加LINE留言盡速回應`},
+        {'字':`營業時間：週一 至 週22日｜08:00 - 23:00｜24H皆可加LINE留言盡速回應`},
         
 
 
@@ -480,6 +479,30 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
 
+<!-- JavaScript 部分 -->
+<script>
+  window.addEventListener('scroll', function() {
+    var iframe = document.getElementById('video1');
+    var rect = iframe.getBoundingClientRect();
+    var windowHeight = window.innerHeight;
+
+    // 判斷影片是否進入視窗
+    if (rect.top <= windowHeight && rect.bottom >= 0) {
+      // 影片進入視窗，啟動自動播放
+      var src = iframe.src;
+      if (!src.includes("autoplay=1")) {
+        iframe.src = src.replace("autoplay=0", "autoplay=1"); // 設置 autoplay=1 開始播放
+      }
+    } else {
+      // 影片離開視窗，停止播放
+      var src = iframe.src;
+      if (src.includes("autoplay=1")) {
+        iframe.src = src.replace("autoplay=1", "autoplay=0"); // 設置 autoplay=0 停止播放
+      }
+    }
+  });
+</script>
+      
       
             // 顯示內容
 function _顯示內容(data, sel) {
