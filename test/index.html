@@ -82,6 +82,40 @@
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 
 <script>
+  // 用來儲存 YouTube 播放器物件
+  var player;
+
+  // 等待 YouTube API 載入並初始化播放器
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player('video1', {
+      events: {
+        'onReady': onPlayerReady,
+        'onStateChange': onPlayerStateChange
+      }
+    });
+  }
+
+  // YouTube API 播放器準備好時的回調
+  function onPlayerReady(event) {
+    // 這裡可以初始化影片的自動播放設定
+    // 當影片進入視窗時，將自動開始播放
+  }
+
+  // 監聽 YouTube 播放器狀態變化的回調
+  function onPlayerStateChange(event) {
+    if (event.data == YT.PlayerState.ENDED) {
+      // 當影片結束後可以選擇做些處理，例如重置為初始狀態
+      player.seekTo(0);
+    }
+  }
+
+  // 加載 YouTube Iframe API
+  var tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/iframe_api";
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+  // 滾動監聽器控制影片播放與暫停
   window.addEventListener('scroll', function() {
     var iframe = document.getElementById('video1');
     var rect = iframe.getBoundingClientRect();
@@ -89,21 +123,18 @@
 
     // 判斷影片是否進入視窗
     if (rect.top <= windowHeight && rect.bottom >= 0) {
-      // 影片進入視窗，啟動自動播放
-      var src = iframe.src;
-      if (!src.includes("autoplay=1")) {
-        iframe.src = src.replace("autoplay=0", "autoplay=1"); // 設置 autoplay=1 開始播放
+      // 影片進入視窗，開始播放
+      if (player && player.getPlayerState() != YT.PlayerState.PLAYING) {
+        player.playVideo();
       }
     } else {
-      // 影片離開視窗，停止播放
-      var src = iframe.src;
-      if (src.includes("autoplay=1")) {
-        iframe.src = src.replace("autoplay=1", "autoplay=0"); // 設置 autoplay=0 停止播放
+      // 影片離開視窗，暫停播放
+      if (player && player.getPlayerState() == YT.PlayerState.PLAYING) {
+        player.pauseVideo();
       }
     }
   });
 </script>
-
 
     
 
@@ -451,7 +482,7 @@ let 產品展示內容 = [
 
       const 聯絡資訊 = [
         {'字':`LINE ID：<a href="https://lin.ee/3mRv2Sp" target="_blank" rel="noreferrer noopener">@052zowjf</a>`},
-        {'字':`營業時間：週一 至 週4日｜08:00 - 23:00｜24H皆可加LINE留言盡速回應`},
+        {'字':`營業時間：週一 至 週5日｜08:00 - 23:00｜24H皆可加LINE留言盡速回應`},
         
 
 
