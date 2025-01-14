@@ -1,8 +1,5 @@
 <html>
   <head>
-
-<script src="https://www.youtube.com/iframe_api"></script>
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -331,7 +328,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 
 let 產品展示內容 = [
-    {'圖': '001.webp', 'url': ''},
+    {'圖': '0001.webp', 'url': ''},
     {'圖': '002.webp', 'url': 'https://lin.ee/0twDNyU'},
     {'圖': '003.webp', 'url': 'https://lin.ee/r9kq7O5'},
     {'圖': '004.webp', 'url': ''},
@@ -563,64 +560,26 @@ function _顯示內容(data, sel) {
       }
 
 
-      
-// 記錄影片播放器實例
-var players = {};
-
-// 確保在 YouTube API 加載完成後，初始化所有影片播放器
-window.onYouTubeIframeAPIReady = function() {
-    console.log('YouTube API is ready');
-
-    // 遍歷所有 iframe 來初始化播放器
-    $('iframe').each(function() {
-        var iframe = $(this);
-        var videoId = iframe.attr('src').split('/').pop().split('?')[0]; // 從 iframe URL 提取影片 ID
-        console.log('Initializing player for video: ' + videoId);  // 確認播放器初始化
-
-        // 初始化 YouTube 播放器
-        players[videoId] = new YT.Player(iframe[0], {
-            events: {
-                'onReady': function(event) {
-                    event.target.pauseVideo(); // 確保影片初始時是暫停狀態
-                },
-                'onStateChange': function(event) {
-                    // 可以根據影片狀態來做額外控制
-                    if (event.data == YT.PlayerState.PLAYING) {
-                        console.log('Playing video: ' + videoId);
-                    }
-                }
-            }
-        });
-    });
-};
-
-// 監控滾動事件，根據視窗位置播放/暫停影片
 $(document).on('scroll', function() {
     $('iframe').each(function() {
         var iframe = $(this);
-        var videoId = iframe.attr('src').split('/').pop().split('?')[0]; // 提取影片 ID
+        var id = iframe.attr('id');
         var offset = iframe.offset().top;
         var windowHeight = $(window).height();
         var scrollTop = $(window).scrollTop();
 
         // 檢查影片是否進入視窗範圍
         if (offset < scrollTop + windowHeight && offset + iframe.height() > scrollTop) {
-            // 影片進入範圍時，播放影片
-            if (players[videoId]) {
-                players[videoId].playVideo();
-            }
-        } else {
-            // 影片離開範圍時，暫停影片
-            if (players[videoId]) {
-                players[videoId].pauseVideo();
+            // 檢查影片是否已經開始播放過，避免重複播放
+            if (!iframe.hasClass('played')) {
+                var src = iframe.attr('src');
+                var newSrc = src.replace(/autoplay=0/, 'autoplay=1').replace(/start=[0-9]+/, 'start=0');
+                iframe.attr('src', newSrc);  // 更新影片 src，這會重新啟動影片播放
+                iframe.addClass('played');   // 記錄影片已經播放過
             }
         }
     });
 });
-
-
-
-
 
 
 
