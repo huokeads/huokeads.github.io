@@ -331,7 +331,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 
 let 產品展示內容 = [
-    {'圖': '0001.webp', 'url': ''},
+    {'圖': '001.webp', 'url': ''},
     {'圖': '002.webp', 'url': 'https://lin.ee/0twDNyU'},
     {'圖': '003.webp', 'url': 'https://lin.ee/r9kq7O5'},
     {'圖': '004.webp', 'url': ''},
@@ -564,16 +564,20 @@ function _顯示內容(data, sel) {
 
 
       
-
 // 記錄影片播放器實例
 var players = {};
 
-// 當 YouTube API 加載完成後，初始化所有影片播放器
-function onYouTubeIframeAPIReady() {
+// 確保在 YouTube API 加載完成後，初始化所有影片播放器
+window.onYouTubeIframeAPIReady = function() {
+    console.log('YouTube API is ready');
+
+    // 遍歷所有 iframe 來初始化播放器
     $('iframe').each(function() {
         var iframe = $(this);
         var videoId = iframe.attr('src').split('/').pop().split('?')[0]; // 從 iframe URL 提取影片 ID
         console.log('Initializing player for video: ' + videoId);  // 確認播放器初始化
+
+        // 初始化 YouTube 播放器
         players[videoId] = new YT.Player(iframe[0], {
             events: {
                 'onReady': function(event) {
@@ -588,9 +592,9 @@ function onYouTubeIframeAPIReady() {
             }
         });
     });
-}
+};
 
-// 監控滾動事件
+// 監控滾動事件，根據視窗位置播放/暫停影片
 $(document).on('scroll', function() {
     $('iframe').each(function() {
         var iframe = $(this);
@@ -613,11 +617,6 @@ $(document).on('scroll', function() {
         }
     });
 });
-
-
-
-
-
 
 
 
