@@ -57,10 +57,6 @@
       input, select {width: 100%;padding: 0.8rem;border: 1px solid #ddd;border-radius: 5px;font-size: 1rem;}
     
 
-<div id="video-container">
-  <!-- JavaScript 將影片插入到這裡 -->
-</div>
-
       
     </style>
 
@@ -189,16 +185,6 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 
 
-document.addEventListener('DOMContentLoaded', () => {
-  const videoContainer = document.getElementById('video-container');
-  videos.forEach(video => {
-    const div = document.createElement('div');
-    div.classList.add('video-container');
-    div.innerHTML = video['產品展示圖'];
-    videoContainer.appendChild(div);
-  });
-});
-
 
 
 
@@ -322,9 +308,7 @@ let 產品展示內容 = [
 
     {'產品展示圖': '<iframe width="100%" height="auto" src="https://www.youtube.com/embed/DJso_sZDx0k?autoplay=1&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>', '產品展示url': '' },
 
-  {'產品展示圖': '<iframe width="100%" height="auto" src="https://www.youtube.com/embed/w2hcMFbr14w?mute=1&enablejsapi=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>', '產品展示url': '' },
-
-
+  
   
     {'圖': '003.webp', 'url': 'https://lin.ee/yaxpZfp'},
     {'圖': '004.webp', 'url': ''},
@@ -408,8 +392,9 @@ let 產品展示內容 = [
 
     {'圖': 'C-og-image.jpg', 'url': ''},
 
-  {'產品展示圖': '<iframe width="100%" height="auto" src="https://www.youtube.com/embed/w2hcMFbr14w?mute=1&enablejsapi=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>', '產品展示url': '' },
-
+    {'產品展示圖': '<iframe width="100%" height="auto" src="https://www.youtube.com/embed/w2hcMFbr14w?autoplay=1&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>', '產品展示url': '' },
+ 
+  
 ];
 
 
@@ -496,30 +481,6 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
 
-// 初始化 Intersection Observer
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    const iframe = entry.target;
-    const player = iframe.contentWindow;
-
-    if (entry.isIntersecting) {
-      // 當影片進入可視範圍時播放
-      player.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
-    } else {
-      // 當影片離開可視範圍時暫停
-      player.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
-    }
-  });
-}, { threshold: 0.5 }); // 至少進入 50% 視窗範圍時觸發
-
-// 監控所有嵌入的 iframe
-document.querySelectorAll('iframe').forEach(iframe => {
-  const src = iframe.src;
-  if (!src.includes('enablejsapi=1')) {
-    iframe.src = src.includes('?') ? `${src}&enablejsapi=1` : `${src}?enablejsapi=1`;
-  }
-  observer.observe(iframe);
-});
 
       
             // 顯示內容
