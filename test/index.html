@@ -56,6 +56,11 @@
       h1,h2,h3,label {display: block;margin-bottom: 0.5rem;color: var(--標題色);}
       input, select {width: 100%;padding: 0.8rem;border: 1px solid #ddd;border-radius: 5px;font-size: 1rem;}
     
+
+<div id="video-container">
+  <!-- JavaScript 將影片插入到這裡 -->
+</div>
+
       
     </style>
 
@@ -184,11 +189,15 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 
 
-
-
-
-
-
+document.addEventListener('DOMContentLoaded', () => {
+  const videoContainer = document.getElementById('video-container');
+  videos.forEach(video => {
+    const div = document.createElement('div');
+    div.classList.add('video-container');
+    div.innerHTML = video['產品展示圖'];
+    videoContainer.appendChild(div);
+  });
+});
 
 
 
