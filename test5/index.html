@@ -25,20 +25,24 @@
       
   /* 產品展示 */
       
+  /* 產品展示 */
   .image-container {
       position: relative;
       width: 100%;
-      padding-top: 56.25%; /* 預設比例：16:9 */
+      padding-top: 56.25%; /* 16:9 比例盒 */
       text-align: center;
   }
-  .responsive-image {max-width: 100%;height: auto;}
+
+  .responsive-image {max-width: 100%; height: auto;}
+
   @media (min-width: 768px) {
-      .responsive-image, .輪播圖 {
+      .responsive-image, .輪播圖, .image-container iframe {
           height: auto;
           width: 50%;
           max-width: 760px;
       }
   }
+
   .image-container iframe {
       position: absolute;
       top: 0;
@@ -362,6 +366,8 @@ let 產品展示內容 = [
  
 {'產品展示圖': '<iframe id="video1" width="100%" src="https://www.youtube.com/embed/w2hcMFbr14w?autoplay=0&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>', '產品展示url': '' }
 {'產品展示圖': '<iframe id="video1" width="100%" src="https://www.youtube.com/embed/gBUy3gqDmwY?autoplay=0&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>', '產品展示url': '' }
+
+
 
 
 ];
