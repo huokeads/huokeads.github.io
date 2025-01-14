@@ -563,15 +563,22 @@ function _顯示內容(data, sel) {
 // 記錄影片播放器實例
 var players = {};
 
-// 當 API 加載完成後，初始化所有影片播放器
+// 當 YouTube API 加載完成後，初始化所有影片播放器
 function onYouTubeIframeAPIReady() {
     $('iframe').each(function() {
         var iframe = $(this);
         var videoId = iframe.attr('src').split('/').pop().split('?')[0]; // 從 iframe URL 提取影片 ID
+        console.log('Initializing player for video: ' + videoId);  // 確認播放器初始化
         players[videoId] = new YT.Player(iframe[0], {
             events: {
                 'onReady': function(event) {
                     event.target.pauseVideo(); // 確保影片初始時是暫停狀態
+                },
+                'onStateChange': function(event) {
+                    // 可以根據影片狀態來做額外控制
+                    if (event.data == YT.PlayerState.PLAYING) {
+                        console.log('Playing video: ' + videoId);
+                    }
                 }
             }
         });
@@ -601,10 +608,6 @@ $(document).on('scroll', function() {
         }
     });
 });
-
-
-
-
 
 
 
