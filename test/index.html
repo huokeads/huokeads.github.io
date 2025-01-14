@@ -81,16 +81,24 @@
 
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 
-    
-<!-- 加載 YouTube Iframe API -->
+    <!-- 加載 YouTube Iframe API -->
 <script src="https://www.youtube.com/iframe_api"></script>
 
 <script>
   var player;
 
-  // 等待 YouTube API 初始化
+  // 等待 YouTube Iframe API 初始化
   function onYouTubeIframeAPIReady() {
-    player = new YT.Player('video1');
+    player = new YT.Player('video1', {
+      events: {
+        'onReady': onPlayerReady,
+      }
+    });
+  }
+
+  function onPlayerReady(event) {
+    // 影片準備就緒後的處理
+    console.log("Player is ready!");
   }
 
   // 滾動監聽器，檢查影片是否進入視窗
@@ -459,7 +467,7 @@ let 產品展示內容 = [
 
       const 聯絡資訊 = [
         {'字':`LINE ID：<a href="https://lin.ee/3mRv2Sp" target="_blank" rel="noreferrer noopener">@052zowjf</a>`},
-        {'字':`營業時間：週一 至 週3日｜08:00 - 23:00｜24H皆可加LINE留言盡速回應`},
+        {'字':`營業時間：週一 至 週4日｜08:00 - 23:00｜24H皆可加LINE留言盡速回應`},
         
 
 
