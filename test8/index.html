@@ -328,7 +328,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 
 let 產品展示內容 = [
-    {'圖': '001.webp', 'url': ''},
+    {'圖': '0001.webp', 'url': ''},
     {'圖': '002.webp', 'url': 'https://lin.ee/0twDNyU'},
     {'圖': '003.webp', 'url': 'https://lin.ee/r9kq7O5'},
     {'圖': '004.webp', 'url': ''},
@@ -571,6 +571,27 @@ function _顯示內容(data, sel) {
 
       }
 
+
+      
+// 假設影片的 id 會是 "video1", "video2", 等等
+$(document).on('scroll', function() {
+    $('iframe').each(function() {
+        var iframe = $(this);
+        var id = iframe.attr('id');
+        var offset = iframe.offset().top;
+        var windowHeight = $(window).height();
+        var scrollTop = $(window).scrollTop();
+
+        // 檢查影片是否進入視窗範圍
+        if (offset < scrollTop + windowHeight && offset + iframe.height() > scrollTop) {
+            // 當影片進入視窗範圍時，重設影片並自動播放
+            var src = iframe.attr('src');
+            var newSrc = src.replace(/autoplay=0/, 'autoplay=1').replace(/start=[0-9]+/, 'start=0');
+            iframe.attr('src', newSrc);  // 更新影片 src，這會重新啟動影片播放
+        }
+    });
+});
+      
 
 $(document).on('scroll', function() {
     $('iframe').each(function() {
