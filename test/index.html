@@ -81,59 +81,6 @@
 
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 
-    <!-- 加載 YouTube Iframe API -->
-<script src="https://www.youtube.com/iframe_api"></script>
-
-<script>
-
-var player;
-let videoProgress = 0;
-
-function onYouTubeIframeAPIReady() {
-  player = new YT.Player('video1', {
-    events: {
-      'onReady': onPlayerReady,
-      'onStateChange': onPlayerStateChange
-    }
-  });
-
-  scrollHandler();
-}
-
-function onPlayerReady(event) {
-  // ... 其他程式碼
-}
-
-function onPlayerStateChange(event) {
-  if (event.data === YT.PlayerState.PLAYING) {
-    videoProgress = player.getCurrentTime();
-  } else if (event.data === YT.PlayerState.PAUSED) {
-    videoProgress = player.getCurrentTime();
-  }
-}
-
-function checkVideoVisibility() {
-  const iframe = document.getElementById('video1');
-  const rect = iframe.getBoundingClientRect();
-  const windowHeight = window.innerHeight;
-
-  if (rect.top <= windowHeight && rect.bottom >= 0) {
-    if (player && player.getPlayerState() !== YT.PlayerState.PLAYING && videoProgress > 0) {
-      player.seekTo(videoProgress);
-      player.playVideo();
-    }
-  } else {
-    if (player && player.getPlayerState() === YT.PlayerState.PLAYING) {
-      player.pauseVideo();
-    }
-  }
-}
-
-function scrollHandler() {
-  checkVideoVisibility();
-  requestAnimationFrame(scrollHandler);
-}
-</script>
 
 <!-- Google Tag Manager --> <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KX6J448M');</script> <!-- End Google Tag Manager -->
     
@@ -443,8 +390,9 @@ let 產品展示內容 = [
 
     {'圖': 'C-og-image.jpg', 'url': ''},
 
-  {'產品展示圖': '<iframe id="video1" width="100%" height="auto" src="https://www.youtube.com/embed/w2hcMFbr14w?autoplay=0&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>', '產品展示url': '' }
-
+  
+    {'產品展示圖': '<iframe width="100%" height="auto" src="https://www.youtube.com/embed/WWgYmdGEsWI?autoplay=1&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>', '產品展示url': '' },
+ 
 
 ];
 
@@ -480,7 +428,7 @@ let 產品展示內容 = [
 
       const 聯絡資訊 = [
         {'字':`LINE ID：<a href="https://lin.ee/3mRv2Sp" target="_blank" rel="noreferrer noopener">@052zowjf</a>`},
-        {'字':`營業時間：週一 至 週33日｜08:00 - 23:00｜24H皆可加LINE留言盡速回應`},
+        {'字':`營業時間：週一 至 週11日｜08:00 - 23:00｜24H皆可加LINE留言盡速回應`},
         
 
 
@@ -532,50 +480,6 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
 
-      var player;
-
-function onYouTubeIframeAPIReady() {
-  player = new YT.Player('video1', {
-    events: {
-      'onReady': onPlayerReady,
-      'onStateChange': onPlayerStateChange
-    }
-  });
-}
-
-function onPlayerReady(event) {
-  console.log('Player is ready!');
-}
-
-function onPlayerStateChange(event) {
-  // ... 处理播放状态变化的逻辑
-}
-
-function checkVideoVisibility() {
-  const iframe = document.getElementById('video1');
-  const rect = iframe.getBoundingClientRect();
-  const windowHeight = window.innerHeight;
-
-  if (rect.top <= windowHeight && rect.bottom >= 0) {
-    // 影片進入視窗，如果影片已暫停，則播放
-    if (player && player.getPlayerState() !== YT.PlayerState.PLAYING) {
-      player.playVideo();
-    }
-  } else {
-    // 影片離開視窗，如果影片正在播放，則暫停
-    if (player && player.getPlayerState() === YT.PlayerState.PLAYING) {
-      player.pauseVideo();
-    }
-  }
-}
-
-// 使用 requestAnimationFrame 優化滾動事件處理
-function scrollHandler() {
-  checkVideoVisibility();
-  requestAnimationFrame(scrollHandler);
-}
-
-scrollHandler();
       
             // 顯示內容
 function _顯示內容(data, sel) {
