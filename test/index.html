@@ -467,7 +467,7 @@ let 產品展示內容 = [
 
       const 聯絡資訊 = [
         {'字':`LINE ID：<a href="https://lin.ee/3mRv2Sp" target="_blank" rel="noreferrer noopener">@052zowjf</a>`},
-        {'字':`營業時間：週一 至 週4日｜08:00 - 23:00｜24H皆可加LINE留言盡速回應`},
+        {'字':`營業時間：週一 至 週11日｜08:00 - 23:00｜24H皆可加LINE留言盡速回應`},
         
 
 
@@ -519,7 +519,21 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
 
+// ... 其他程式碼
 
+function onPlayerReady(event) {
+  // 影片準備就緒後的處理
+  console.log('Player is ready!');
+}
+
+window.addEventListener('scroll', function() {
+  // ... 其他程式碼
+
+  if (player && player.getPlayerState() !== YT.PlayerState.UNSTARTED) {
+    // 如果Player已初始化且不是UNSTARTED狀態，才進行播放/暫停操作
+    // ...
+  }
+});
       
             // 顯示內容
 function _顯示內容(data, sel) {
