@@ -312,9 +312,8 @@ let 產品展示內容 = [
     {'圖': '002.webp', 'url': 'https://lin.ee/3mRv2Sp'},
 
     {'產品展示圖': '<iframe width="100%" height="auto" src="https://www.youtube.com/embed/DJso_sZDx0k?autoplay=1&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>', '產品展示url': '' },
- 
-  {'產品展示圖': '<iframe width="100%" height="auto" src="https://www.youtube.com/embed/w2hcMFbr14w?autoplay=1&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>', '產品展示url': '' },
- 
+
+  {'產品展示圖': '<iframe width="100%" height="auto" src="https://www.youtube.com/embed/w2hcMFbr14w?mute=1&enablejsapi=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>', '產品展示url': '' },
 
 
   
@@ -400,8 +399,7 @@ let 產品展示內容 = [
 
     {'圖': 'C-og-image.jpg', 'url': ''},
 
-      {'產品展示圖': '<iframe width="100%" height="auto" src="https://www.youtube.com/embed/w2hcMFbr14w?autoplay=1&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>', '產品展示url': '' },
- 
+  {'產品展示圖': '<iframe width="100%" height="auto" src="https://www.youtube.com/embed/w2hcMFbr14w?mute=1&enablejsapi=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>', '產品展示url': '' },
 
 ];
 
@@ -495,26 +493,24 @@ const observer = new IntersectionObserver((entries) => {
     const iframe = entry.target;
     const player = iframe.contentWindow;
 
-    // 當影片進入可視範圍
     if (entry.isIntersecting) {
+      // 當影片進入可視範圍時播放
       player.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
     } else {
+      // 當影片離開可視範圍時暫停
       player.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
     }
   });
-}, { threshold: 0.5 }); // 當影片 50% 進入視窗時觸發
+}, { threshold: 0.5 }); // 至少進入 50% 視窗範圍時觸發
 
-// 對所有 iframe 進行監控
+// 監控所有嵌入的 iframe
 document.querySelectorAll('iframe').forEach(iframe => {
-  // 啟用 YouTube API 功能
   const src = iframe.src;
   if (!src.includes('enablejsapi=1')) {
     iframe.src = src.includes('?') ? `${src}&enablejsapi=1` : `${src}?enablejsapi=1`;
   }
   observer.observe(iframe);
 });
-
-
 
       
             // 顯示內容
