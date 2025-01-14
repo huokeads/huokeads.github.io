@@ -376,6 +376,13 @@ let 產品展示內容 = [
     {'圖': '038.webp', 'url': 'https://lin.ee/0twDNyU'},
 
 
+{'產品展示圖': '<iframe id="video1" width="100%" height="300px" src="https://www.youtube.com/embed/Ko-NaqUA6vc?autoplay=0&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>', '產品展示url': '' },
+
+{'產品展示圖': '<iframe id="video2" width="100%" height="300px" src="https://www.youtube.com/embed/ehI-aWsA1zo?autoplay=0&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>', '產品展示url': '' },
+
+{'產品展示圖': '<iframe id="video3" width="100%" height="300px" src="https://www.youtube.com/embed/w2hcMFbr14w?autoplay=0&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>', '產品展示url': '' },
+
+{'產品展示圖': '<iframe id="video4" width="100%" height="300px" src="https://www.youtube.com/embed/WWgYmdGEsWI?autoplay=0&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>', '產品展示url': '' },
 
 
 
@@ -564,10 +571,45 @@ function _顯示內容(data, sel) {
 
       
 
+$(document).on('scroll', function() {
+    $('iframe').each(function() {
+        var iframe = $(this);
+        var id = iframe.attr('id');
+        var offset = iframe.offset().top;
+        var windowHeight = $(window).height();
+        var scrollTop = $(window).scrollTop();
+
+        // 檢查影片是否進入視窗範圍
+        if (offset < scrollTop + windowHeight && offset + iframe.height() > scrollTop) {
+            // 當影片進入視窗範圍時，重設影片並自動播放
+            var src = iframe.attr('src');
+            var newSrc = src.replace(/autoplay=0/, 'autoplay=1').replace(/start=[0-9]+/, 'start=0');
+            iframe.attr('src', newSrc);  // 更新影片 src，這會重新啟動影片播放
+        }
+    });
+});
 
 
+$(document).on('scroll', function() {
+    $('iframe').each(function() {
+        var iframe = $(this);
+        var id = iframe.attr('id');
+        var offset = iframe.offset().top;
+        var windowHeight = $(window).height();
+        var scrollTop = $(window).scrollTop();
 
-
+        // 檢查影片是否進入視窗範圍
+        if (offset < scrollTop + windowHeight && offset + iframe.height() > scrollTop) {
+            // 檢查影片是否已經開始播放過，避免重複播放
+            if (!iframe.hasClass('played')) {
+                var src = iframe.attr('src');
+                var newSrc = src.replace(/autoplay=0/, 'autoplay=1').replace(/start=[0-9]+/, 'start=0');
+                iframe.attr('src', newSrc);  // 更新影片 src，這會重新啟動影片播放
+                iframe.addClass('played');   // 記錄影片已經播放過
+            }
+        }
+    });
+});
 
 
 
