@@ -82,39 +82,30 @@
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 
 <script>
-  var iframe = document.getElementById('video1');
-  var player;
-
-  // 等待 YouTube API 載入
-  function onYouTubeIframeAPIReady() {
-    player = new YT.Player('video1');
-  }
-
-  // 加載 YouTube Iframe API
-  var tag = document.createElement('script');
-  tag.src = "https://www.youtube.com/iframe_api";
-  var firstScriptTag = document.getElementsByTagName('script')[0];
-  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-  // 監聽視窗滾動事件
   window.addEventListener('scroll', function() {
+    var iframe = document.getElementById('video1');
     var rect = iframe.getBoundingClientRect();
     var windowHeight = window.innerHeight;
 
     // 判斷影片是否進入視窗
     if (rect.top <= windowHeight && rect.bottom >= 0) {
-      // 影片進入視窗，開始播放
-      if (player && !player.getPlayerState()) {
-        player.playVideo();
+      // 影片進入視窗，啟動自動播放
+      var src = iframe.src;
+      if (!src.includes("autoplay=1")) {
+        iframe.src = src.replace("autoplay=0", "autoplay=1"); // 設置 autoplay=1 開始播放
       }
     } else {
-      // 影片離開視窗，暫停播放
-      if (player && player.getPlayerState() == YT.PlayerState.PLAYING) {
-        player.pauseVideo();
+      // 影片離開視窗，停止播放
+      var src = iframe.src;
+      if (src.includes("autoplay=1")) {
+        iframe.src = src.replace("autoplay=1", "autoplay=0"); // 設置 autoplay=0 停止播放
       }
     }
   });
 </script>
+
+
+    
 
 <!-- Google Tag Manager --> <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KX6J448M');</script> <!-- End Google Tag Manager -->
     
