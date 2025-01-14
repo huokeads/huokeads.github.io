@@ -80,29 +80,6 @@
 
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 
-    <!-- JavaScript 部分 -->
-<script>
-  window.addEventListener('scroll', function() {
-    var iframe = document.getElementById('video1');
-    var rect = iframe.getBoundingClientRect();
-    var windowHeight = window.innerHeight;
-
-    // 判斷影片是否進入視窗
-    if (rect.top <= windowHeight && rect.bottom >= 0) {
-      // 影片進入視窗，啟動自動播放
-      var src = iframe.src;
-      if (!src.includes("autoplay=1")) {
-        iframe.src = src.replace("autoplay=0", "autoplay=1"); // 設置 autoplay=1 開始播放
-      }
-    } else {
-      // 影片離開視窗，停止播放
-      var src = iframe.src;
-      if (src.includes("autoplay=1")) {
-        iframe.src = src.replace("autoplay=1", "autoplay=0"); // 設置 autoplay=0 停止播放
-      }
-    }
-  });
-</script>
 
 
 
@@ -341,7 +318,7 @@ let 產品展示內容 = [
     {'圖': '007.webp', 'url': 'https://lin.ee/0twDNyU'},
   
     {'圖': '031.webp', 'url': ''},  
-    {'產品展示圖': '<iframe id="video1" width="100%" height="auto" src="https://www.youtube.com/embed/Ko-NaqUA6vc?autoplay=0&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>', '產品展示url': '' }
+    {'產品展示圖': '<iframe width="100%" height="auto" src="https://www.youtube.com/embed/Ko-NaqUA6vc?autoplay=1&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>', '產品展示url': '' },
     {'圖': '032.webp', 'url': 'https://lin.ee/0twDNyU'},
   
     {'圖': '008.webp', 'url': ''},
@@ -357,7 +334,7 @@ let 產品展示內容 = [
     {'圖': '018.webp', 'url': 'https://lin.ee/0twDNyU'},
 
     {'圖': '033.webp', 'url': ''},  
-    {'產品展示圖': '<iframe id="video1" width="100%" height="auto" src="https://www.youtube.com/embed/ehI-aWsA1zo?autoplay=0&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>', '產品展示url': '' }
+    {'產品展示圖': '<iframe width="100%" height="auto" src="https://www.youtube.com/embed/ehI-aWsA1zo?autoplay=1&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>', '產品展示url': '' },
     {'圖': '034.webp', 'url': 'https://lin.ee/0twDNyU'},
 
     {'圖': '019.webp', 'url': ''},
@@ -369,8 +346,8 @@ let 產品展示內容 = [
     {'圖': '025.webp', 'url': ''},
     {'圖': '026.webp', 'url': 'https://lin.ee/0twDNyU'},
 
-    {'圖': '035.webp', 'url': ''}, 
-    {'產品展示圖': '<iframe id="video1" width="100%" height="auto" src="https://www.youtube.com/embed/w2hcMFbr14w?autoplay=0&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>', '產品展示url': '' }
+    {'圖': '035.webp', 'url': ''},  
+    {'產品展示圖': '<iframe width="100%" height="auto" src="https://www.youtube.com/embed/w2hcMFbr14w?autoplay=1&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>', '產品展示url': '' },
     {'圖': '036.webp', 'url': 'https://lin.ee/0twDNyU'},
 
     {'圖': '027.webp', 'url': ''},
@@ -379,7 +356,7 @@ let 產品展示內容 = [
     {'圖': '030.webp', 'url': 'https://lin.ee/0twDNyU'},
 
     {'圖': '037.webp', 'url': ''},  
-    {'產品展示圖': '<iframe id="video1" width="100%" height="auto" src="https://www.youtube.com/embed/WWgYmdGEsWI?autoplay=0&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>', '產品展示url': '' }
+    {'產品展示圖': '<iframe width="100%" height="auto" src="https://www.youtube.com/embed/WWgYmdGEsWI?autoplay=1&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>', '產品展示url': '' },
     {'圖': '038.webp', 'url': 'https://lin.ee/0twDNyU'},
   
     {'圖': 'C-og-image.jpg', 'url': ''},
@@ -669,5 +646,3 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     </script>
   </body>
 </html>
-
-
