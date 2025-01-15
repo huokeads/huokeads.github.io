@@ -19,6 +19,8 @@
 
       .close-marquee {position: absolute;right: 10px;top: 5px;cursor: pointer;z-index: 2;}
 
+
+
       /* 產品展示 */
       .image-container {width: 100%;text-align: center;}
       .responsive-image {max-width: 100%;height: auto;}
@@ -31,9 +33,7 @@
       .toggle-btn {cursor: pointer;font-size: 24px;}
       .contact-content {height: 0;overflow: hidden;transition: height 0.3s ease-in-out;}
 
-
-
-
+      
       /* line圖示 */
       .social-links {margin: 20px ;}
       .line-icon {width: 40px;height: 40px;}
@@ -56,6 +56,7 @@
       h1,h2,h3,label {display: block;margin-bottom: 0.5rem;color: var(--標題色);}
       input, select {width: 100%;padding: 0.8rem;border: 1px solid #ddd;border-radius: 5px;font-size: 1rem;}
     
+
       
     </style>
 
@@ -69,18 +70,52 @@
 <meta property="og:title" content="演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣">
 <meta property="og:description" content="台灣知名首席級接髮師Morgan摩根，演藝界明星藝人唯一指定！魔法般的奇蹟接髮，完美解決頭髮留不長問題。採超無痕接髮不怕斷層被發現，沒有摩根神手美不起來的女人。感恩回饋接髮再送免費染髮，名額限額提供，加LINE立即進行免費諮詢！">
 
-<meta property="og:url" content="https://huokeads.github.io/mh">
+<meta property="og:url" content="https://xn--line-ed8fkrm0f4trth3j.cc//mh">
 
-<meta property="og:image" content="https://huokeads.github.io/mh/C-og-image.jpg">
+<meta property="og:image" content="https://xn--line-ed8fkrm0f4trth3j.cc//mh/C-og-image.jpg">
 <meta property="og:image:alt" content="演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:type" content="website">
 <meta property="fb:app_id" content="你的FacebookAppID">
 
+
+    
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    
+
+    <!-- JavaScript 部分 -->
+<script>
+  window.addEventListener('scroll', function() {
+    var iframe = document.getElementById('video1');
+    var rect = iframe.getBoundingClientRect();
+    var windowHeight = window.innerHeight;
+
+    // 判斷影片是否進入視窗
+    if (rect.top <= windowHeight && rect.bottom >= 0) {
+      // 影片進入視窗，啟動自動播放
+      var src = iframe.src;
+      if (!src.includes("autoplay=1")) {
+        iframe.src = src.replace("autoplay=0", "autoplay=1"); // 設置 autoplay=1 開始播放
+      }
+    } else {
+      // 影片離開視窗，停止播放
+      var src = iframe.src;
+      if (src.includes("autoplay=1")) {
+        iframe.src = src.replace("autoplay=1", "autoplay=0"); // 設置 autoplay=0 停止播放
+      }
+    }
+  });
+</script>
 
 
+
+
+
+
+
+
+    
 
 
 <!-- Google Tag Manager --> <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-N79KC82C');</script> <!-- End Google Tag Manager -->
@@ -181,12 +216,6 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   </div>
 
 </section>
-
-
-
-
-
-
 
 
 
@@ -308,7 +337,6 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 
 let 產品展示內容 = [
-
     {'圖': '001.webp', 'url': ''},
     {'圖': '002.webp', 'url': 'https://lin.ee/0twDNyU'},
     {'圖': '003.webp', 'url': 'https://lin.ee/r9kq7O5'},
@@ -317,8 +345,8 @@ let 產品展示內容 = [
     {'圖': '006.webp', 'url': ''},
     {'圖': '007.webp', 'url': 'https://lin.ee/0twDNyU'},
   
-    {'圖': '031.webp', 'url': ''},  
-    {'產品展示圖': '<iframe width="100%" height="auto" src="https://www.youtube.com/embed/Ko-NaqUA6vc?autoplay=1&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>', '產品展示url': '' },
+    {'圖': '031.webp', 'url': ''}, 
+    {'產品展示圖': '<iframe id="video1" width="100%" height="300px" src="https://www.youtube.com/embed/Ko-NaqUA6vc?autoplay=0&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>', '產品展示url': '' },
     {'圖': '032.webp', 'url': 'https://lin.ee/0twDNyU'},
   
     {'圖': '008.webp', 'url': ''},
@@ -334,7 +362,7 @@ let 產品展示內容 = [
     {'圖': '018.webp', 'url': 'https://lin.ee/0twDNyU'},
 
     {'圖': '033.webp', 'url': ''},  
-    {'產品展示圖': '<iframe width="100%" height="auto" src="https://www.youtube.com/embed/ehI-aWsA1zo?autoplay=1&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>', '產品展示url': '' },
+    {'產品展示圖': '<iframe id="video1" width="100%" height="300px" src="https://www.youtube.com/embed/ehI-aWsA1zo?autoplay=0&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>', '產品展示url': '' },
     {'圖': '034.webp', 'url': 'https://lin.ee/0twDNyU'},
 
     {'圖': '019.webp', 'url': ''},
@@ -347,7 +375,7 @@ let 產品展示內容 = [
     {'圖': '026.webp', 'url': 'https://lin.ee/0twDNyU'},
 
     {'圖': '035.webp', 'url': ''},  
-    {'產品展示圖': '<iframe width="100%" height="auto" src="https://www.youtube.com/embed/w2hcMFbr14w?autoplay=1&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>', '產品展示url': '' },
+    {'產品展示圖': '<iframe id="video1" width="100%" height="300px" src="https://www.youtube.com/embed/w2hcMFbr14w?autoplay=0&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>', '產品展示url': '' },
     {'圖': '036.webp', 'url': 'https://lin.ee/0twDNyU'},
 
     {'圖': '027.webp', 'url': ''},
@@ -356,10 +384,11 @@ let 產品展示內容 = [
     {'圖': '030.webp', 'url': 'https://lin.ee/0twDNyU'},
 
     {'圖': '037.webp', 'url': ''},  
-    {'產品展示圖': '<iframe width="100%" height="auto" src="https://www.youtube.com/embed/WWgYmdGEsWI?autoplay=1&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>', '產品展示url': '' },
+    {'產品展示圖': '<iframe id="video1" width="100%" height="300px" src="https://www.youtube.com/embed/WWgYmdGEsWI?autoplay=0&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>', '產品展示url': '' },
     {'圖': '038.webp', 'url': 'https://lin.ee/0twDNyU'},
   
-    {'圖': 'C-og-image.jpg', 'url': ''},
+      {'圖': 'C-og-image.jpg', 'url': ''},
+  
 
 ];
 
@@ -372,6 +401,7 @@ let 產品展示內容 = [
       
       const 關於我們 = [
         {'字':`
+
 
 台灣知名首席級接髮師Morgan摩根	<br>
 演藝界明星藝人唯一指定！	<br>
@@ -392,6 +422,7 @@ let 產品展示內容 = [
 最快2小時讓妳擁有美艷長髮	<br>
 
 
+
 `}
       ];
 
@@ -403,7 +434,9 @@ let 產品展示內容 = [
 
         {'字':`聯絡信箱：Morgan789789@icloud.com`},
       
-        {'字':`聯絡地址：108台北市萬華區武昌街2段53號2樓`}];
+        {'字':`聯絡地址：108台北市萬華區武昌街2段53號2樓`}
+
+];
 
         
       const 社交帳號 = [
@@ -451,6 +484,9 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
 
+
+      
+      
             // 顯示內容
 function _顯示內容(data, sel) {
     cont = 0;
@@ -524,28 +560,30 @@ function _顯示內容(data, sel) {
       }
 
 
+window.addEventListener('scroll', function() {
+  var iframes = document.querySelectorAll('iframe[id^="video"]'); // 選取所有 id 以 "video" 開頭的 iframe
+  var windowHeight = window.innerHeight;
+
+  iframes.forEach(function(iframe) {
+    var rect = iframe.getBoundingClientRect();
+
+    // 判斷影片是否進入視窗
+    if (rect.top <= windowHeight && rect.bottom >= 0) {
+      // 影片進入視窗，啟動自動播放
+      var src = iframe.src;
+      if (!src.includes("autoplay=1")) {
+        iframe.src = src.replace("autoplay=0", "autoplay=1"); // 設置 autoplay=1 開始播放
+      }
+    } else {
+      // 影片離開視窗，停止播放
+      var src = iframe.src;
+      if (src.includes("autoplay=1")) {
+        iframe.src = src.replace("autoplay=1", "autoplay=0"); // 設置 autoplay=0 停止播放
+      }
+    }
+  });
+});
       
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
