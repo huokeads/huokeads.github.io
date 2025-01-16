@@ -575,7 +575,30 @@ function _顯示內容(data, sel) {
       }
 
 
-      
+      window.addEventListener('scroll', function() {
+  var iframes = document.querySelectorAll('iframe[id^="video"]'); // 選取所有 id 以 "video" 開頭的 iframe
+  var windowHeight = window.innerHeight;
+
+  iframes.forEach(function(iframe) {
+    var rect = iframe.getBoundingClientRect();
+
+    // 判斷影片是否進入視窗
+    if (rect.top <= windowHeight && rect.bottom >= 0) {
+      // 影片進入視窗，啟動自動播放
+      var src = iframe.src;
+      if (!src.includes("autoplay=1")) {
+        iframe.src = src.replace("autoplay=0", "autoplay=1"); // 設置 autoplay=1 開始播放
+      }
+    } else {
+      // 影片離開視窗，停止播放
+      var src = iframe.src;
+      if (src.includes("autoplay=1")) {
+        iframe.src = src.replace("autoplay=1", "autoplay=0"); // 設置 autoplay=0 停止播放
+      }
+    }
+  });
+});
+
 
 
 
