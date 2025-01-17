@@ -459,7 +459,7 @@ if (lastScrollTop < 20) {
 
 
 let 產品展示內容 = [
-    {'圖': '001.webp', 'url': ''},
+    {'圖': '0001.webp', 'url': ''},
     {'圖': '002.webp', 'url': 'https://lin.ee/0twDNyU'},
     {'圖': '003.webp', 'url': 'https://lin.ee/r9kq7O5'},
     {'圖': '004.webp', 'url': ''},
@@ -705,10 +705,23 @@ window.addEventListener('scroll', function() {
     }
   });
 });
+
+
+
+
+    
+
+$(document).ready(function () {
+    const marqueeContent = $('.marquee-content');
+    走馬燈內容.forEach(item => {
+        marqueeContent.append(`<div class="marquee-item"><a href="${item.url}" target="_blank">${item.字}</a></div>`);
+    });
+
+    _走馬燈動();
+});
+
+
       
-
-
-
 /* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
           :::        :::::::::         :::   :::       :::::::::::       ::::    :::
