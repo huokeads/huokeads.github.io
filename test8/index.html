@@ -21,31 +21,20 @@
       /* 回頂鍵 */
       .scroll-top {position: fixed;bottom: 20px;right: 20px;background: var(--主題色); color: white;width: 40px;height: 40px;border-radius: 50%;display: none;justify-content: center;align-items: center;cursor: pointer;box-shadow: 0 2px 5px rgba(0,0,0,0.2);}
 
-
-
-      /*（原本的版本）
-      * {margin: 0;padding: 0;box-sizing: border-box;font-family: "Microsoft JhengHei", Arial, sans-serif;}
-      .logo-container {height: 50px;width: 100%;background-color: #7F552F;display: flex;justify-content: center;align-items: center;}
-      .logo {color: white;font-size: 24px;font-weight: bold;}
-      .logo img {height: 100%;width: auto;}
-      */
-
-
-
-
-      
-      
-
-      /* 走馬燈  qqq 修改每段停一下 qqq */
+      /* 走馬燈 */
       .marquee-container {height: 30px;width: 100%;position: relative;overflow: hidden;background: #343434;}
       .marquee-container:hover .marquee-content {animation-play-state: paused;}
-      .marquee-content {position: absolute;width: 100%;display: flex;flex-direction: column;animation: scrollUp 10s linear infinite;}      
+      .marquee-content {position: absolute;width: 100%;display: flex;flex-direction: column;transition: transform 0.5s ease-in-out; /* 滑動時添加平滑效果 */}      
       .marquee-item {padding: 5px;text-align: center;  height: 30px;display: flex;align-items: center;justify-content: center;}
-      .marquee-item a {text-decoration: none;color: #edff66;}
+      .marquee-item a {text-decoration: none;color: var(--走馬燈文字色); }
       .marquee-item a:hover {text-decoration: underline;}
-
       .close-marquee {position: absolute;right: 10px;top: 5px;cursor: pointer;z-index: 2;}
 
+
+
+
+
+      
 
 
       /* 產品展示 */
@@ -273,12 +262,35 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
       @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
 
 
-
-
       // 關走馬燈
       function closeMarquee() {
         document.getElementById('marqueeContainer').style.display = 'none';
       }
+
+
+      function _走馬燈動() {
+        const $content = $('.marquee-content');
+        const $items = $('.marquee-item');
+        const itemHeight = $items.outerHeight();
+        const itemCount = $items.length;
+        let currentIndex = 0;
+        function scrollMarquee() {
+          currentIndex++;
+          if (currentIndex >= itemCount) {
+            // 到最後一條後立即回到第一條
+            $content.css('transform', `translateY(0)`);
+            currentIndex = 0; // 重置索引
+          } else {
+            // 滾動到下一條
+            $content.css('transform', `translateY(-${itemHeight * currentIndex}px)`);
+          }
+        }
+        // 每次滾動後停留一秒
+        setInterval(scrollMarquee, 1500); // 包括滑動與停留時間
+      }
+
+
+      
 
       // 開闢 聯絡卡
       function toggleContact() {
@@ -333,20 +345,34 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
           // 顯示或隱藏「回到頂部」按鈕
           toggleScrollTopButton();
       });
-      function toggleScrollTopButton() {
-          const scrollTopButton = document.getElementById('scrollTop');
-          const displayThreshold = 200; // 設定需要滾動多少距離後才考慮顯示按鈕
-          if (isScrollingUp && lastScrollTop > displayThreshold) {
-              scrollTopButton.style.display = 'flex';
-              $('.logo-container').css('top', '0px'); // 顯示logo位
-          } else {
-              scrollTopButton.style.display = 'none';
-              $('.logo-container').css('top', '-50px'); // 隱藏logo位
-          }
-          // 顯示logo位
-          if (lastScrollTop < 20) $('.logo-container').css('top', '0px');
-      }
 
+
+
+/*GPT建議的改法，讓跑馬燈可以一起跟隨*/
+      function toggleScrollTopButton() {
+    const scrollTopButton = document.getElementById('scrollTop');
+    const displayThreshold = 200; // 滾動距離閾值
+    const logoContainer = document.querySelector('.logo-container');
+    const marqueeContainer = document.querySelector('.marquee-container');
+
+    if (isScrollingUp && lastScrollTop > displayThreshold) {
+        // 顯示 logo 和跑馬燈
+        scrollTopButton.style.display = 'flex';
+        logoContainer.style.top = '0px';
+        marqueeContainer.style.top = '50px'; // 跑馬燈緊貼 logo 下方
+    } else {
+        // 隱藏 logo 和跑馬燈
+        scrollTopButton.style.display = 'none';
+        logoContainer.style.top = '-50px';
+        marqueeContainer.style.top = '-80px'; // 跑馬燈隱藏
+    }
+
+    // 滾動到頂部時，始終顯示 logo 和跑馬燈
+    if (lastScrollTop < 20) {
+        logoContainer.style.top = '0px';
+        marqueeContainer.style.top = '50px';
+    }
+}
 
 
 
