@@ -349,19 +349,19 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 
 /*GPT建議的改法，讓跑馬燈可以一起跟隨*/
-      function toggleScrollTopButton() {
+ function toggleScrollTopButton() {
     const scrollTopButton = document.getElementById('scrollTop');
-    const displayThreshold = 200; // 滾動距離閾值
     const logoContainer = document.querySelector('.logo-container');
     const marqueeContainer = document.querySelector('.marquee-container');
+    const displayThreshold = 200; // 滾動距離閾值
 
     if (isScrollingUp && lastScrollTop > displayThreshold) {
-        // 顯示 logo 和跑馬燈
+        // 滾動方向向上，顯示 logo 和跑馬燈
         scrollTopButton.style.display = 'flex';
         logoContainer.style.top = '0px';
-        marqueeContainer.style.top = '50px'; // 跑馬燈緊貼 logo 下方
+        marqueeContainer.style.top = '50px'; // 跑馬燈緊貼 logo
     } else {
-        // 隱藏 logo 和跑馬燈
+        // 滾動方向向下，隱藏 logo 和跑馬燈
         scrollTopButton.style.display = 'none';
         logoContainer.style.top = '-50px';
         marqueeContainer.style.top = '-80px'; // 跑馬燈隱藏
@@ -373,7 +373,6 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
         marqueeContainer.style.top = '50px';
     }
 }
-
 
 
       
@@ -441,7 +440,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 
 let 產品展示內容 = [
-    {'圖': '0001.webp', 'url': ''},
+    {'圖': '001.webp', 'url': ''},
     {'圖': '002.webp', 'url': 'https://lin.ee/0twDNyU'},
     {'圖': '003.webp', 'url': 'https://lin.ee/r9kq7O5'},
     {'圖': '004.webp', 'url': ''},
