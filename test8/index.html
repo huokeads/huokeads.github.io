@@ -348,31 +348,33 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 
 
-/*GPT建議的改法，讓跑馬燈可以一起跟隨*/
- function toggleScrollTopButton() {
-    const scrollTopButton = document.getElementById('scrollTop');
-    const logoContainer = document.querySelector('.logo-container');
-    const marqueeContainer = document.querySelector('.marquee-container');
-    const displayThreshold = 200; // 滾動距離閾值
+      function toggleScrollTopButton() {
+          const scrollTopButton = document.getElementById('scrollTop');
+          const displayThreshold = 200; // 設定需要滾動多少距離後才考慮顯示按鈕
+          if (isScrollingUp && lastScrollTop > displayThreshold) {
+              scrollTopButton.style.display = 'flex';
+              $('.logo-container').css('top', '0px'); // 顯示logo位
+          } else {
+              scrollTopButton.style.display = 'none';
+              $('.logo-container').css('top', '-50px'); // 隱藏logo位
+          }
 
-    if (isScrollingUp && lastScrollTop > displayThreshold) {
-        // 滾動方向向上，顯示 logo 和跑馬燈
-        scrollTopButton.style.display = 'flex';
-        logoContainer.style.top = '0px';
-        marqueeContainer.style.top = '50px'; // 跑馬燈緊貼 logo
-    } else {
-        // 滾動方向向下，隱藏 logo 和跑馬燈
-        scrollTopButton.style.display = 'none';
-        logoContainer.style.top = '-50px';
-        marqueeContainer.style.top = '-80px'; // 跑馬燈隱藏
-    }
 
-    // 滾動到頂部時，始終顯示 logo 和跑馬燈
-    if (lastScrollTop < 20) {
-        logoContainer.style.top = '0px';
-        marqueeContainer.style.top = '50px';
-    }
+        
+        /*測試GPT新版代碼*/
+        
+         // 顯示 logo 和跑馬燈
+if (lastScrollTop < 20) {
+    $('.logo-container').css('top', '0px');
+    $('.marquee-container').css('top', '50px'); // 跑馬燈緊貼 logo
 }
+
+
+
+        
+
+      }
+
 
 
       
@@ -440,7 +442,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 
 let 產品展示內容 = [
-    {'圖': '001.webp', 'url': ''},
+    {'圖': '0001.webp', 'url': ''},
     {'圖': '002.webp', 'url': 'https://lin.ee/0twDNyU'},
     {'圖': '003.webp', 'url': 'https://lin.ee/r9kq7O5'},
     {'圖': '004.webp', 'url': ''},
