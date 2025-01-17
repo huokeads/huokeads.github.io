@@ -22,7 +22,20 @@
       .scroll-top {position: fixed;bottom: 20px;right: 20px;background: var(--主題色); color: white;width: 40px;height: 40px;border-radius: 50%;display: none;justify-content: center;align-items: center;cursor: pointer;box-shadow: 0 2px 5px rgba(0,0,0,0.2);}
 
       /* 走馬燈 */
-      .marquee-container {height: 30px;width: 100%;position: relative;overflow: hidden;background: #343434;}
+
+.marquee-container {
+    height: 30px;
+    width: 100%;
+    position: fixed; /* 修改為固定定位 */
+    top: 50px; /* 初始位置緊貼 logo-container */
+    overflow: hidden;
+    background: #343434;
+    z-index: 10; /* 確保在視圖內正確顯示 */
+    transition: 0.5s; /* 平滑過渡效果 */
+}
+
+
+      
       .marquee-container:hover .marquee-content {animation-play-state: paused;}
       .marquee-content {position: absolute;width: 100%;display: flex;flex-direction: column;transition: transform 0.5s ease-in-out; /* 滑動時添加平滑效果 */}      
       .marquee-item {padding: 5px;text-align: center;  height: 30px;display: flex;align-items: center;justify-content: center;}
@@ -351,13 +364,17 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
       function toggleScrollTopButton() {
           const scrollTopButton = document.getElementById('scrollTop');
           const displayThreshold = 200; // 設定需要滾動多少距離後才考慮顯示按鈕
-          if (isScrollingUp && lastScrollTop > displayThreshold) {
-              scrollTopButton.style.display = 'flex';
-              $('.logo-container').css('top', '0px'); // 顯示logo位
-          } else {
-              scrollTopButton.style.display = 'none';
-              $('.logo-container').css('top', '-50px'); // 隱藏logo位
-          }
+
+        
+if (isScrollingUp && lastScrollTop > displayThreshold) {
+    scrollTopButton.style.display = 'flex';
+    $('.logo-container').css('top', '0px'); // 顯示 logo 位
+    $('.marquee-container').css('top', '50px'); // 跑馬燈跟隨 logo 顯示
+} else {
+    scrollTopButton.style.display = 'none';
+    $('.logo-container').css('top', '-50px'); // 隱藏 logo 位
+    $('.marquee-container').css('top', '-80px'); // 跑馬燈隱藏
+}
 
 
         
@@ -442,7 +459,7 @@ if (lastScrollTop < 20) {
 
 
 let 產品展示內容 = [
-    {'圖': '0001.webp', 'url': ''},
+    {'圖': '001.webp', 'url': ''},
     {'圖': '002.webp', 'url': 'https://lin.ee/0twDNyU'},
     {'圖': '003.webp', 'url': 'https://lin.ee/r9kq7O5'},
     {'圖': '004.webp', 'url': ''},
