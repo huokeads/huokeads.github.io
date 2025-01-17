@@ -33,7 +33,12 @@
     transition: 0.5s; /* 平滑過渡效果 */
 }
 
-      
+            .marquee-container:hover .marquee-content {animation-play-state: paused;}
+      .marquee-content {position: absolute;width: 100%;display: flex;flex-direction: column;transition: transform 0.5s ease-in-out; /* 滑動時添加平滑效果 */}      
+      .marquee-item {padding: 5px;text-align: center;  height: 30px;display: flex;align-items: center;justify-content: center;}
+      .marquee-item a {text-decoration: none;color: var(--走馬燈文字色); }
+      .marquee-item a:hover {text-decoration: underline;}
+      .close-marquee {position: absolute;right: 10px;top: 5px;cursor: pointer;z-index: 2;}
 
 
 
