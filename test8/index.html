@@ -4,10 +4,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
+
+
+      /*（本次新增的版本）*/
+      :root {--主題色: #7F552F;--走馬燈文字色: #edff66;}
+      * {margin: 0;padding: 0;box-sizing: border-box;font-family: "Microsoft JhengHei", Arial, sans-serif;}
+
+      /* 上拉顯示logo位 下拉隱藏 */
+      body{margin-top: 50px;}
+      .logo-container {height: 50px;width: 100%;background-color: var(--主題色); display: flex;justify-content: center;align-items: center;
+      position: fixed;top: 0;z-index: 11;transition: .5s ;}
+
+      .logo {color: white;font-size: 24px;font-weight: bold;}
+      .logo img {height: 100%;width: auto;}
+
+      /* 回頂鍵 */
+      .scroll-top {position: fixed;bottom: 20px;right: 20px;background: var(--主題色); color: white;width: 40px;height: 40px;border-radius: 50%;display: none;justify-content: center;align-items: center;cursor: pointer;box-shadow: 0 2px 5px rgba(0,0,0,0.2);}
+
+
+
+      /*（原本的版本）
       * {margin: 0;padding: 0;box-sizing: border-box;font-family: "Microsoft JhengHei", Arial, sans-serif;}
       .logo-container {height: 50px;width: 100%;background-color: #7F552F;display: flex;justify-content: center;align-items: center;}
       .logo {color: white;font-size: 24px;font-weight: bold;}
       .logo img {height: 100%;width: auto;}
+      */
+
+
+
+
+      
+      
 
       /* 走馬燈  qqq 修改每段停一下 qqq */
       .marquee-container {height: 30px;width: 100%;position: relative;overflow: hidden;background: #343434;}
