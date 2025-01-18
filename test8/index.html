@@ -62,17 +62,6 @@
       .toggle-btn {cursor: pointer;font-size: 24px;}
       .contact-content {height: 0;overflow: hidden;transition: height 0.3s ease-in-out;}
 
-
-   /* 輪播圖 */
-      .輪播圖 {position: relative;overflow: hidden;border: 2px solid #ccc;border-radius: 10px;margin: auto;}
-      .輪播圖-images {display: flex;transition: transform 0.5s ease-in-out;width: 100%;}
-      .輪播圖-images img {object-fit: cover;width: 100%;height: auto;}
-      .輪播圖 button {position: absolute;top: 50%;transform: translateY(-50%);background-color: rgba(0, 0, 0, 0);border:none; cursor: pointer;z-index: 10;width: 40%;height: 80%;}
-      .輪播圖 button.prev {left: 0px;}
-      .輪播圖 button.next {right: 0px;}
-
-
-
       
       /* line圖示 */
       .social-links {margin: 20px ;}
@@ -100,11 +89,11 @@
       
     </style>
 
-<title>1演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
+<title>演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
 
 <meta name="description" content="台灣知名首席級接髮師Morgan摩根，演藝界明星藝人唯一指定！魔法般的奇蹟接髮，完美解決頭髮留不長問題。採超無痕接髮不怕斷層被發現，沒有摩根神手美不起來的女人。感恩回饋接髮再送免費染髮，名額限額提供，加LINE立即進行免費諮詢！">
 
-<meta content="摩根1接髮" name="copyright">
+<meta content="摩根接髮" name="copyright">
 
 <meta property="og:site_name" content="摩根接髮">
 <meta property="og:title" content="演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣">
@@ -406,36 +395,52 @@ if (lastScrollTop < 20) {
 
 
       
-      // 輪播圖
-      function _輪播圖動() {
-          const images = document.querySelector('.輪播圖-images');
-          const prevButton = document.querySelector('.prev');
-          const nextButton = document.querySelector('.next');
-          let currentIndex = 0;
-          const imageCount = images.children.length;
-          function updateCarousel() {
-              const containerWidth = images.parentElement.clientWidth; // 獲取容器寬度
-              const offset = -currentIndex * containerWidth;
-              images.style.transform = `translateX(${offset}px)`;
-          }
-          prevButton.addEventListener('click', () => {
-              currentIndex = (currentIndex - 1 + imageCount) % imageCount;
-              updateCarousel();
-          });
-          nextButton.addEventListener('click', () => {
-              currentIndex = (currentIndex + 1) % imageCount;
-              updateCarousel();
-          });
-          // 自動播放功能
-          setInterval(() => {
-              currentIndex = (currentIndex + 1) % imageCount;
-              updateCarousel();
-          }, 3000); // 每 3 秒切換一次
-          // 初始化輪播圖位置
-          updateCarousel();
-          // 當窗口大小改變時，更新輪播圖位置
-          window.addEventListener('resize', updateCarousel);
+
+      /*（本次刪除的部分）
+
+      
+      // 回頁頂
+      function scrollToTop() {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
       }
+
+      // 捲動顯示回頂鍵
+      window.onscroll = function() {
+        const scrollTop = document.getElementById('scrollTop');
+        const logo = document.querySelector('.logo-container');
+        const logoBottom = logo.offsetTop + logo.offsetHeight;
+        
+        if (window.pageYOffset > logoBottom) {
+          scrollTop.style.display = 'flex';
+        } else {
+          scrollTop.style.display = 'none';
+        }
+      };
+
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
       /* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
@@ -454,16 +459,57 @@ if (lastScrollTop < 20) {
 
 
 let 產品展示內容 = [
-    {'產品展示圖': '0001.webp', 'url': ''},
-    {'產品展示圖': '002.webp', 'url': 'https://lin.ee/0twDNyU'},
-    {'產品展示圖': '003.webp', 'url': 'https://lin.ee/r9kq7O5'},
-
-  {'產品展示圖': '011.webp,012.webp', '產品展示url': 'https://lin.ee/exeQ2Yx,https://lin.ee/exeQ2Yx'},
-
+    {'圖': '001.webp', 'url': ''},
+    {'圖': '002.webp', 'url': 'https://lin.ee/0twDNyU'},
+    {'圖': '003.webp', 'url': 'https://lin.ee/r9kq7O5'},
+    {'圖': '004.webp', 'url': ''},
+    {'圖': '005.webp', 'url': ''},
+    {'圖': '006.webp', 'url': ''},
+    {'圖': '007.webp', 'url': 'https://lin.ee/0twDNyU'},
   
-
+    {'圖': '031.webp', 'url': ''}, 
+    {'產品展示圖': '<iframe id="video1" width="100%" height="300px" src="https://www.youtube.com/embed/Ko-NaqUA6vc?autoplay=0&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>', '產品展示url': '' },
+    {'圖': '032.webp', 'url': 'https://lin.ee/0twDNyU'},
   
-      {'產品展示圖': 'C-og-image.jpg', 'url': ''},
+    {'圖': '008.webp', 'url': ''},
+    {'圖': '009.webp', 'url': 'https://lin.ee/0twDNyU'},
+    {'圖': '010.webp', 'url': ''},
+    {'圖': '011.webp', 'url': ''},
+    {'圖': '012.webp', 'url': ''},
+    {'圖': '013.webp', 'url': ''},
+    {'圖': '014.webp', 'url': ''},
+    {'圖': '015.webp', 'url': ''},
+    {'圖': '016.webp', 'url': ''},
+    {'圖': '017.webp', 'url': ''},
+    {'圖': '018.webp', 'url': 'https://lin.ee/0twDNyU'},
+
+    {'圖': '033.webp', 'url': ''},  
+    {'產品展示圖': '<iframe id="video1" width="100%" height="300px" src="https://www.youtube.com/embed/ehI-aWsA1zo?autoplay=0&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>', '產品展示url': '' },
+    {'圖': '034.webp', 'url': 'https://lin.ee/0twDNyU'},
+
+    {'圖': '019.webp', 'url': ''},
+    {'圖': '020.webp', 'url': 'https://lin.ee/0twDNyU'},
+    {'圖': '021.webp', 'url': ''},
+    {'圖': '022.webp', 'url': 'https://lin.ee/0twDNyU'},
+    {'圖': '023.webp', 'url': ''},
+    {'圖': '024.webp', 'url': 'https://lin.ee/0twDNyU'},
+    {'圖': '025.webp', 'url': ''},
+    {'圖': '026.webp', 'url': 'https://lin.ee/0twDNyU'},
+
+    {'圖': '035.webp', 'url': ''},  
+    {'產品展示圖': '<iframe id="video1" width="100%" height="300px" src="https://www.youtube.com/embed/w2hcMFbr14w?autoplay=0&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>', '產品展示url': '' },
+    {'圖': '036.webp', 'url': 'https://lin.ee/0twDNyU'},
+
+    {'圖': '027.webp', 'url': ''},
+    {'圖': '028.webp', 'url': 'https://lin.ee/0twDNyU'},
+    {'圖': '029.webp', 'url': ''},
+    {'圖': '030.webp', 'url': 'https://lin.ee/0twDNyU'},
+
+    {'圖': '037.webp', 'url': ''},  
+    {'產品展示圖': '<iframe id="video1" width="100%" height="300px" src="https://www.youtube.com/embed/WWgYmdGEsWI?autoplay=0&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>', '產品展示url': '' },
+    {'圖': '038.webp', 'url': 'https://lin.ee/0twDNyU'},
+  
+      {'圖': 'C-og-image.jpg', 'url': ''},
   
 
 ];
@@ -573,7 +619,22 @@ function _顯示內容(data, sel) {
         if (sel == '走馬燈') {
             all內容 = `<div class="marquee-item"><a href="${內容.url}" target="_blank" rel="noopener noreferrer">${內容.字}</a></div>`;
         }
-
+        /***************** 產品展示 ******************/
+        else if (sel == '產品展示') { // 使用 else if
+            if (內容.產品展示圖) { // 判斷是否有 產品展示圖 屬性
+                all內容 = $(`<div class="image-container"></div>`).append(內容.產品展示圖); // 直接將 HTML 字串 append
+            } else if (內容.圖) { // 處理圖片的情況
+                $內容圖 = $(`<img class="responsive-image" src="${內容.圖}">`);
+                let 單個內容 = $內容圖;
+                if (內容.url) {
+                    單個內容 = $(`<a href="${內容.url}" target="_blank"></a>`).append($內容圖);
+                }
+                all內容 = $(`<div class="image-container"></div>`).append(單個內容);
+                $內容圖.on("error", function () {
+                    all內容.remove();
+                });
+            }
+        }
         /***************** 關於我們 ******************/
         else if (sel == '關於我們') { // 使用 else if
             all內容 = `<p>${內容.字}</p>`;
@@ -660,54 +721,6 @@ $(document).ready(function () {
 });
 
 
-
-
-
-         /***************** 產品展示 ******************/
-          if (sel == '產品展示'){
-            // 只圖
-            $內容圖 = $(`<img class="responsive-image" src="${內容.產品展示圖}" >`);
-            單個內容 = $內容圖
-            // 有ulr圖
-            if (內容.產品展示url != '') 單個內容 = $(`<a href="${內容.產品展示url}" target="_blank"></a>`).append($內容圖); // 包裹連結並插入圖片
-            // yt片
-            if (內容.產品展示圖.includes('<iframe')) {
-              整尺寸 = 內容.產品展示圖.split('src')[1]
-              整尺寸 =  '<iframe width="100%" height="auto" src' + 整尺寸
-              單個內容 = 整尺寸; // 直接插入yt片
-              }
-
-            
-
-
-      
-
-            // 輪播圖
-            if (內容.產品展示圖.includes(',')){
-              // 取輪播料
-              整組輪播圖 = 內容.產品展示圖.split(',')
-              $輪播圖容器 = $('<div class="輪播圖-images"></div>');
-
-              for (let i = 0; i < 整組輪播圖.length; i++) {
-                $輪圖 = $(`<img class="responsive-image" src="${整組輪播圖[i]}" >`);
-                第n輪圖 = $輪圖;
-                // a 有問題不做
-                $輪播圖容器.append(第n輪圖);
-              }
-              單個內容 = $('<div class="輪播圖"><button class="prev"></button><button class="next"></button></div>').append($輪播圖容器);
-            }
-
-            all內容 = $(`<div class="image-container"></div>`).append(單個內容); // 包裹圖片容器
-            // 加載錯誤時隱藏該圖片
-            $內容圖.on("error", function () {
-              if (!/<iframe|,/.test(內容.產品展示圖)) all內容.remove(); // 移除整個容器
-            });
-
-
-
-
-
-      
       
 /* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
@@ -806,3 +819,4 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     </script>
   </body>
 </html>
+
