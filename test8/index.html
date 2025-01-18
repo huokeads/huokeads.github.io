@@ -62,6 +62,17 @@
       .toggle-btn {cursor: pointer;font-size: 24px;}
       .contact-content {height: 0;overflow: hidden;transition: height 0.3s ease-in-out;}
 
+
+   /* 輪播圖 */
+      .輪播圖 {position: relative;overflow: hidden;border: 2px solid #ccc;border-radius: 10px;margin: auto;}
+      .輪播圖-images {display: flex;transition: transform 0.5s ease-in-out;width: 100%;}
+      .輪播圖-images img {object-fit: cover;width: 100%;height: auto;}
+      .輪播圖 button {position: absolute;top: 50%;transform: translateY(-50%);background-color: rgba(0, 0, 0, 0);border:none; cursor: pointer;z-index: 10;width: 40%;height: 80%;}
+      .輪播圖 button.prev {left: 0px;}
+      .輪播圖 button.next {right: 0px;}
+
+
+
       
       /* line圖示 */
       .social-links {margin: 20px ;}
@@ -395,52 +406,36 @@ if (lastScrollTop < 20) {
 
 
       
-
-      /*（本次刪除的部分）
-
-      
-      // 回頁頂
-      function scrollToTop() {
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth'
-        });
+      // 輪播圖
+      function _輪播圖動() {
+          const images = document.querySelector('.輪播圖-images');
+          const prevButton = document.querySelector('.prev');
+          const nextButton = document.querySelector('.next');
+          let currentIndex = 0;
+          const imageCount = images.children.length;
+          function updateCarousel() {
+              const containerWidth = images.parentElement.clientWidth; // 獲取容器寬度
+              const offset = -currentIndex * containerWidth;
+              images.style.transform = `translateX(${offset}px)`;
+          }
+          prevButton.addEventListener('click', () => {
+              currentIndex = (currentIndex - 1 + imageCount) % imageCount;
+              updateCarousel();
+          });
+          nextButton.addEventListener('click', () => {
+              currentIndex = (currentIndex + 1) % imageCount;
+              updateCarousel();
+          });
+          // 自動播放功能
+          setInterval(() => {
+              currentIndex = (currentIndex + 1) % imageCount;
+              updateCarousel();
+          }, 3000); // 每 3 秒切換一次
+          // 初始化輪播圖位置
+          updateCarousel();
+          // 當窗口大小改變時，更新輪播圖位置
+          window.addEventListener('resize', updateCarousel);
       }
-
-      // 捲動顯示回頂鍵
-      window.onscroll = function() {
-        const scrollTop = document.getElementById('scrollTop');
-        const logo = document.querySelector('.logo-container');
-        const logoBottom = logo.offsetTop + logo.offsetHeight;
-        
-        if (window.pageYOffset > logoBottom) {
-          scrollTop.style.display = 'flex';
-        } else {
-          scrollTop.style.display = 'none';
-        }
-      };
-
-
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
       /* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
@@ -459,9 +454,13 @@ if (lastScrollTop < 20) {
 
 
 let 產品展示內容 = [
-    {'圖': '001.webp', 'url': ''},
+    {'圖': '0001.webp', 'url': ''},
     {'圖': '002.webp', 'url': 'https://lin.ee/0twDNyU'},
     {'圖': '003.webp', 'url': 'https://lin.ee/r9kq7O5'},
+
+  {'產品展示圖': '011.webp,012.webp', '產品展示url': 'https://lin.ee/exeQ2Yx,https://lin.ee/exeQ2Yx'},
+
+  
     {'圖': '004.webp', 'url': ''},
     {'圖': '005.webp', 'url': ''},
     {'圖': '006.webp', 'url': ''},
@@ -721,6 +720,32 @@ $(document).ready(function () {
 });
 
 
+            // 輪播圖
+            if (內容.產品展示圖.includes(',')){
+              // 取輪播料
+              整組輪播圖 = 內容.產品展示圖.split(',')
+              $輪播圖容器 = $('<div class="輪播圖-images"></div>');
+
+              for (let i = 0; i < 整組輪播圖.length; i++) {
+                $輪圖 = $(`<img class="responsive-image" src="${整組輪播圖[i]}" >`);
+                第n輪圖 = $輪圖;
+                // a 有問題不做
+                $輪播圖容器.append(第n輪圖);
+              }
+              單個內容 = $('<div class="輪播圖"><button class="prev"></button><button class="next"></button></div>').append($輪播圖容器);
+            }
+
+            all內容 = $(`<div class="image-container"></div>`).append(單個內容); // 包裹圖片容器
+            // 加載錯誤時隱藏該圖片
+            $內容圖.on("error", function () {
+              if (!/<iframe|,/.test(內容.產品展示圖)) all內容.remove(); // 移除整個容器
+            });
+
+
+
+
+
+      
       
 /* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
