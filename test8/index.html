@@ -86,10 +86,49 @@
       input, select {width: 100%;padding: 0.8rem;border: 1px solid #ddd;border-radius: 5px;font-size: 1rem;}
     
 
+    .輪播圖 {
+      position: relative;
+      overflow: hidden;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      margin: auto;
+      max-width: 800px;
+    }
+
+    .輪播圖-images {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .輪播圖-images img {
+      object-fit: cover;
+      width: 100%;
+    }
+
+    .輪播圖 button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
+
+    .輪播圖 button.prev {
+      left: 10px;
+    }
+
+    .輪播圖 button.next {
+      right: 10px;
+    }
+
+
+
+      
       
     </style>
 
-<title>演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
+<title>2演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
 
 <meta name="description" content="台灣知名首席級接髮師Morgan摩根，演藝界明星藝人唯一指定！魔法般的奇蹟接髮，完美解決頭髮留不長問題。採超無痕接髮不怕斷層被發現，沒有摩根神手美不起來的女人。感恩回饋接髮再送免費染髮，名額限額提供，加LINE立即進行免費諮詢！">
 
@@ -460,6 +499,20 @@ if (lastScrollTop < 20) {
 
 let 產品展示內容 = [
     {'圖': '001.webp', 'url': ''},
+
+
+  
+  <div class="輪播圖">
+    <button class="prev">上一張</button>
+    <div class="輪播圖-images">
+      <img src="011.webp" alt="圖片1">
+      <img src="012.webp" alt="圖片2">
+    </div>
+    <button class="next">下一張</button>
+  </div>
+
+
+  
     {'圖': '002.webp', 'url': 'https://lin.ee/0twDNyU'},
     {'圖': '003.webp', 'url': 'https://lin.ee/r9kq7O5'},
     {'圖': '004.webp', 'url': ''},
@@ -721,6 +774,38 @@ $(document).ready(function () {
 });
 
 
+
+ document.addEventListener("DOMContentLoaded", () => {
+      const imagesContainer = document.querySelector(".輪播圖-images");
+      const prevButton = document.querySelector(".prev");
+      const nextButton = document.querySelector(".next");
+      let currentIndex = 0;
+      const imageCount = imagesContainer.children.length;
+
+      function updateCarousel() {
+        const offset = -currentIndex * imagesContainer.clientWidth;
+        imagesContainer.style.transform = `translateX(${offset}px)`;
+      }
+
+      prevButton.addEventListener("click", () => {
+        currentIndex = (currentIndex - 1 + imageCount) % imageCount;
+        updateCarousel();
+      });
+
+      nextButton.addEventListener("click", () => {
+        currentIndex = (currentIndex + 1) % imageCount;
+        updateCarousel();
+      });
+
+      setInterval(() => {
+        currentIndex = (currentIndex + 1) % imageCount;
+        updateCarousel();
+      }, 3000);
+
+      updateCarousel();
+    });
+
+       
       
 /* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
