@@ -720,6 +720,28 @@ $(document).ready(function () {
 });
 
 
+
+
+
+         /***************** 產品展示 ******************/
+          if (sel == '產品展示'){
+            // 只圖
+            $內容圖 = $(`<img class="responsive-image" src="${內容.產品展示圖}" >`);
+            單個內容 = $內容圖
+            // 有ulr圖
+            if (內容.產品展示url != '') 單個內容 = $(`<a href="${內容.產品展示url}" target="_blank"></a>`).append($內容圖); // 包裹連結並插入圖片
+            // yt片
+            if (內容.產品展示圖.includes('<iframe')) {
+              整尺寸 = 內容.產品展示圖.split('src')[1]
+              整尺寸 =  '<iframe width="100%" height="auto" src' + 整尺寸
+              單個內容 = 整尺寸; // 直接插入yt片
+              }
+
+            
+
+
+      
+
             // 輪播圖
             if (內容.產品展示圖.includes(',')){
               // 取輪播料
