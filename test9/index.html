@@ -95,7 +95,7 @@
       
     </style>
 
-<title>6明星網紅首選！接髮+染髮只要4,999元｜韓哥Hange接髮｜台北市西門町</title>
+<title>7明星網紅首選！接髮+染髮只要4,999元｜韓哥Hange接髮｜台北市西門町</title>
 
 <meta name="description" content="西門高質感接髮Hange韓哥，百萬級強榜王者名師。台北縮毛矯正專家。5星級超高接髮滿意度，120%的耐心諮詢服務。10多年專精接髮豐富經驗，頭髮任何問題問韓哥就對了。獨家接髮技術，專門為妳服務。獨家髮束排列，不怕脫落，接髮持久耐用。給我2小時，讓妳短髮瞬變長髮美女正妹，變美真的很簡單。">
 
@@ -429,7 +429,42 @@ if (lastScrollTop < 20) {
 
 
 
+.carousel-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
 
+.carousel-inner {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.carousel-item {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+    height: auto;
+}
+
+.carousel-control-prev, .carousel-control-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.carousel-control-prev {
+    left: 10px;
+}
+
+.carousel-control-next {
+    right: 10px;
+}
 
 
 
@@ -763,14 +798,61 @@ $(document).ready(function () {
 
 
 
+function createCarousel(images) {
+    // 創建輪播圖的容器
+    let carouselContainer = $('<div class="carousel-container"></div>');
+    let carouselInner = $('<div class="carousel-inner"></div>');
+    
+    // 為每張圖片創建一個 <div> 並將它們添加到輪播圖中
+    images.forEach((img, index) => {
+        let imgElement = $('<img class="carousel-item">').attr('src', img);
+        // 標記第一張為顯示狀態
+        if (index === 0) {
+            imgElement.addClass('active');
+        }
+        carouselInner.append(imgElement);
+    });
+
+    // 加入左右按鈕
+    let prevButton = $('<button class="carousel-control-prev">Prev</button>');
+    let nextButton = $('<button class="carousel-control-next">Next</button>');
+    
+    // 組合輪播圖容器
+    carouselContainer.append(prevButton).append(carouselInner).append(nextButton);
+    
+    // 添加輪播圖到頁面
+    $('.image-container').append(carouselContainer);
+
+    // 實現左右切換功能
+    prevButton.on('click', function() {
+        let activeImg = carouselInner.find('.active');
+        let prevImg = activeImg.prev('.carousel-item');
+        if (prevImg.length === 0) {
+            prevImg = carouselInner.find('.carousel-item').last();
+        }
+        activeImg.removeClass('active');
+        prevImg.addClass('active');
+    });
+
+    nextButton.on('click', function() {
+        let activeImg = carouselInner.find('.active');
+        let nextImg = activeImg.next('.carousel-item');
+        if (nextImg.length === 0) {
+            nextImg = carouselInner.find('.carousel-item').first();
+        }
+        activeImg.removeClass('active');
+        nextImg.addClass('active');
+    });
+}
 
 
 
 
 
 
-
-
+$內容圖.on("error", function () {
+    $(this).hide();  // 只隱藏加載錯誤的圖片，不移除容器
+});
 
 
 
