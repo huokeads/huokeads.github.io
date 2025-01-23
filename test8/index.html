@@ -85,7 +85,6 @@
   flex: 0 0 100%;  /* 新增 */
   width: 100%;
   height: auto;
-  display: block;
 }
 
       
@@ -160,7 +159,7 @@
       
     </style>
 
-<title>1007演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
+<title>2001演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
 
 <meta name="description" content="台灣知名首席級接髮師Morgan摩根，演藝界明星藝人唯一指定！魔法般的奇蹟接髮，完美解決頭髮留不長問題。採超無痕接髮不怕斷層被發現，沒有摩根神手美不起來的女人。感恩回饋接髮再送免費染髮，名額限額提供，加LINE立即進行免費諮詢！">
 
@@ -335,6 +334,7 @@ $(document).ready(function () {
   _顯示內容(關於我們, '關於我們');
   _顯示內容(聯絡資訊, '聯絡資訊');
   _顯示內容(社交帳號, '社交帳號');
+  _輪播圖動();
   _走馬燈動();
   _去後台();
 });
@@ -350,7 +350,6 @@ $(document).ready(function () {
                 all內容 = `<div class="marquee-item"><a href="${內容.url}" target="_blank" rel="noopener noreferrer">${內容.字}</a></div>`;
               }
               /***************** 產品展示 ******************/
-
 
 else if (sel == '產品展示') {
     if (內容.產品展示圖) {
@@ -383,35 +382,25 @@ else if (sel == '產品展示') {
                 }
             }, 100);
         } else {
-            let 圖片們 = 內容.產品展示圖.split(',');
+            let 圖片們 = 內容.產品展示圖.split(',').map(圖 => 圖.trim());
             let url們 = [];
             
             // 處理 url
             if (內容.產品展示url) {
                 url們 = 內容.產品展示url.split(',');
             }
+            // 確保每張圖片都有對應的 URL，如果沒有就用 javascript:void(0)
+            while (url們.length < 圖片們.length) {
+                url們.push('javascript:void(0)');
+            }
             
             let 輪播圖 = $(`<div class="輪播圖"></div>`);
             let 輪播圖images = $(`<div class="輪播圖-images"></div>`);
             let dots = $(`<div class="輪播圖-dots"></div>`);
             
-            // 確保所有圖片都已載入後再初始化輪播圖
-            let loadedImages = 0;
             圖片們.forEach((圖, i) => {
-                let $圖 = $(`<img src="${圖}">`);
-                let href = (url們[i] && url們[i] !== '#') ? url們[i] : 'javascript:void(0)';
-                let target = (url們[i] && url們[i] !== '#') ? 'target="_blank"' : '';
-                let 單個圖 = $(`<a href="${href}" ${target} style="display:block;"></a>`).append($圖);
-                
-                // 監聽圖片載入
-                $圖.on('load', function() {
-                    loadedImages++;
-                    if (loadedImages === 圖片們.length) {
-                        // 所有圖片載入完成後初始化輪播圖
-                        setTimeout(_輪播圖動, 0);
-                    }
-                });
-                
+                let $圖 = $(`<img src="${圖}" style="width:100%;height:100%;object-fit:cover;">`);
+                let 單個圖 = $(`<a href="${url們[i]}" style="display:block;width:100%;height:100%;" ${url們[i] !== 'javascript:void(0)' ? 'target="_blank"' : ''}></a>`).append($圖);
                 輪播圖images.append(單個圖);
                 dots.append($(`<div class="輪播圖-dot ${i === 0 ? 'active' : ''}"></div>`));
             });
@@ -419,51 +408,50 @@ else if (sel == '產品展示') {
             輪播圖.append(輪播圖images).append(dots);
             all內容 = 輪播圖;
         }
-    },
-
-
-
-
-
-
-
-
-              
-            
-            let dots = $(`<div class="輪播圖-dots"></div>`);
-            圖片們.forEach((_, i) => {
-                dots.append($(`<div class="輪播圖-dot ${i === 0 ? 'active' : ''}"></div>`));
-            });
-            
-            輪播圖.append(輪播圖images);
-            輪播圖.append(dots);
-            all內容 = 輪播圖;
-        }
-    } else if (內容.圖) {
-        $內容圖 = $(`<img class="responsive-image" src="${內容.圖}">`);
-        let 單個內容 = $內容圖;
-        if (內容.url) {
-            單個內容 = $(`<a href="${內容.url}" target="_blank"></a>`).append($內容圖);
-        }
-        all內容 = $(`<div class="image-container"></div>`).append(單個內容);
-        $內容圖.on("error", function () {
-            all內容.remove();
+        
+        // 添加指示點
+        let dots = $(`<div class="輪播圖-dots"></div>`);
+        圖片們.forEach((_, i) => {
+            dots.append($(`<div class="輪播圖-dot ${i === 0 ? 'active' : ''}"></div>`));
         });
-    }
+        
+        輪播圖.append(輪播圖images);
+        輪播圖.append(dots);
+        all內容 = 輪播圖;
+        _輪播圖動();
 
-    // 在這裡添加內容到 DOM
-    if (all內容) {
-        $(`#${sel}`).append(all內容);
-        // 如果是輪播圖，則初始化
-        if (內容.產品展示圖 && !內容.產品展示圖.includes('iframe')) {
-            setTimeout(() => _輪播圖動(), 0);
+ } else if (內容.產品展示圖) {
+        // 檢查是否為 YouTube iframe
+        if (內容.產品展示圖.includes('iframe')) {
+            const videoId = `video${cont++}`;
+            const iframeHtml = 內容.產品展示圖.replace('id="video1"', `id="${videoId}"`);
+            all內容 = $(`<div class="image-container youtube-container"></div>`).append(iframeHtml);
+            
+            // 為每個影片添加滾動監聽
+            setTimeout(() => {
+                const iframe = document.getElementById(videoId);
+                if (iframe) {
+                    window.addEventListener('scroll', function() {
+                        const rect = iframe.getBoundingClientRect();
+                        const windowHeight = window.innerHeight;
+
+                        if (rect.top <= windowHeight && rect.bottom >= 0) {
+                            const src = iframe.src;
+                            if (!src.includes("autoplay=1")) {
+                                iframe.src = src.replace("autoplay=0", "autoplay=1");
+                            }
+                        } else {
+                            const src = iframe.src;
+                            if (src.includes("autoplay=1")) {
+                                iframe.src = src.replace("autoplay=1", "autoplay=0");
+                            }
+                        }
+                    });
+                }
+            }, 100);
+        } else {
+            all內容 = $(`<div class="image-container"></div>`).append(內容.產品展示圖);
         }
-    }
-}
-
-
-
-
 
 
 
@@ -477,8 +465,18 @@ else if (sel == '產品展示') {
 
 
       
-    
-
+    } else if (內容.圖) {
+        $內容圖 = $(`<img class="responsive-image" src="${內容.圖}">`);
+        let 單個內容 = $內容圖;
+        if (內容.url) {
+            單個內容 = $(`<a href="${內容.url}" target="_blank"></a>`).append($內容圖);
+        }
+        all內容 = $(`<div class="image-container"></div>`).append(單個內容);
+        $內容圖.on("error", function () {
+            all內容.remove();
+        });
+    }
+}
               /***************** 關於我們 ******************/
               else if (sel === '關於我們') {
                 all內容 = `<p>${內容.字}</p>`;
@@ -495,8 +493,9 @@ else if (sel == '產品展示') {
               if (all內容) {
                 $(`#${sel}`).append(all內容);
               }
-         }
-    }
+            }
+          }
+    
           // 關走馬燈
           function closeMarquee() {
             document.getElementById('marqueeContainer').style.display = 'none';
@@ -544,18 +543,6 @@ function _輪播圖動() {
     let autoPlayInterval;
     let isTransitioning = false;
 
-    // 初始化輪播圖大小和位置
-    function initializeCarousel() {
-        const containerWidth = images.parentElement.clientWidth;
-        Array.from(images.children).forEach((child, index) => {
-            child.style.width = `${containerWidth}px`;
-            child.style.flex = '0 0 auto';
-        });
-        images.style.width = `${containerWidth * imageCount}px`;
-        images.style.display = 'flex';
-        images.style.transition = 'transform 0.5s ease-in-out';
-    }
-
     function updateCarousel() {
         if (isTransitioning) return;
         isTransitioning = true;
@@ -577,13 +564,11 @@ function _輪播圖動() {
     }
 
     function nextSlide() {
-        if (isTransitioning) return;
         currentIndex = (currentIndex + 1) % imageCount;
         updateCarousel();
     }
 
     function prevSlide() {
-        if (isTransitioning) return;
         currentIndex = (currentIndex - 1 + imageCount) % imageCount;
         updateCarousel();
     }
@@ -594,7 +579,6 @@ function _輪播圖動() {
 
     images.addEventListener('touchstart', e => {
         touchStartX = e.touches[0].clientX;
-        clearInterval(autoPlayInterval);
     });
 
     images.addEventListener('touchend', e => {
@@ -608,13 +592,11 @@ function _輪播圖動() {
                 prevSlide();
             }
         }
-        autoPlayInterval = setInterval(nextSlide, 3000);
     });
 
     // 添加指示點點擊事件
     document.querySelectorAll('.輪播圖-dot').forEach((dot, i) => {
         dot.addEventListener('click', () => {
-            if (isTransitioning) return;
             clearInterval(autoPlayInterval);
             currentIndex = i;
             updateCarousel();
@@ -622,18 +604,9 @@ function _輪播圖動() {
         });
     });
 
-    // 初始化
-    initializeCarousel();
-    updateCarousel();
-    
-    // 監聽視窗大小變化
-    window.addEventListener('resize', () => {
-        initializeCarousel();
-        updateCarousel();
-    });
-
-    // 自動播放
     autoPlayInterval = setInterval(nextSlide, 3000);
+    window.addEventListener('resize', updateCarousel);
+    updateCarousel();
 }
     
           // 開闢聯絡卡
@@ -752,20 +725,21 @@ function _輪播圖動() {
 let 產品展示內容 = [
     {'圖': '001.webp', 'url': ''},
 
-
+ /*只有加上超連結，才可以正常使用連播圖功能*/
   {'產品展示圖': '001.webp,002.webp', '產品展示url': 'https://lin.ee/exeQ2Yx,https://lin.ee/exeQ2Yx'},
 
 
 
-  {'產品展示圖': '001.webp,002.webp,003.webp', '產品展示url': '#,#,#'},
+  
+
+  /*會失敗的寫法。網站雖然會秀出圖片，但只會顯示第1張，然後不會動*/
   {'產品展示圖': '001.webp,002.webp', '產品展示url': ','},
 
 
-  
-  
+  /*會失敗的寫法，網站上會出現不了圖片，只會顯示圖片名稱，例如001.webp*/
   {'產品展示圖': '001.webp,002.webp', '產品展示url': ''},
   {'產品展示圖': '001.webp,002.webp,003.webp,004.webp,005.webp', '產品展示url': ''},
-
+  /*會失敗的寫法，網站上會出現不了圖片，只會顯示圖片名稱，例如001.webp*/
 
 
   
