@@ -159,7 +159,7 @@
       
     </style>
 
-<title>2001演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
+<title>0003演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
 
 <meta name="description" content="台灣知名首席級接髮師Morgan摩根，演藝界明星藝人唯一指定！魔法般的奇蹟接髮，完美解決頭髮留不長問題。採超無痕接髮不怕斷層被發現，沒有摩根神手美不起來的女人。感恩回饋接髮再送免費染髮，名額限額提供，加LINE立即進行免費諮詢！">
 
@@ -352,62 +352,23 @@ $(document).ready(function () {
               /***************** 產品展示 ******************/
 
 else if (sel == '產品展示') {
-    if (內容.產品展示圖) {
-        // 檢查是否為 YouTube iframe
-        if (內容.產品展示圖.includes('iframe')) {
-            const videoId = `video${cont++}`;
-            const iframeHtml = 內容.產品展示圖.replace('id="video1"', `id="${videoId}"`);
-            all內容 = $(`<div class="image-container youtube-container"></div>`).append(iframeHtml);
-            
-            // 為每個影片添加滾動監聽
-            setTimeout(() => {
-                const iframe = document.getElementById(videoId);
-                if (iframe) {
-                    window.addEventListener('scroll', function() {
-                        const rect = iframe.getBoundingClientRect();
-                        const windowHeight = window.innerHeight;
-
-                        if (rect.top <= windowHeight && rect.bottom >= 0) {
-                            const src = iframe.src;
-                            if (!src.includes("autoplay=1")) {
-                                iframe.src = src.replace("autoplay=0", "autoplay=1");
-                            }
-                        } else {
-                            const src = iframe.src;
-                            if (src.includes("autoplay=1")) {
-                                iframe.src = src.replace("autoplay=1", "autoplay=0");
-                            }
-                        }
-                    });
-                }
-            }, 100);
-        } else {
-            let 圖片們 = 內容.產品展示圖.split(',').map(圖 => 圖.trim());
-            let url們 = [];
-            
-            // 處理 url
-            if (內容.產品展示url) {
-                url們 = 內容.產品展示url.split(',');
+    if (內容.產品展示圖 && 內容.產品展示url) {
+        let 圖片們 = 內容.產品展示圖.split(',');
+        let url們 = 內容.產品展示url.split(',');
+        let 輪播圖 = $(`<div class="輪播圖"></div>`);
+        let 輪播圖images = $(`<div class="輪播圖-images"></div>`);
+        
+        // 添加圖片
+        圖片們.forEach((圖, i) => {
+            let $圖 = $(`<img src="${圖}">`);
+            let 單個圖;
+            if (url們[i]) {
+                單個圖 = $(`<a href="${url們[i]}" target="_blank"></a>`).append($圖);
+            } else {
+                單個圖 = $圖;
             }
-            // 確保每張圖片都有對應的 URL，如果沒有就用 javascript:void(0)
-            while (url們.length < 圖片們.length) {
-                url們.push('javascript:void(0)');
-            }
-            
-            let 輪播圖 = $(`<div class="輪播圖"></div>`);
-            let 輪播圖images = $(`<div class="輪播圖-images"></div>`);
-            let dots = $(`<div class="輪播圖-dots"></div>`);
-            
-            圖片們.forEach((圖, i) => {
-                let $圖 = $(`<img src="${圖}" style="width:100%;height:100%;object-fit:cover;">`);
-                let 單個圖 = $(`<a href="${url們[i]}" style="display:block;width:100%;height:100%;" ${url們[i] !== 'javascript:void(0)' ? 'target="_blank"' : ''}></a>`).append($圖);
-                輪播圖images.append(單個圖);
-                dots.append($(`<div class="輪播圖-dot ${i === 0 ? 'active' : ''}"></div>`));
-            });
-            
-            輪播圖.append(輪播圖images).append(dots);
-            all內容 = 輪播圖;
-        }
+            輪播圖images.append(單個圖);
+        });
         
         // 添加指示點
         let dots = $(`<div class="輪播圖-dots"></div>`);
@@ -728,9 +689,6 @@ let 產品展示內容 = [
  /*只有加上超連結，才可以正常使用連播圖功能*/
   {'產品展示圖': '001.webp,002.webp', '產品展示url': 'https://lin.ee/exeQ2Yx,https://lin.ee/exeQ2Yx'},
 
-
-
-  
 
   /*會失敗的寫法。網站雖然會秀出圖片，但只會顯示第1張，然後不會動*/
   {'產品展示圖': '001.webp,002.webp', '產品展示url': ','},
