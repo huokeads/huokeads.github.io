@@ -123,7 +123,7 @@
       
     </style>
 
-<title>77演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
+<title>666演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
 
 <meta name="description" content="台灣知名首席級接髮師Morgan摩根，演藝界明星藝人唯一指定！魔法般的奇蹟接髮，完美解決頭髮留不長問題。採超無痕接髮不怕斷層被發現，沒有摩根神手美不起來的女人。感恩回饋接髮再送免費染髮，名額限額提供，加LINE立即進行免費諮詢！">
 
@@ -147,29 +147,8 @@
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     
 
-    <!-- JavaScript 部分 -->
-<script>
-  window.addEventListener('scroll', function() {
-    var iframe = document.getElementById('video1');
-    var rect = iframe.getBoundingClientRect();
-    var windowHeight = window.innerHeight;
 
-    // 判斷影片是否進入視窗
-    if (rect.top <= windowHeight && rect.bottom >= 0) {
-      // 影片進入視窗，啟動自動播放
-      var src = iframe.src;
-      if (!src.includes("autoplay=1")) {
-        iframe.src = src.replace("autoplay=0", "autoplay=1"); // 設置 autoplay=1 開始播放
-      }
-    } else {
-      // 影片離開視窗，停止播放
-      var src = iframe.src;
-      if (src.includes("autoplay=1")) {
-        iframe.src = src.replace("autoplay=1", "autoplay=0"); // 設置 autoplay=0 停止播放
-      }
-    }
-  });
-</script>
+
 
 
 
@@ -347,42 +326,46 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
                 all內容 = `<div class="marquee-item"><a href="${內容.url}" target="_blank" rel="noopener noreferrer">${內容.字}</a></div>`;
               }
               /***************** 產品展示 ******************/
-              else if (sel === '產品展示') {
-                // YouTube 影片處理
-                if (內容.產品展示圖 && 內容.產品展示圖.includes('youtube.com')) {
-                  all內容 = $(`<div class="image-container">
-                    <iframe 
-                      src="${內容.產品展示圖}"
-                      frameborder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowfullscreen>
-                    </iframe>
-                  </div>`);
-                }
-                // 輪播圖處理
-                else if (內容.產品展示圖 && 內容.產品展示圖.includes(',')) {
-                  let 整組輪播圖 = 內容.產品展示圖.split(',');
-                  let $輪播圖容器 = $('<div class="輪播圖-images"></div>');
-    
-                  for (let i = 0; i < 整組輪播圖.length; i++) {
-                    let $輪圖 = $(`<img class="responsive-image" src="${整組輪播圖[i]}" loading="lazy">`);
-                    $輪播圖容器.append($輪圖);
-                  }
-                  all內容 = $('<div class="輪播圖"><button class="prev"></button><button class="next"></button></div>').append($輪播圖容器);
-                }
-                // 一般圖片處理
-                else if (內容.圖) {
-                  let $內容圖 = $(`<img class="responsive-image" src="${內容.圖}" loading="lazy">`);
-                  let 單個內容 = $內容圖;
-                  if (內容.url) {
-                    單個內容 = $(`<a href="${內容.url}" target="_blank" rel="noopener noreferrer"></a>`).append($內容圖);
-                  }
-                  all內容 = $(`<div class="image-container"></div>`).append(單個內容);
-                  $內容圖.on("error", function () {
-                    all內容.remove();
-                  });
-                }
-              }
+
+else if (sel == '產品展示') {
+    if (內容.產品展示圖 && 內容.產品展示url) {
+        let 圖片們 = 內容.產品展示圖.split(',');
+        let url們 = 內容.產品展示url.split(',');
+        let 輪播圖 = $(`<div class="輪播圖"></div>`);
+        let 輪播圖images = $(`<div class="輪播圖-images"></div>`);
+        圖片們.forEach((圖, i) => {
+            let $圖 = $(`<img src="${圖}">`);
+            let 單個圖;
+            if (url們[i]) {
+                單個圖 = $(`<a href="${url們[i]}" target="_blank"></a>`).append($圖);
+            } else {
+                單個圖 = $圖;
+            }
+            輪播圖images.append(單個圖);
+        });
+        輪播圖.append(輪播圖images);
+        輪播圖.append(`<button class="prev">❮</button><button class="next">❯</button>`);
+        all內容 = 輪播圖;
+        _輪播圖動();
+    } else if (內容.產品展示圖) {
+        // 檢查是否為 YouTube iframe
+        if (內容.產品展示圖.includes('iframe')) {
+            all內容 = $(`<div class="image-container youtube-container"></div>`).append(內容.產品展示圖);
+        } else {
+            all內容 = $(`<div class="image-container"></div>`).append(內容.產品展示圖);
+        }
+    } else if (內容.圖) {
+        $內容圖 = $(`<img class="responsive-image" src="${內容.圖}">`);
+        let 單個內容 = $內容圖;
+        if (內容.url) {
+            單個內容 = $(`<a href="${內容.url}" target="_blank"></a>`).append($內容圖);
+        }
+        all內容 = $(`<div class="image-container"></div>`).append(單個內容);
+        $內容圖.on("error", function () {
+            all內容.remove();
+        });
+    }
+}
               /***************** 關於我們 ******************/
               else if (sel === '關於我們') {
                 all內容 = `<p>${內容.字}</p>`;
@@ -834,7 +817,30 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
   _去後台()
 
 
+function _初始化YouTube影片控制() {
+    window.addEventListener('scroll', function() {
+        // 找到所有 YouTube iframe
+        document.querySelectorAll('.youtube-container iframe').forEach(function(iframe) {
+            const rect = iframe.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
 
+            // 判斷影片是否進入視窗
+            if (rect.top <= windowHeight && rect.bottom >= 0) {
+                // 影片進入視窗，啟動自動播放
+                const src = iframe.src;
+                if (!src.includes("autoplay=1")) {
+                    iframe.src = src.replace("autoplay=0", "autoplay=1");
+                }
+            } else {
+                // 影片離開視窗，停止播放
+                const src = iframe.src;
+                if (src.includes("autoplay=1")) {
+                    iframe.src = src.replace("autoplay=1", "autoplay=0");
+                }
+            }
+        });
+    });
+}
 
 
 
