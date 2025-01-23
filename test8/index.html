@@ -132,7 +132,7 @@
       
     </style>
 
-<title>444演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
+<title>555演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
 
 <meta name="description" content="台灣知名首席級接髮師Morgan摩根，演藝界明星藝人唯一指定！魔法般的奇蹟接髮，完美解決頭髮留不長問題。採超無痕接髮不怕斷層被發現，沒有摩根神手美不起來的女人。感恩回饋接髮再送免費染髮，名額限額提供，加LINE立即進行免費諮詢！">
 
@@ -357,43 +357,13 @@ else if (sel == '產品展示') {
         輪播圖.append(`<button class="prev">❮</button><button class="next">❯</button>`);
         all內容 = 輪播圖;
         _輪播圖動();
-else if (sel == '產品展示') {
-    if (內容.產品展示圖) {
+    } else if (內容.產品展示圖) {
         // 檢查是否為 YouTube iframe
         if (內容.產品展示圖.includes('iframe')) {
-            // 為每個 YouTube 影片添加唯一 ID
-            const videoId = `video${cont++}`;
-            const iframeHtml = 內容.產品展示圖.replace('id="video1"', `id="${videoId}"`);
-            all內容 = $(`<div class="image-container youtube-container"></div>`).append(iframeHtml);
-            
-            // 為每個影片添加滾動監聽
-            setTimeout(() => {
-                const iframe = document.getElementById(videoId);
-                if (iframe) {
-                    window.addEventListener('scroll', function() {
-                        const rect = iframe.getBoundingClientRect();
-                        const windowHeight = window.innerHeight;
-
-                        if (rect.top <= windowHeight && rect.bottom >= 0) {
-                            const src = iframe.src;
-                            if (!src.includes("autoplay=1")) {
-                                iframe.src = src.replace("autoplay=0", "autoplay=1");
-                            }
-                        } else {
-                            const src = iframe.src;
-                            if (src.includes("autoplay=1")) {
-                                iframe.src = src.replace("autoplay=1", "autoplay=0");
-                            }
-                        }
-                    });
-                }
-            }, 100);
+            all內容 = $(`<div class="image-container youtube-container"></div>`).append(內容.產品展示圖);
         } else {
             all內容 = $(`<div class="image-container"></div>`).append(內容.產品展示圖);
         }
-    }
-
-  
     } else if (內容.圖) {
         $內容圖 = $(`<img class="responsive-image" src="${內容.圖}">`);
         let 單個內容 = $內容圖;
@@ -888,4 +858,3 @@ function _初始化YouTube影片控制() {
     </script>
   </body>
 </html>
-
