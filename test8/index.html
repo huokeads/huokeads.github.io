@@ -62,6 +62,40 @@
       .toggle-btn {cursor: pointer;font-size: 24px;}
       .contact-content {height: 0;overflow: hidden;transition: height 0.3s ease-in-out;}
 
+
+ /* 輪播圖 */
+      .輪播圖 {
+        position: relative;
+        overflow: hidden;
+        border: 2px solid #ccc;
+        border-radius: 10px;
+        margin: auto;
+      }
+      .輪播圖-images {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+        width: 100%;
+      }
+      .輪播圖-images img {
+        object-fit: cover;
+        width: 100%;
+        height: auto;
+      }
+      .輪播圖 button {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(0, 0, 0, 0);
+        border: none;
+        cursor: pointer;
+        z-index: 10;
+        width: 40%;
+        height: 80%;
+      }
+      .輪播圖 button.prev {left: 0px;}
+      .輪播圖 button.next {right: 0px;}
+
+
       
       /* line圖示 */
       .social-links {margin: 20px ;}
@@ -89,7 +123,7 @@
       
     </style>
 
-<title>演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
+<title>88演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
 
 <meta name="description" content="台灣知名首席級接髮師Morgan摩根，演藝界明星藝人唯一指定！魔法般的奇蹟接髮，完美解決頭髮留不長問題。採超無痕接髮不怕斷層被發現，沒有摩根神手美不起來的女人。感恩回饋接髮再送免費染髮，名額限額提供，加LINE立即進行免費諮詢！">
 
@@ -275,158 +309,292 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
       @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
 
 
-      // 關走馬燈
-      function closeMarquee() {
-        document.getElementById('marqueeContainer').style.display = 'none';
-      }
-
-
-      function _走馬燈動() {
-        const $content = $('.marquee-content');
-        const $items = $('.marquee-item');
-        const itemHeight = $items.outerHeight();
-        const itemCount = $items.length;
-        let currentIndex = 0;
-        function scrollMarquee() {
-          currentIndex++;
-          if (currentIndex >= itemCount) {
-            // 到最後一條後立即回到第一條
-            $content.css('transform', `translateY(0)`);
-            currentIndex = 0; // 重置索引
-          } else {
-            // 滾動到下一條
-            $content.css('transform', `translateY(-${itemHeight * currentIndex}px)`);
+        <!-- JavaScript 部分 -->
+        
+          $(document).ready(function () {
+            try {
+              // 顯示載入中狀態
+              $('body').append('<div id="loading">載入中...</div>');
+              
+              // 初始化所有功能
+              _顯示LogoIcon();
+              _顯示內容(產品展示內容, '產品展示');
+              _顯示內容(走馬燈內容, '走馬燈');
+              _顯示內容(關於我們, '關於我們');
+              _顯示內容(聯絡資訊, '聯絡資訊');
+              _顯示內容(社交帳號, '社交帳號');
+              _輪播圖動();
+              _走馬燈動();
+              _去後台();
+              
+              // 移除載入中狀態
+              $('#loading').remove();
+            } catch (error) {
+              console.error('初始化錯誤:', error);
+              // 顯示錯誤訊息給使用者
+              $('body').append('<div class="error-message">載入發生錯誤，請重新整理頁面</div>');
+            }
+          });
+    
+          // 定義 _顯示內容 函數
+          function _顯示內容(data, sel) {
+            let cont = 0;
+            for (let 內容 of data) {
+              let all內容;
+    
+              /***************** 走馬燈 ******************/
+              if (sel === '走馬燈') {
+                all內容 = `<div class="marquee-item"><a href="${內容.url}" target="_blank" rel="noopener noreferrer">${內容.字}</a></div>`;
+              }
+              /***************** 產品展示 ******************/
+              else if (sel === '產品展示') {
+                // YouTube 影片處理
+                if (內容.產品展示圖 && 內容.產品展示圖.includes('youtube.com')) {
+                  all內容 = $(`<div class="image-container">
+                    <iframe 
+                      src="${內容.產品展示圖}"
+                      frameborder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowfullscreen>
+                    </iframe>
+                  </div>`);
+                }
+                // 輪播圖處理
+                else if (內容.產品展示圖 && 內容.產品展示圖.includes(',')) {
+                  let 整組輪播圖 = 內容.產品展示圖.split(',');
+                  let $輪播圖容器 = $('<div class="輪播圖-images"></div>');
+    
+                  for (let i = 0; i < 整組輪播圖.length; i++) {
+                    let $輪圖 = $(`<img class="responsive-image" src="${整組輪播圖[i]}" loading="lazy">`);
+                    $輪播圖容器.append($輪圖);
+                  }
+                  all內容 = $('<div class="輪播圖"><button class="prev"></button><button class="next"></button></div>').append($輪播圖容器);
+                }
+                // 一般圖片處理
+                else if (內容.圖) {
+                  let $內容圖 = $(`<img class="responsive-image" src="${內容.圖}" loading="lazy">`);
+                  let 單個內容 = $內容圖;
+                  if (內容.url) {
+                    單個內容 = $(`<a href="${內容.url}" target="_blank" rel="noopener noreferrer"></a>`).append($內容圖);
+                  }
+                  all內容 = $(`<div class="image-container"></div>`).append(單個內容);
+                  $內容圖.on("error", function () {
+                    all內容.remove();
+                  });
+                }
+              }
+              /***************** 關於我們 ******************/
+              else if (sel === '關於我們') {
+                all內容 = `<p>${內容.字}</p>`;
+              }
+              /***************** 聯絡資訊 ******************/
+              else if (sel === '聯絡資訊') {
+                all內容 = `<p>${內容.字}</p>`;
+              }
+              /***************** 社交帳號 ******************/
+              else if (sel === '社交帳號') {
+                all內容 = 內容.html;
+              }
+    
+              if (all內容) {
+                $(`#${sel}`).append(all內容);
+              }
+            }
           }
-        }
-        // 每次滾動後停留一秒
-        setInterval(scrollMarquee, 1500); // 包括滑動與停留時間
-      }
-
-
-      
-
-      // 開闢 聯絡卡
-      function toggleContact() {
-        const content = document.getElementById('聯絡資訊');
-        const btn = document.querySelector('.toggle-btn');
-
-        if (content.style.height === '0px' || content.style.height === '') {
-          // 開啟
-          content.style.height = 'auto';
-          const height = content.offsetHeight + 'px'; // 取得實際高度
-          content.style.height = '0px'; // 先設定為 0 以便觸發過渡
-          setTimeout(() => {
-            content.style.height = height; // 再設定為實際高度
-          }, 0);
-          btn.textContent = '-';
-        } else {
-          // 關閉
-          content.style.height = content.offsetHeight + 'px'; // 設定為當前高度以觸發過渡
-          setTimeout(() => {
-            content.style.height = '0px'; // 再設定為 0
-          }, 0);
-          btn.textContent = '+';
-        }
-      }
-
-
-
- /*（本次新增的部分）*/
-
-      // 回頁頂
-      function scrollToTop() {
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth'
-        });
-      }
-      /* 回頂鍵 */
-      let lastScrollTop = 0;
-      let isScrollingUp = false;
-      window.addEventListener('scroll', function() {
-          // 獲取當前滾動位置
-          let currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-          // 判斷滾動方向
-          if (currentScrollTop < lastScrollTop) {
+    
+          // 關走馬燈
+          function closeMarquee() {
+            document.getElementById('marqueeContainer').style.display = 'none';
+          }
+    
+          // 走馬燈功能
+          function _走馬燈動() {
+            const $content = $('.marquee-content');
+            const $items = $('.marquee-item');
+            if (!$items.length) return;
+    
+            const itemHeight = $items.outerHeight();
+            const itemCount = $items.length;
+            let currentIndex = 0;
+            let isVisible = true;
+    
+            // 檢查走馬燈是否在可視範圍內
+            const observer = new IntersectionObserver((entries) => {
+              isVisible = entries[0].isIntersecting;
+            });
+            
+            observer.observe($content[0]);
+    
+            function scrollMarquee() {
+              if (!isVisible) return;
+              currentIndex = (currentIndex + 1) % itemCount;
+              $content.css('transform', `translateY(-${itemHeight * currentIndex}px)`);
+            }
+    
+            const intervalId = setInterval(scrollMarquee, 1500);
+    
+            $content.hover(
+              () => clearInterval(intervalId),
+              () => setInterval(scrollMarquee, 1500)
+            );
+          }
+    
+          // 輪播圖功能
+          function _輪播圖動() {
+            const images = document.querySelector('.輪播圖-images');
+            if (!images) return;
+    
+            const prevButton = document.querySelector('.prev');
+            const nextButton = document.querySelector('.next');
+            let currentIndex = 0;
+            const imageCount = images.children.length;
+            let autoPlayInterval;
+            let isTransitioning = false;
+    
+            function updateCarousel() {
+              if (isTransitioning) return;
+              isTransitioning = true;
+              
+              const containerWidth = images.parentElement.clientWidth;
+              const offset = -currentIndex * containerWidth;
+              
+              images.style.transform = `translateX(${offset}px)`;
+              
+              setTimeout(() => {
+                isTransitioning = false;
+              }, 500);
+            }
+    
+            function nextSlide() {
+              currentIndex = (currentIndex + 1) % imageCount;
+              updateCarousel();
+            }
+    
+            function prevSlide() {
+              currentIndex = (currentIndex - 1 + imageCount) % imageCount;
+              updateCarousel();
+            }
+    
+            // 觸控支援
+            let touchStartX = 0;
+            let touchEndX = 0;
+    
+            images.addEventListener('touchstart', e => {
+              touchStartX = e.touches[0].clientX;
+            });
+    
+            images.addEventListener('touchend', e => {
+              touchEndX = e.changedTouches[0].clientX;
+              const diff = touchStartX - touchEndX;
+    
+              if (Math.abs(diff) > 50) {
+                if (diff > 0) {
+                  nextSlide();
+                } else {
+                  prevSlide();
+                }
+              }
+            });
+    
+            prevButton?.addEventListener('click', () => {
+              clearInterval(autoPlayInterval);
+              prevSlide();
+              autoPlayInterval = setInterval(nextSlide, 3000);
+            });
+    
+            nextButton?.addEventListener('click', () => {
+              clearInterval(autoPlayInterval);
+              nextSlide();
+              autoPlayInterval = setInterval(nextSlide, 3000);
+            });
+    
+            autoPlayInterval = setInterval(nextSlide, 3000);
+            window.addEventListener('resize', updateCarousel);
+            updateCarousel();
+          }
+    
+          // 開闢聯絡卡
+          function toggleContact() {
+            const content = document.getElementById('聯絡資訊');
+            const btn = document.querySelector('.toggle-btn');
+    
+            if (content.style.height === '0px' || content.style.height === '') {
+              content.style.height = 'auto';
+              const height = content.offsetHeight + 'px';
+              content.style.height = '0px';
+              setTimeout(() => { content.style.height = height; }, 0);
+              btn.textContent = '-';
+            } else {
+              content.style.height = content.offsetHeight + 'px';
+              setTimeout(() => { content.style.height = '0px'; }, 0);
+              btn.textContent = '+';
+            }
+          }
+    
+          // 回頁頂
+          function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
+    
+          let lastScrollTop = 0;
+          let isScrollingUp = false;
+    
+          window.addEventListener('scroll', function() {
+            let currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (currentScrollTop < lastScrollTop) {
               isScrollingUp = true;
-          } else {
+            } else {
               isScrollingUp = false;
+            }
+            lastScrollTop = currentScrollTop;
+            toggleScrollTopButton();
+          });
+    
+          function toggleScrollTopButton() {
+            const scrollTopButton = document.getElementById('scrollTop');
+            const displayThreshold = 200;
+            if (isScrollingUp && lastScrollTop > displayThreshold) {
+              scrollTopButton.style.display = 'flex';
+              $('.logo-container').css('top', '0px');
+              $('.marquee-container').css('top', '50px');
+            } else {
+              scrollTopButton.style.display = 'none';
+              $('.logo-container').css('top', '-50px');
+              $('.marquee-container').css('top', '-80px');
+            }
+            if (lastScrollTop < 20) {
+              $('.logo-container').css('top', '0px');
+              $('.marquee-container').css('top', '50px');
+            }
           }
-          // 更新上一次的滾動位置
-          lastScrollTop = currentScrollTop;
-          // 顯示或隱藏「回到頂部」按鈕
-          toggleScrollTopButton();
-      });
-
-
-
-      function toggleScrollTopButton() {
-          const scrollTopButton = document.getElementById('scrollTop');
-          const displayThreshold = 200; // 設定需要滾動多少距離後才考慮顯示按鈕
-
+    
+          function _顯示LogoIcon() {
+            const logoImage = "A-頁首LOGO.png";
+            const newFavicon = "B-Favicon分頁圖示.png";
+    
+            $("#logo").attr("src", logoImage).on("error", function () {
+              $(this).attr("src", defaultImage);
+            });
+    
+            let $favicon = $("link[rel='icon'], link[rel='shortcut icon'], link[rel='alternate icon'], link[rel='apple-touch-icon']");
+            if ($favicon.length) {
+              $favicon.attr("href", newFavicon).attr("type", "image/x-icon");
+            } else {
+              $("head").append(`<link rel="icon" type="image/x-icon" href="${newFavicon}">`);
+            }
+          }
+    
+          function _去後台() {
+            admin明文 = false;
+            if ((location.href).indexOf('???') != -1) admin明文 = decodeURIComponent(location.href.split('???')[1]);
+            if (sha256(admin明文) == adp) $('nav').addClass('active');
+          }
+    
+          function _導航換頁(page) {
+            $('.section').removeClass('active');
+            $(`#${page}page`).addClass('active');
+          }
         
-if (isScrollingUp && lastScrollTop > displayThreshold) {
-    scrollTopButton.style.display = 'flex';
-    $('.logo-container').css('top', '0px'); // 顯示 logo 位
-    $('.marquee-container').css('top', '50px'); // 跑馬燈跟隨 logo 顯示
-} else {
-    scrollTopButton.style.display = 'none';
-    $('.logo-container').css('top', '-50px'); // 隱藏 logo 位
-    $('.marquee-container').css('top', '-80px'); // 跑馬燈隱藏
-}
-
-
-        
-        /*測試GPT新版代碼*/
-        
-         // 顯示 logo 和跑馬燈
-if (lastScrollTop < 20) {
-    $('.logo-container').css('top', '0px');
-    $('.marquee-container').css('top', '50px'); // 跑馬燈緊貼 logo
-}
-
-
-
-        
-
-      }
-
-
-
-      
-
-      /*（本次刪除的部分）
-
-      
-      // 回頁頂
-      function scrollToTop() {
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth'
-        });
-      }
-
-      // 捲動顯示回頂鍵
-      window.onscroll = function() {
-        const scrollTop = document.getElementById('scrollTop');
-        const logo = document.querySelector('.logo-container');
-        const logoBottom = logo.offsetTop + logo.offsetHeight;
-        
-        if (window.pageYOffset > logoBottom) {
-          scrollTop.style.display = 'flex';
-        } else {
-          scrollTop.style.display = 'none';
-        }
-      };
-
-
-*/
-
-
-
-
-
 
 
 
@@ -608,148 +776,6 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 
       
-      
-            // 顯示內容
-function _顯示內容(data, sel) {
-    cont = 0;
-    for (let 內容 of data) {
-        let all內容; // 只宣告 all內容，不賦值
-
-        /***************** 走馬燈 ******************/
-        if (sel == '走馬燈') {
-            all內容 = `<div class="marquee-item"><a href="${內容.url}" target="_blank" rel="noopener noreferrer">${內容.字}</a></div>`;
-        }
-        /***************** 產品展示 ******************/
-        else if (sel == '產品展示') { // 使用 else if
-            if (內容.產品展示圖) { // 判斷是否有 產品展示圖 屬性
-                all內容 = $(`<div class="image-container"></div>`).append(內容.產品展示圖); // 直接將 HTML 字串 append
-            } else if (內容.圖) { // 處理圖片的情況
-                $內容圖 = $(`<img class="responsive-image" src="${內容.圖}">`);
-                let 單個內容 = $內容圖;
-                if (內容.url) {
-                    單個內容 = $(`<a href="${內容.url}" target="_blank"></a>`).append($內容圖);
-                }
-                all內容 = $(`<div class="image-container"></div>`).append(單個內容);
-                $內容圖.on("error", function () {
-                    all內容.remove();
-                });
-            }
-        }
-        /***************** 關於我們 ******************/
-        else if (sel == '關於我們') { // 使用 else if
-            all內容 = `<p>${內容.字}</p>`;
-        }
-        /***************** 聯絡資訊 ******************/
-        else if (sel == '聯絡資訊') { // 使用 else if
-            all內容 = `<p>${內容.字}</p>`;
-        }
-        /***************** 社交帳號 ******************/
-        else if (sel == '社交帳號') { // 使用 else if
-            all內容 = 內容.html;
-        }
-
-        if (all內容) { // 確保 all內容 不是 undefined 才 append
-          $(`#${sel}`).append(all內容);
-        }
-    }
-}
-      function _顯示LogoIcon() {
-
-
-            
-            const logoImage = "A-頁首LOGO.png"; // LOGO 圖片路徑
-            const newFavicon = "B-Favicon分頁圖示.png";// 新的分頁圖示檔案名稱
-
-            // 將 LOGO 圖片設置到 <img> 標籤
-            $("#logo").attr("src", logoImage).on("error", function () {
-                // 如果圖片加載失敗，替換為預設圖片
-                $(this).attr("src", defaultImage);
-            });
-
-            // Icon
-            // 檢查是否已存在 <link rel="icon">
-            let $favicon = $("link[rel='icon'], link[rel='shortcut icon'], link[rel='alternate icon'], link[rel='apple-touch-icon']");
-            if ($favicon.length) {
-                // 替換現有的分頁圖示
-                $favicon.attr("href", newFavicon).attr("type", "image/x-icon");
-            } else {
-                // 如果不存在，新增 <link rel="icon">
-                $("head").append(
-                    `<link rel="icon" type="image/x-icon" href="${newFavicon}">`
-                );
-            }
-
-      }
-
-
-window.addEventListener('scroll', function() {
-  var iframes = document.querySelectorAll('iframe[id^="video"]'); // 選取所有 id 以 "video" 開頭的 iframe
-  var windowHeight = window.innerHeight;
-
-  iframes.forEach(function(iframe) {
-    var rect = iframe.getBoundingClientRect();
-
-    // 判斷影片是否進入視窗
-    if (rect.top <= windowHeight && rect.bottom >= 0) {
-      // 影片進入視窗，啟動自動播放
-      var src = iframe.src;
-      if (!src.includes("autoplay=1")) {
-        iframe.src = src.replace("autoplay=0", "autoplay=1"); // 設置 autoplay=1 開始播放
-      }
-    } else {
-      // 影片離開視窗，停止播放
-      var src = iframe.src;
-      if (src.includes("autoplay=1")) {
-        iframe.src = src.replace("autoplay=1", "autoplay=0"); // 設置 autoplay=0 停止播放
-      }
-    }
-  });
-});
-
-
-
-
-    
-
-$(document).ready(function () {
-    const marqueeContent = $('.marquee-content');
-    走馬燈內容.forEach(item => {
-        marqueeContent.append(`<div class="marquee-item"><a href="${item.url}" target="_blank">${item.字}</a></div>`);
-    });
-
-    _走馬燈動();
-});
-
-
-      
-/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-          :::        :::::::::         :::   :::       :::::::::::       ::::    :::
-       :+: :+:      :+:    :+:       :+:+: :+:+:          :+:           :+:+:   :+:
-     +:+   +:+     +:+    +:+      +:+ +:+:+ +:+         +:+           :+:+:+  +:+
-   +#++:++#++:    +#+    +:+      +#+  +:+  +#+         +#+           +#+ +:+ +#+
-  +#+     +#+    +#+    +#+      +#+       +#+         +#+           +#+  +#+#+#
- #+#     #+#    #+#    #+#      #+#       #+#         #+#           #+#   #+#+#
-###     ###    #########       ###       ###     ###########       ###    ####
-
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
-
-      function _去後台() {
-        admin明文 = false;
-        if ((location.href).indexOf('???') != -1) admin明文 = decodeURIComponent(location.href.split('???')[1])
-        if (sha256(admin明文) == adp) $('nav').addClass('active');
-      }
-
-      function _導航換頁(page) {
-        // 隱頁 - .active
-        $('.section').removeClass('active');
-        // 顯頁 + .active
-        $(`#${page}page`).addClass('active');
-      }
-
-
-
 
 
 
