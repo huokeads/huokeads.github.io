@@ -160,7 +160,7 @@
       
     </style>
 
-<title>1004演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
+<title>1005演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
 
 <meta name="description" content="台灣知名首席級接髮師Morgan摩根，演藝界明星藝人唯一指定！魔法般的奇蹟接髮，完美解決頭髮留不長問題。採超無痕接髮不怕斷層被發現，沒有摩根神手美不起來的女人。感恩回饋接髮再送免費染髮，名額限額提供，加LINE立即進行免費諮詢！">
 
@@ -351,6 +351,7 @@ $(document).ready(function () {
               }
               /***************** 產品展示 ******************/
 
+
 else if (sel == '產品展示') {
     if (內容.產品展示圖) {
         // 檢查是否為 YouTube iframe
@@ -382,28 +383,17 @@ else if (sel == '產品展示') {
                 }
             }, 100);
         } else {
-            let 圖片們 = 內容.產品展示圖.split(',').filter(圖 => 圖.trim());
-            if (圖片們.length === 0) return;
-
-            let url們 = [];
-            if (內容.產品展示url) {
-                url們 = 內容.產品展示url.split(',');
-            }
-            // 確保 url們 的長度與圖片們相同
-            while (url們.length < 圖片們.length) {
-                url們.push('javascript:void(0)');
-            }
+            let 圖片們 = 內容.產品展示圖.split(',').map(圖 => 圖.trim()).filter(圖 => 圖);
+            if (!圖片們.length) return;
 
             let 輪播圖 = $(`<div class="輪播圖"></div>`);
             let 輪播圖images = $(`<div class="輪播圖-images"></div>`);
             
             圖片們.forEach((圖, i) => {
-                let $圖 = $(`<img src="${圖.trim()}" style="width:100%;height:100%;object-fit:cover;">`);
-                let $連結 = $(`<a href="${url們[i]}" style="display:block;width:100%;height:100%;" ${url們[i] !== 'javascript:void(0)' ? 'target="_blank"' : ''}></a>`).append($圖);
+                let $圖 = $(`<img src="${圖}">`);
+                let $連結 = $(`<a href="javascript:void(0);"></a>`).append($圖);
                 輪播圖images.append($連結);
             });
-
-
 
 
 
