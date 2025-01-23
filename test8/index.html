@@ -160,7 +160,7 @@
       
     </style>
 
-<title>1002演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
+<title>1003演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
 
 <meta name="description" content="台灣知名首席級接髮師Morgan摩根，演藝界明星藝人唯一指定！魔法般的奇蹟接髮，完美解決頭髮留不長問題。採超無痕接髮不怕斷層被發現，沒有摩根神手美不起來的女人。感恩回饋接髮再送免費染髮，名額限額提供，加LINE立即進行免費諮詢！">
 
@@ -535,6 +535,18 @@ function _輪播圖動() {
     let autoPlayInterval;
     let isTransitioning = false;
 
+    // 初始化輪播圖大小和位置
+    function initializeCarousel() {
+        const containerWidth = images.parentElement.clientWidth;
+        Array.from(images.children).forEach((child, index) => {
+            child.style.width = `${containerWidth}px`;
+            child.style.flex = '0 0 auto';
+        });
+        images.style.width = `${containerWidth * imageCount}px`;
+        images.style.display = 'flex';
+        images.style.transition = 'transform 0.5s ease-in-out';
+    }
+
     function updateCarousel() {
         if (isTransitioning) return;
         isTransitioning = true;
@@ -556,11 +568,13 @@ function _輪播圖動() {
     }
 
     function nextSlide() {
+        if (isTransitioning) return;
         currentIndex = (currentIndex + 1) % imageCount;
         updateCarousel();
     }
 
     function prevSlide() {
+        if (isTransitioning) return;
         currentIndex = (currentIndex - 1 + imageCount) % imageCount;
         updateCarousel();
     }
@@ -571,6 +585,7 @@ function _輪播圖動() {
 
     images.addEventListener('touchstart', e => {
         touchStartX = e.touches[0].clientX;
+        clearInterval(autoPlayInterval);
     });
 
     images.addEventListener('touchend', e => {
@@ -584,11 +599,13 @@ function _輪播圖動() {
                 prevSlide();
             }
         }
+        autoPlayInterval = setInterval(nextSlide, 3000);
     });
 
     // 添加指示點點擊事件
     document.querySelectorAll('.輪播圖-dot').forEach((dot, i) => {
         dot.addEventListener('click', () => {
+            if (isTransitioning) return;
             clearInterval(autoPlayInterval);
             currentIndex = i;
             updateCarousel();
@@ -596,9 +613,18 @@ function _輪播圖動() {
         });
     });
 
-    autoPlayInterval = setInterval(nextSlide, 3000);
-    window.addEventListener('resize', updateCarousel);
+    // 初始化
+    initializeCarousel();
     updateCarousel();
+    
+    // 監聽視窗大小變化
+    window.addEventListener('resize', () => {
+        initializeCarousel();
+        updateCarousel();
+    });
+
+    // 自動播放
+    autoPlayInterval = setInterval(nextSlide, 3000);
 }
     
           // 開闢聯絡卡
