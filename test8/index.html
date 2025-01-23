@@ -159,7 +159,7 @@
       
     </style>
 
-<title>0002演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
+<title>0003演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
 
 <meta name="description" content="台灣知名首席級接髮師Morgan摩根，演藝界明星藝人唯一指定！魔法般的奇蹟接髮，完美解決頭髮留不長問題。採超無痕接髮不怕斷層被發現，沒有摩根神手美不起來的女人。感恩回饋接髮再送免費染髮，名額限額提供，加LINE立即進行免費諮詢！">
 
@@ -358,14 +358,13 @@ else if (sel == '產品展示') {
         let 輪播圖 = $(`<div class="輪播圖"></div>`);
         let 輪播圖images = $(`<div class="輪播圖-images"></div>`);
         
-        // 添加圖片
         圖片們.forEach((圖, i) => {
             let $圖 = $(`<img src="${圖}">`);
             let 單個圖;
-            if (url們[i]) {
+            if (url們[i] && url們[i].trim() !== '') {  // 檢查 URL 是否存在且不為空
                 單個圖 = $(`<a href="${url們[i]}" target="_blank"></a>`).append($圖);
             } else {
-                單個圖 = $圖;
+                單個圖 = $圖;  // 如果沒有 URL，直接使用圖片元素
             }
             輪播圖images.append(單個圖);
         });
@@ -691,9 +690,12 @@ let 產品展示內容 = [
 
 
 
+  {'產品展示圖': '001.webp,002.webp,003.webp', '產品展示url': ',,'},
+
+
+  
+
   {'產品展示圖': '001.webp,002.webp', '產品展示url': ','},
-
-
   
   {'產品展示圖': '001.webp,002.webp', '產品展示url': ''},
   {'產品展示圖': '001.webp,002.webp,003.webp,004.webp,005.webp', '產品展示url': ''},
