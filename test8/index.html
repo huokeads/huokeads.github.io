@@ -159,7 +159,7 @@
       
     </style>
 
-<title>8803演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
+<title>8801演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
 
 <meta name="description" content="台灣知名首席級接髮師Morgan摩根，演藝界明星藝人唯一指定！魔法般的奇蹟接髮，完美解決頭髮留不長問題。採超無痕接髮不怕斷層被發現，沒有摩根神手美不起來的女人。感恩回饋接髮再送免費染髮，名額限額提供，加LINE立即進行免費諮詢！">
 
@@ -352,13 +352,9 @@ $(document).ready(function () {
               /***************** 產品展示 ******************/
 
 else if (sel == '產品展示') {
-    if (內容.產品展示圖 && 內容.產品展示圖.includes('iframe')) {
-        const videoId = `video${cont++}`;
-        const iframeHtml = 內容.產品展示圖.replace('id="video1"', `id="${videoId}"`);
-        all內容 = $(`<div class="image-container youtube-container"></div>`).append(iframeHtml);
-    } else if (內容.產品展示圖) {
+    if (內容.產品展示圖 && 內容.產品展示url) {
         let 圖片們 = 內容.產品展示圖.split(',');
-        let url們 = 內容.產品展示url ? 內容.產品展示url.split(',') : [];
+        let url們 = 內容.產品展示url.split(',');
         let 輪播圖 = $(`<div class="輪播圖"></div>`);
         let 輪播圖images = $(`<div class="輪播圖-images"></div>`);
         
@@ -366,33 +362,23 @@ else if (sel == '產品展示') {
         圖片們.forEach((圖, i) => {
             let $圖 = $(`<img src="${圖}">`);
             let 單個圖;
-            if (url們[i] && url們[i].trim() !== '') {
+            if (url們[i]) {
                 單個圖 = $(`<a href="${url們[i]}" target="_blank"></a>`).append($圖);
             } else {
-                單個圖 = $圖;  // 如果沒有URL，直接使用圖片元素
+                單個圖 = $圖;
             }
             輪播圖images.append(單個圖);
         });
-
-        // 添加按鈕和指示點
-        輪播圖.append(輪播圖images)
-              .append('<button class="prev"></button>')
-              .append('<button class="next"></button>');
-              
+        
+        // 添加指示點
+        let dots = $(`<div class="輪播圖-dots"></div>`);
+        圖片們.forEach((_, i) => {
+            dots.append($(`<div class="輪播圖-dot ${i === 0 ? 'active' : ''}"></div>`));
+        });
+        
+        輪播圖.append(輪播圖images);
+        輪播圖.append(dots);
         all內容 = 輪播圖;
-    } else if (內容.圖) {
-        let $內容圖 = $(`<img class="responsive-image" src="${內容.圖}" loading="lazy">`);
-        let 單個內容 = $內容圖;
-        if (內容.url) {
-            單個內容 = $(`<a href="${內容.url}" target="_blank" rel="noopener noreferrer"></a>`).append($內容圖);
-        }
-        all內容 = $(`<div class="image-container"></div>`).append(單個內容);
-    }
-}
-
-
-
-      
         _輪播圖動();
 
  } else if (內容.產品展示圖) {
