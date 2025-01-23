@@ -70,8 +70,6 @@
 .輪播圖 {
   position: relative;
   overflow: hidden;
-  border: 2px solid #ccc;
-  border-radius: 10px;
   margin: auto;
   width: 100%;  /* 新增 */
 }
@@ -104,7 +102,36 @@
       .輪播圖 button.prev {left: 0px;}
       .輪播圖 button.next {right: 0px;}
 
+.輪播圖 button.prev,
+.輪播圖 button.next {
+    display: none;
+}
 
+      /* 輪播圖指示點 */
+.輪播圖-dots {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+}
+
+.輪播圖-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.輪播圖-dot.active {
+    background: white;
+}
+
+
+      
       
       /* line圖示 */
       .social-links {margin: 20px ;}
@@ -132,7 +159,7 @@
       
     </style>
 
-<title>5566演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
+<title>7788演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
 
 <meta name="description" content="台灣知名首席級接髮師Morgan摩根，演藝界明星藝人唯一指定！魔法般的奇蹟接髮，完美解決頭髮留不長問題。採超無痕接髮不怕斷層被發現，沒有摩根神手美不起來的女人。感恩回饋接髮再送免費染髮，名額限額提供，加LINE立即進行免費諮詢！">
 
@@ -330,6 +357,8 @@ else if (sel == '產品展示') {
         let url們 = 內容.產品展示url.split(',');
         let 輪播圖 = $(`<div class="輪播圖"></div>`);
         let 輪播圖images = $(`<div class="輪播圖-images"></div>`);
+        
+        // 添加圖片
         圖片們.forEach((圖, i) => {
             let $圖 = $(`<img src="${圖}">`);
             let 單個圖;
@@ -340,8 +369,15 @@ else if (sel == '產品展示') {
             }
             輪播圖images.append(單個圖);
         });
+        
+        // 添加指示點
+        let dots = $(`<div class="輪播圖-dots"></div>`);
+        圖片們.forEach((_, i) => {
+            dots.append($(`<div class="輪播圖-dot ${i === 0 ? 'active' : ''}"></div>`));
+        });
+        
         輪播圖.append(輪播圖images);
-        輪播圖.append(`<button class="prev">❮</button><button class="next">❯</button>`);
+        輪播圖.append(dots);
         all內容 = 輪播圖;
         _輪播圖動();
 
@@ -458,79 +494,81 @@ else if (sel == '產品展示') {
             );
           }
     
-          // 輪播圖功能
-          function _輪播圖動() {
-            const images = document.querySelector('.輪播圖-images');
-            if (!images) return;
-    
-            const prevButton = document.querySelector('.prev');
-            const nextButton = document.querySelector('.next');
-            let currentIndex = 0;
-            const imageCount = images.children.length;
-            let autoPlayInterval;
-            let isTransitioning = false;
-    
-            function updateCarousel() {
-              if (isTransitioning) return;
-              isTransitioning = true;
-              
-              const containerWidth = images.parentElement.clientWidth;
-              const offset = -currentIndex * containerWidth;
-              
-              images.style.transform = `translateX(${offset}px)`;
-              
-              setTimeout(() => {
-                isTransitioning = false;
-              }, 500);
+        // 輪播圖功能
+function _輪播圖動() {
+    const images = document.querySelector('.輪播圖-images');
+    if (!images) return;
+
+    let currentIndex = 0;
+    const imageCount = images.children.length;
+    let autoPlayInterval;
+    let isTransitioning = false;
+
+    function updateCarousel() {
+        if (isTransitioning) return;
+        isTransitioning = true;
+        
+        const containerWidth = images.parentElement.clientWidth;
+        const offset = -currentIndex * containerWidth;
+        
+        images.style.transform = `translateX(${offset}px)`;
+        
+        // 更新指示點
+        const dots = document.querySelectorAll('.輪播圖-dot');
+        dots.forEach((dot, i) => {
+            dot.classList.toggle('active', i === currentIndex);
+        });
+        
+        setTimeout(() => {
+            isTransitioning = false;
+        }, 500);
+    }
+
+    function nextSlide() {
+        currentIndex = (currentIndex + 1) % imageCount;
+        updateCarousel();
+    }
+
+    function prevSlide() {
+        currentIndex = (currentIndex - 1 + imageCount) % imageCount;
+        updateCarousel();
+    }
+
+    // 觸控支援
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    images.addEventListener('touchstart', e => {
+        touchStartX = e.touches[0].clientX;
+    });
+
+    images.addEventListener('touchend', e => {
+        touchEndX = e.changedTouches[0].clientX;
+        const diff = touchStartX - touchEndX;
+
+        if (Math.abs(diff) > 50) {
+            if (diff > 0) {
+                nextSlide();
+            } else {
+                prevSlide();
             }
-    
-            function nextSlide() {
-              currentIndex = (currentIndex + 1) % imageCount;
-              updateCarousel();
-            }
-    
-            function prevSlide() {
-              currentIndex = (currentIndex - 1 + imageCount) % imageCount;
-              updateCarousel();
-            }
-    
-            // 觸控支援
-            let touchStartX = 0;
-            let touchEndX = 0;
-    
-            images.addEventListener('touchstart', e => {
-              touchStartX = e.touches[0].clientX;
-            });
-    
-            images.addEventListener('touchend', e => {
-              touchEndX = e.changedTouches[0].clientX;
-              const diff = touchStartX - touchEndX;
-    
-              if (Math.abs(diff) > 50) {
-                if (diff > 0) {
-                  nextSlide();
-                } else {
-                  prevSlide();
-                }
-              }
-            });
-    
-            prevButton?.addEventListener('click', () => {
-              clearInterval(autoPlayInterval);
-              prevSlide();
-              autoPlayInterval = setInterval(nextSlide, 3000);
-            });
-    
-            nextButton?.addEventListener('click', () => {
-              clearInterval(autoPlayInterval);
-              nextSlide();
-              autoPlayInterval = setInterval(nextSlide, 3000);
-            });
-    
-            autoPlayInterval = setInterval(nextSlide, 3000);
-            window.addEventListener('resize', updateCarousel);
+        }
+    });
+
+    // 添加指示點點擊事件
+    document.querySelectorAll('.輪播圖-dot').forEach((dot, i) => {
+        dot.addEventListener('click', () => {
+            clearInterval(autoPlayInterval);
+            currentIndex = i;
             updateCarousel();
-          }
+            autoPlayInterval = setInterval(nextSlide, 3000);
+        });
+    });
+
+    autoPlayInterval = setInterval(nextSlide, 3000);
+    window.addEventListener('resize', updateCarousel);
+    updateCarousel();
+}
     
           // 開闢聯絡卡
           function toggleContact() {
