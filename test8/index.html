@@ -159,7 +159,7 @@
       
     </style>
 
-<title>0006演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
+<title>0007演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
 
 <meta name="description" content="台灣知名首席級接髮師Morgan摩根，演藝界明星藝人唯一指定！魔法般的奇蹟接髮，完美解決頭髮留不長問題。採超無痕接髮不怕斷層被發現，沒有摩根神手美不起來的女人。感恩回饋接髮再送免費染髮，名額限額提供，加LINE立即進行免費諮詢！">
 
@@ -334,7 +334,6 @@ $(document).ready(function () {
   _顯示內容(關於我們, '關於我們');
   _顯示內容(聯絡資訊, '聯絡資訊');
   _顯示內容(社交帳號, '社交帳號');
-  _輪播圖動();
   _走馬燈動();
   _去後台();
 });
@@ -353,32 +352,34 @@ $(document).ready(function () {
 
 else if (sel == '產品展示') {
     if (內容.產品展示圖) {
-        let 圖片們 = 內容.產品展示圖.split(',');
-        let url們 = 內容.產品展示url ? 內容.產品展示url.split(',') : Array(圖片們.length).fill('#');
-        let 輪播圖 = $(`<div class="輪播圖"></div>`);
-        let 輪播圖images = $(`<div class="輪播圖-images"></div>`);
-        
-        圖片們.forEach((圖, i) => {
-            let $圖 = $(`<img src="${圖}">`);
-            let 單個圖;
-            if (url們[i] && url們[i] !== '#') {
-                單個圖 = $(`<a href="${url們[i]}" target="_blank"></a>`).append($圖);
-            } else {
-                單個圖 = $圖;
-            }
-            輪播圖images.append(單個圖);
-        });
-        
-        // 添加指示點
-        let dots = $(`<div class="輪播圖-dots"></div>`);
-        圖片們.forEach((_, i) => {
-            dots.append($(`<div class="輪播圖-dot ${i === 0 ? 'active' : ''}"></div>`));
-        });
-        
-        輪播圖.append(輪播圖images);
-        輪播圖.append(dots);
-        all內容 = 輪播圖;
-      setTimeout(() => _輪播圖動(), 0);
+        if (!內容.產品展示圖.includes('iframe')) {
+            let 圖片們 = 內容.產品展示圖.split(',');
+            let url們 = 內容.產品展示url ? 內容.產品展示url.split(',') : Array(圖片們.length).fill('#');
+            let 輪播圖 = $(`<div class="輪播圖"></div>`);
+            let 輪播圖images = $(`<div class="輪播圖-images"></div>`);
+            
+            圖片們.forEach((圖, i) => {
+                let $圖 = $(`<img src="${圖}">`);
+                let 單個圖;
+                if (url們[i] && url們[i] !== '#') {
+                    單個圖 = $(`<a href="${url們[i]}" target="_blank"></a>`).append($圖);
+                } else {
+                    單個圖 = $圖;
+                }
+                輪播圖images.append(單個圖);
+            });
+            
+            let dots = $(`<div class="輪播圖-dots"></div>`);
+            圖片們.forEach((_, i) => {
+                dots.append($(`<div class="輪播圖-dot ${i === 0 ? 'active' : ''}"></div>`));
+            });
+            
+            輪播圖.append(輪播圖images);
+            輪播圖.append(dots);
+            all內容 = 輪播圖;
+            
+            setTimeout(() => _輪播圖動(), 0);
+        }
     }
 }
 
