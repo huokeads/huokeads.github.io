@@ -82,7 +82,7 @@
       input, select {width: 100%;padding: 0.8rem;border: 1px solid #ddd;border-radius: 5px;font-size: 1rem;}
     </style>
 
-    <title>1明星網紅首選！接髮+染髮只要4,999元｜韓哥Hange接髮｜台北市西門町</title>
+    <title>2明星網紅首選！接髮+染髮只要4,999元｜韓哥Hange接髮｜台北市西門町</title>
 
     <meta name="description" content="西門高質感接髮Hange韓哥，百萬級強榜王者名師。台北縮毛矯正專家。5星級超高接髮滿意度，120%的耐心諮詢服務。10多年專精接髮豐富經驗，頭髮任何問題問韓哥就對了。獨家接髮技術，專門為妳服務。獨家髮束排列，不怕脫落，接髮持久耐用。給我2小時，讓妳短髮瞬變長髮美女正妹，變美真的很簡單。">
 
@@ -105,6 +105,60 @@
 
     <!-- JavaScript 部分 -->
     <script>
+      // 定義 _顯示內容 函數
+      function _顯示內容(data, sel) {
+        let cont = 0;
+        for (let 內容 of data) {
+            let all內容; // 只宣告 all內容，不賦值
+
+            /***************** 走馬燈 ******************/
+            if (sel === '走馬燈') {
+                all內容 = `<div class="marquee-item"><a href="${內容.url}" target="_blank" rel="noopener noreferrer">${內容.字}</a></div>`;
+            }
+            /***************** 產品展示 ******************/
+            else if (sel === '產品展示') { // 使用 else if
+                if (內容.產品展示圖 && 內容.產品展示圖.includes(',')) {
+                    // 取輪播料
+                    let 整組輪播圖 = 內容.產品展示圖.split(',');
+                    let $輪播圖容器 = $('<div class="輪播圖-images"></div>');
+
+                    for (let i = 0; i < 整組輪播圖.length; i++) {
+                        let $輪圖 = $(`<img class="responsive-image" src="${整組輪播圖[i]}" >`);
+                        $輪播圖容器.append($輪圖);
+                    }
+                    all內容 = $('<div class="輪播圖"><button class="prev"></button><button class="next"></button></div>').append($輪播圖容器);
+                } 
+                else if (內容.圖) { // 處理圖片的情況
+                    let $內容圖 = $(`<img class="responsive-image" src="${內容.圖}">`);
+                    let 單個內容 = $內容圖;
+                    if (內容.url) {
+                        單個內容 = $(`<a href="${內容.url}" target="_blank"></a>`).append($內容圖);
+                    }
+                    all內容 = $(`<div class="image-container"></div>`).append(單個內容);
+                    $內容圖.on("error", function () {
+                        all內容.remove();
+                    });
+                }
+            }
+            /***************** 關於我們 ******************/
+            else if (sel === '關於我們') { // 使用 else if
+                all內容 = `<p>${內容.字}</p>`;
+            }
+            /***************** 聯絡資訊 ******************/
+            else if (sel === '聯絡資訊') { // 使用 else if
+                all內容 = `<p>${內容.字}</p>`;
+            }
+            /***************** 社交帳號 ******************/
+            else if (sel === '社交帳號') { // 使用 else if
+                all內容 = 內容.html;
+            }
+
+            if (all內容) { // 確保 all內容 不是 undefined 才 append
+                $(`#${sel}`).append(all內容);
+            }
+        }
+      }
+
       window.addEventListener('scroll', function() {
         var iframe = document.getElementById('video1');
         var rect = iframe.getBoundingClientRect();
@@ -239,6 +293,42 @@
         _輪播圖動();
       });
 
+      function _顯示LogoIcon() {
+        const logoImage = "A-頁首LOGO.png";
+        const newFavicon = "B-Favicon分頁圖示.png";
+
+        $("#logo").attr("src", logoImage).on("error", function () {
+          $(this).attr("src", defaultImage);
+        });
+
+        let $favicon = $("link[rel='icon'], link[rel='shortcut icon'], link[rel='alternate icon'], link[rel='apple-touch-icon']");
+        if ($favicon.length) {
+          $favicon.attr("href", newFavicon).attr("type", "image/x-icon");
+        } else {
+          $("head").append(`<link rel="icon" type="image/x-icon" href="${newFavicon}">`);
+        }
+      }
+
+      function _去後台() {
+        admin明文 = false;
+        if ((location.href).indexOf('???') != -1) admin明文 = decodeURIComponent(location.href.split('???')[1])
+        if (sha256(admin明文) == adp) $('nav').addClass('active');
+      }
+
+      function _導航換頁(page) {
+        $('.section').removeClass('active');
+        $(`#${page}page`).addClass('active');
+      }
+
+      _顯示LogoIcon();
+      _顯示內容(產品展示內容, '產品展示');
+      _顯示內容(走馬燈內容, '走馬燈');
+      _顯示內容(關於我們, '關於我們');_顯示內容(聯絡資訊, '聯絡資訊');
+      _顯示內容(社交帳號, '社交帳號');
+      _去後台();
+    </script>
+
+    <script>
       let 產品展示內容 = [
         {'圖': '001.webp', 'url': ''},
         {'產品展示圖': '001.webp,002.webp', '產品展示url': 'https://lin.ee/exeQ2Yx,https://lin.ee/exeQ2Yx'},
@@ -286,7 +376,7 @@
         {'圖': '037.webp', 'url': ''},
         {'圖': '038.webp', 'url': ''},
         {'圖': '039.webp', 'url': 'https://lin.ee/xy1OdUd'},
-	{'圖': '040.webp', 'url': ''},
+        {'圖': '040.webp', 'url': ''},
         {'圖': '041.webp', 'url': 'https://lin.ee/xy1OdUd'},
         {'圖': '042.webp', 'url': ''},
         {'圖': '043.webp', 'url': 'https://lin.ee/xy1OdUd'},
@@ -343,99 +433,12 @@
 
       const 社交帳號 = [
         {'html': `<a href="https://lin.ee/xy1OdUd">
-	<svg class="line-icon" viewBox="0 0 24 24">
+          <svg class="line-icon" viewBox="0 0 24 24">
             <path fill="#888" d="M24 10.304c0-5.369-5.383-9.738-12-9.738-6.616 0-12 4.369-12 9.738 0 4.814 4.269 8.846 10.036 9.608.391.084.922.258 1.057.592.121.303.079.778.039 1.085l-.171 1.027c-.053.303-.242 1.186 1.039.647 1.281-.54 6.911-4.069 9.428-6.967 1.739-1.907 2.572-3.843 2.572-5.992zm-18.988-2.595c.129 0 .234.105.234.234v4.153h2.287c.129 0 .233.104.233.233v.842c0 .129-.104.234-.233.234h-3.363c-.063 0-.119-.025-.161-.065-.043-.043-.072-.1-.072-.169v-5.229c0-.129.104-.233.233-.233h.842zm14.992 0c.129 0 .233.105.233.234v.842c0 .129-.104.234-.233.234h-2.287v.883h2.287c.129 0 .233.105.233.234v.842c0 .129-.104.234-.233.234h-2.287v.884h2.287c.129 0 .233.105.233.233v.842c0 .129-.104.234-.233.234h-3.363c-.063 0-.12-.025-.162-.065-.043-.043-.071-.1-.071-.169v-5.229c0-.129.104-.233.233-.233h3.363zm-10.442.001c.129 0 .234.105.234.234v5.229c0 .129-.105.234-.234.234h-.842c-.129 0-.234-.105-.234-.234v-5.229c0-.129.105-.234.234-.234h.842zm2.127 0h.891l2.368 3.354v-3.354c0-.129.105-.234.234-.234h.842c.129 0 .234.105.234.234v5.229c0 .129-.105.234-.234.234h-.841l-2.421-3.354v3.354c0 .129-.105.234-.234.234h-.839c-.129 0-.234-.105-.234-.234v-5.229c0-.129.105-.234.234-.234z"/>
           </svg>
         </a>`
       }
     ];
-  </script>
-  </head>
-  <body>
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-56VJTP7R" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
-
-    <nav style="text-align: center;">
-      <button class="btn" id="主頁btn" onclick="_導航換頁('主頁')" >主頁</button>
-      <button class="btn" id="設置btn" onclick="_導航換頁('設置')" >設置</button>
-    </nav>
-
-    <section id="主頁page" class="section active">
-      <div class="logo-container">
-        <div class="logo"><img id="logo" alt="韓哥Hange接髮"></div>
-      </div>
-
-      <div class="marquee-container" id="marqueeContainer">
-        <div class="close-marquee" onclick="closeMarquee()">×</div>
-        <div id="走馬燈" class="marquee-content"></div>
-      </div>
-
-      <div id="產品展示"></div>
-
-      <div id="關於我們" class="company-intro"></div>
-
-      <div class="contact-section">
-        <div class="contact-title">
-          客服與聯絡資訊
-          <span class="toggle-btn" onclick="toggleContact()">+</span>
-        </div>
-        <div id="聯絡資訊" class="contact-content"></div>
-      </div>
-
-      <div id="社交帳號" class="social-links"></div>
-
-      <div class="copyright">
-        <script> $('.copyright').text(`© ${new Date().getFullYear()} All rights reserved by 韓哥Hange接髮`)</script>
-      </div>
-
-      <div class="scroll-top" id="scrollTop" onclick="scrollToTop()">↑</div>
-    </section>
-
-    <section id="設置page" class="section">
-      <div class="container">
-        <h2>您的商家名稱</h2>
-        <input type="text" id="公司名Input" placeholder="請修改您的商家名稱" title="請修改您的商家名稱">
-
-        <button class="btn" onclick="_更222新野('公司資料', ['公司名Input','公司簡介Input', '公司wsInput', '公司地址Input', '營業時間Input', '打烊時間Input', '每時段Input', '時段做客上限Input', '主題色Input', '按鈕色Input', '標題色Input', '文字色Input'])">更新公司資料</button>
-      </div>
-    </section>
-
-    <script>
-      function _顯示LogoIcon() {
-        const logoImage = "A-頁首LOGO.png";
-        const newFavicon = "B-Favicon分頁圖示.png";
-
-        $("#logo").attr("src", logoImage).on("error", function () {
-          $(this).attr("src", defaultImage);
-        });
-
-        let $favicon = $("link[rel='icon'], link[rel='shortcut icon'], link[rel='alternate icon'], link[rel='apple-touch-icon']");
-        if ($favicon.length) {
-          $favicon.attr("href", newFavicon).attr("type", "image/x-icon");
-        } else {
-          $("head").append(`<link rel="icon" type="image/x-icon" href="${newFavicon}">`);
-        }
-      }
-
-      function _去後台() {
-        admin明文 = false;
-        if ((location.href).indexOf('???') != -1) admin明文 = decodeURIComponent(location.href.split('???')[1])
-        if (sha256(admin明文) == adp) $('nav').addClass('active');
-      }
-
-      function _導航換頁(page) {
-        $('.section').removeClass('active');
-        $(`#${page}page`).addClass('active');
-      }
-
-      _顯示LogoIcon();
-      _顯示內容(產品展示內容, '產品展示');
-      _顯示內容(走馬燈內容, '走馬燈');
-      _顯示內容(關於我們, '關於我們');
-      _顯示內容(聯絡資訊, '聯絡資訊');
-      _顯示內容(社交帳號, '社交帳號');
-      _去後台();
     </script>
   </body>
 </html>
