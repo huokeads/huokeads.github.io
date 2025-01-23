@@ -64,23 +64,32 @@
 
 
  /* 輪播圖 */
-      .輪播圖 {
-        position: relative;
-        overflow: hidden;
-        border: 2px solid #ccc;
-        border-radius: 10px;
-        margin: auto;
-      }
-      .輪播圖-images {
-        display: flex;
-        transition: transform 0.5s ease-in-out;
-        width: 100%;
-      }
-      .輪播圖-images img {
-        object-fit: cover;
-        width: 100%;
-        height: auto;
-      }
+
+
+
+.輪播圖 {
+  position: relative;
+  overflow: hidden;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  margin: auto;
+  width: 100%;  /* 新增 */
+}
+
+.輪播圖-images {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  width: 100%;
+}
+
+.輪播圖-images img,
+.輪播圖-images a {  /* 新增 */
+  flex: 0 0 100%;  /* 新增 */
+  width: 100%;
+  height: auto;
+}
+
+      
       .輪播圖 button {
         position: absolute;
         top: 50%;
@@ -123,7 +132,7 @@
       
     </style>
 
-<title>666演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
+<title>555演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
 
 <meta name="description" content="台灣知名首席級接髮師Morgan摩根，演藝界明星藝人唯一指定！魔法般的奇蹟接髮，完美解決頭髮留不長問題。採超無痕接髮不怕斷層被發現，沒有摩根神手美不起來的女人。感恩回饋接髮再送免費染髮，名額限額提供，加LINE立即進行免費諮詢！">
 
@@ -305,6 +314,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
               _輪播圖動();
               _走馬燈動();
               _去後台();
+              _初始化YouTube影片控制();  // 新增這一行
               
               // 移除載入中狀態
               $('#loading').remove();
@@ -818,28 +828,24 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 
 function _初始化YouTube影片控制() {
-    window.addEventListener('scroll', function() {
-        // 找到所有 YouTube iframe
-        document.querySelectorAll('.youtube-container iframe').forEach(function(iframe) {
-            const rect = iframe.getBoundingClientRect();
-            const windowHeight = window.innerHeight;
-
-            // 判斷影片是否進入視窗
-            if (rect.top <= windowHeight && rect.bottom >= 0) {
-                // 影片進入視窗，啟動自動播放
-                const src = iframe.src;
-                if (!src.includes("autoplay=1")) {
-                    iframe.src = src.replace("autoplay=0", "autoplay=1");
-                }
-            } else {
-                // 影片離開視窗，停止播放
-                const src = iframe.src;
-                if (src.includes("autoplay=1")) {
-                    iframe.src = src.replace("autoplay=1", "autoplay=0");
-                }
-            }
-        });
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const iframe = entry.target;
+      
+      if (entry.isIntersecting) {
+        // 重新設置 src 來強制重新載入影片
+        const currentSrc = iframe.src;
+        iframe.src = currentSrc.replace('autoplay=0', 'autoplay=1');
+      } else {
+        const currentSrc = iframe.src;
+        iframe.src = currentSrc.replace('autoplay=1', 'autoplay=0');
+      }
     });
+  }, { threshold: 0.5 });
+
+  document.querySelectorAll('.youtube-container iframe').forEach(iframe => {
+    observer.observe(iframe);
+  });
 }
 
 
