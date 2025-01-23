@@ -649,6 +649,20 @@ function _顯示內容(data, sel) {
                 }
 
 
+   // 輪播圖
+            if (內容.產品展示圖.includes(',')){
+              // 取輪播料
+              整組輪播圖 = 內容.產品展示圖.split(',')
+              $輪播圖容器 = $('<div class="輪播圖-images"></div>');
+
+              for (let i = 0; i < 整組輪播圖.length; i++) {
+                $輪圖 = $(`<img class="responsive-image" src="${整組輪播圖[i]}" >`);
+                第n輪圖 = $輪圖;
+                // a 有問題不做
+                $輪播圖容器.append(第n輪圖);
+              }
+              單個內容 = $('<div class="輪播圖"><button class="prev"></button><button class="next"></button></div>').append($輪播圖容器);
+            }
 
 		    
 
