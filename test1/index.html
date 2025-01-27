@@ -2,7 +2,7 @@
 <html>
   <head>
     
-    <title>2演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
+    <title>3演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -105,6 +105,7 @@
       .image-container {
         width: 100%;
         text-align: center;
+        margin-bottom: 0;  /* 【新增】移除下方間隔 */
       }
       .responsive-image {
         max-width: 100%;
@@ -121,10 +122,13 @@
           max-width: 760px;
         }
       }
-      .image-container iframe {
-        height: auto;
-        min-height: 300px;
-        aspect-ratio: 16/9;
+/* 修改這段 - YouTube 影片容器 */
+.image-container iframe {
+  width: 100%;        /* 【修改】從 height: auto 改為 width: 100% */
+  max-width: 100%;    /* 【新增】確保不超出螢幕寬度 */
+  height: auto;
+  min-height: 300px;
+  aspect-ratio: 16/9;
       }
             .company-intro {
         width: 90%;
