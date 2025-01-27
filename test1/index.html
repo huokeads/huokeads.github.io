@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>3明星網紅首選！接髮+染髮只要4,999元｜韓哥Hange接髮｜台北市西門町</title>
+    <title>4明星網紅首選！接髮+染髮只要4,999元｜韓哥Hange接髮｜台北市西門町</title>
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -53,6 +53,7 @@
         width: auto;
         object-fit: contain;
         padding: 5px;
+        max-height: 50px; /* 新增：限制最大高度 */
       }
 
       .scroll-top {
@@ -286,9 +287,10 @@
         _走馬燈動();
         _去後台();
 
-        // 自動更新頁尾年份
-        const currentYear = new Date().getFullYear();
-        $('.copyright p').text(`© ${currentYear} 韓哥Hange接髮 版權所有`);
+  // 修正頁尾年份顯示
+  const currentYear = new Date().getFullYear();
+  $('.copyright').find('p').text(`© ${currentYear} 韓哥Hange接髮 版權所有`);
+  
       });
 
       function _顯示內容(data, sel) {
@@ -377,57 +379,57 @@
         document.getElementById('marqueeContainer').style.display = 'none';
       }
             // 走馬燈功能
-      function _走馬燈動() {
-        const $content = $('.marquee-content');
-        const $items = $('.marquee-item');
-        if (!$items.length) return;
+function _走馬燈動() {
+  const $content = $('.marquee-content');
+  const $items = $('.marquee-item');
+  if (!$items.length) return;
 
-        const itemHeight = $items.outerHeight();
-        const itemCount = $items.length;
-        let currentIndex = 0;
-        let isVisible = true;
-        let intervalId = null;
+  const itemHeight = $items.outerHeight();
+  const itemCount = $items.length;
+  let currentIndex = 0;
+  let isVisible = true;
+  let intervalId = null;
 
-        const observer = new IntersectionObserver((entries) => {
-          isVisible = entries[0].isIntersecting;
-        });
-        
-        observer.observe($content[0]);
+  const observer = new IntersectionObserver((entries) => {
+    isVisible = entries[0].isIntersecting;
+  });
+  
+  observer.observe($content[0]);
 
-        function scrollMarquee() {
-          if (!isVisible) return;
-          
-          currentIndex = (currentIndex + 1) % itemCount;
-          
-          $content.css({
-            'transition': 'transform 0.5s ease-in-out',
-            'transform': `translateY(-${itemHeight * currentIndex}px)`
-          });
-        }
+  function scrollMarquee() {
+    if (!isVisible) return;
+    
+    $content.css({
+      'transition': 'transform 1.2s ease-in-out',
+      'transform': `translateY(-${itemHeight * currentIndex}px)`
+    });
+    
+    currentIndex = (currentIndex + 1) % itemCount;
+  }
 
-        // 清除可能存在的舊計時器
-        if (intervalId) {
-          clearInterval(intervalId);
-        }
+  // 清除可能存在的舊計時器
+  if (intervalId) {
+    clearInterval(intervalId);
+  }
 
-        // 設置新的計時器
-        intervalId = setInterval(scrollMarquee, 5000);
+  // 設置新的計時器，每1.2秒執行一次
+  intervalId = setInterval(scrollMarquee, 1200);
 
-        // 滑鼠懸停時暫停
-        $content.hover(
-          () => {
-            if (intervalId) {
-              clearInterval(intervalId);
-              intervalId = null;
-            }
-          },
-          () => {
-            if (!intervalId) {
-              intervalId = setInterval(scrollMarquee, 5000);
-            }
-          }
-        );
-
+  // 滑鼠懸停時暫停
+  $content.hover(
+    () => {
+      if (intervalId) {
+        clearInterval(intervalId);
+        intervalId = null;
+      }
+    },
+    () => {
+      if (!intervalId) {
+        intervalId = setInterval(scrollMarquee, 1200);
+      }
+    }
+  );
+}
         // 監聽轉場動畫結束
         $content.on('transitionend', function() {
           if (currentIndex === itemCount - 1) {
@@ -672,7 +674,8 @@
       ];
 
       const 關於我們 = [
-        {'字':`百萬級強榜王者名師
+        {'字':`
+百萬級強榜王者名師
 台北縮毛矯正專家
 5星級超高接髮滿意度
 120%的耐心諮詢服務
