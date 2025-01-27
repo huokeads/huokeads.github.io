@@ -1,8 +1,33 @@
 <!DOCTYPE html>
 <html>
   <head>
+    
+    
+    <title>1明星網紅首選！接髮+染髮只要4,999元｜韓哥Hange接髮｜台北市西門町</title>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+            
+
+            <meta name="description" content="西門高質感接髮Hange韓哥，百萬級強榜王者名師。台北縮毛矯正專家。5星級超高接髮滿意度，120%的耐心諮詢服務。10多年專精接髮豐富經驗，頭髮任何問題問韓哥就對了。獨家接髮技術，專門為妳服務。獨家髮束排列，不怕脫落，接髮持久耐用。給我2小時，讓妳短髮瞬變長髮美女正妹，變美真的很簡單。">
+        
+            <meta content="韓哥Hange接髮" name="copyright">
+        
+            <meta property="og:site_name" content="韓哥Hange接髮">
+            <meta property="og:title" content="明星網紅首選！接髮+染髮只要4,999元｜韓哥Hange接髮｜台北市西門町">
+            <meta property="og:description" content="西門高質感接髮Hange韓哥，百萬級強榜王者名師。台北縮毛矯正專家。5星級超高接髮滿意度，120%的耐心諮詢服務。10多年專精接髮豐富經驗，頭髮任何問題問韓哥就對了。獨家接髮技術，專門為妳服務。獨家髮束排列，不怕脫落，接髮持久耐用。給我2小時，讓妳短髮瞬變長髮美女正妹，變美真的很簡單。">
+        
+            <meta property="og:url" content="https://huokeads.github.io/han">
+        
+            <meta property="og:image" content="https://huokeads.github.io/han/C-og-image.jpg">
+            <meta property="og:image:alt" content="明星網紅首選！接髮+染髮只要4,999元｜韓哥Hange接髮｜台北市西門町">
+            <meta property="og:image:width" content="1200">
+            <meta property="og:image:height" content="630">
+            <meta property="og:type" content="website">
+            <meta property="fb:app_id" content="你的FacebookAppID">
+
+    
 
     <style>
       /*（本次新增的版本）*/
@@ -10,22 +35,27 @@
       * {margin: 0;padding: 0;box-sizing: border-box;font-family: "Microsoft JhengHei", Arial, sans-serif;}
 
       /* 上拉顯示logo位 下拉隱藏 */
-      body{margin-top: 80px;}
+      body {
+        margin-top: 80px;
+        width: 100%;
+        overflow-x: hidden;
+      }
+      
       .logo-container {
         height: 50px;
-        width: 100%;
+        width: 100vw;
         background-color: var(--主題色);
         display: flex;
         justify-content: center;
         align-items: center;
         position: fixed;
         top: 0;
+        left: 0;
         z-index: 11;
         transition: .5s;
         overflow: hidden;
       }
-
-      .logo {color: white;font-size: 24px;font-weight: bold;}
+            .logo {color: white;font-size: 24px;font-weight: bold;}
       .logo img {
         height: 50px;
         width: auto;
@@ -52,14 +82,16 @@
       /* 走馬燈 */
       .marquee-container {
         height: 30px;
-        width: 100%;
+        width: 100vw;
         position: fixed;
         top: 50px;
+        left: 0;
         overflow: hidden;
         background: #343434;
         z-index: 10;
         transition: 0.5s;
       }
+      
       .marquee-container:hover .marquee-content {animation-play-state: paused;}
       .marquee-content {
         position: absolute;
@@ -90,6 +122,7 @@
       .image-container {
         width: 100%;
         text-align: center;
+        line-height: 0;
       }
       .responsive-image {
         max-width: 100%;
@@ -97,19 +130,22 @@
         display: block;
         margin: 0 auto;
       }
+      
       @media (min-width: 768px) {
         .responsive-image,
         .輪播圖,
         .image-container iframe {
-          height: auto;
           width: 50%;
           max-width: 760px;
+          margin: 0 auto;
         }
       }
+      
       .image-container iframe {
-        height: auto;
-        min-height: 300px;
+        width: 100%;
         aspect-ratio: 16/9;
+        display: block;
+        border: none;
       }
             .company-intro {
         width: 90%;
@@ -147,6 +183,7 @@
         position: relative;
         overflow: hidden;
         margin: auto;
+        line-height: 0;
       }
       .輪播圖-images {
         display: flex;
@@ -160,17 +197,20 @@
       }
       .輪播圖 button {
         position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        background-color: rgba(0, 0, 0, 0);
+        top: 0;
+        height: 100%;
+        width: 50%;
+        background: transparent;
         border: none;
         cursor: pointer;
-        z-index: 10;
-        width: 40%;
-        height: 80%;
+        outline: none;
+        -webkit-tap-highlight-color: transparent;
       }
-      .輪播圖 button.prev {left: 0px;}
-      .輪播圖 button.next {right: 0px;}
+      .輪播圖 button:focus {
+        outline: none;
+      }
+      .輪播圖 button.prev {left: 0;}
+      .輪播圖 button.next {right: 0;}
 
       /* line圖示 */
       .social-links {margin: 20px;}
@@ -187,8 +227,7 @@
         0% {transform: translateY(100%);}
         100% {transform: translateY(-100%);}
       }
-
-      /* admin */
+            /* admin */
       .btn {
         border: none;
         padding: 10px 20px;
@@ -224,7 +263,7 @@
     </style>
 
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-        <script>
+    <script>
       $(document).ready(function () {
         // 初始化所有功能
         _顯示LogoIcon();
@@ -247,20 +286,18 @@
           if (sel === '走馬燈') {
             all內容 = `<div class="marquee-item"><a href="${內容.url}" target="_blank" rel="noopener noreferrer">${內容.字}</a></div>`;
           }
-          /***************** 產品展示 ******************/
+                    /***************** 產品展示 ******************/
           else if (sel === '產品展示') {
             // YouTube 影片處理
             if (內容.產品展示圖 && 內容.產品展示圖.includes('youtube.com')) {
               all內容 = $(`<div class="image-container">
                 <iframe 
                   src="${內容.產品展示圖}?enablejsapi=1&autoplay=0"
-                  frameborder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowfullscreen>
                 </iframe>
               </div>`);
               
-              // 添加 Intersection Observer 來控制視頻播放
               const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                   const iframe = entry.target.querySelector('iframe');
@@ -280,7 +317,7 @@
               let $輪播圖容器 = $('<div class="輪播圖-images"></div>');
 
               for (let i = 0; i < 整組輪播圖.length; i++) {
-                let $輪圖 = $(`<img class="responsive-image" src="${整組輪播圖[i]}" loading="lazy">`);
+                let $輪圖 = $(`<img class="responsive-image" src="${整組輪播圖[i].trim()}" loading="lazy">`);
                 $輪播圖容器.append($輪圖);
               }
               all內容 = $('<div class="輪播圖"><button class="prev"></button><button class="next"></button></div>').append($輪播圖容器);
@@ -298,7 +335,7 @@
               });
             }
           }
-          /***************** 關於我們 ******************/
+                    /***************** 關於我們 ******************/
           else if (sel === '關於我們') {
             all內容 = `<p>${內容.字}</p>`;
           }
@@ -316,7 +353,8 @@
           }
         }
       }
-                // 關走馬燈
+
+      // 關走馬燈
       function closeMarquee() {
         document.getElementById('marqueeContainer').style.display = 'none';
       }
@@ -351,8 +389,7 @@
           () => setInterval(scrollMarquee, 1500)
         );
       }
-
-      // 輪播圖功能
+            // 輪播圖功能
       function _輪播圖動() {
         const images = document.querySelector('.輪播圖-images');
         if (!images) return;
@@ -425,8 +462,7 @@
         window.addEventListener('resize', updateCarousel);
         updateCarousel();
       }
-
-      function _顯示LogoIcon() {
+            function _顯示LogoIcon() {
         const logoImage = "A-頁首LOGO.png";
         const newFavicon = "B-Favicon分頁圖示.png";
 
@@ -470,12 +506,12 @@
           btn.textContent = '+';
         }
       }
-                // 回頁頂
+
+      // 回頁頂
       function scrollToTop() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
-
-      let lastScrollTop = 0;
+            let lastScrollTop = 0;
       let isScrollingUp = false;
 
       window.addEventListener('scroll', function() {
@@ -512,9 +548,7 @@
         {'圖': '002.webp', 'url': ''},
         {'圖': '003.webp', 'url': ''},
         {'圖': '004.webp', 'url': ''},
-
-                {'產品展示圖': '001.webp,002.webp', '產品展示url': ','},
-        
+        {'產品展示圖': '001.webp,002.webp', '產品展示url': ','},
         {'圖': '005.webp', 'url': ''},
         {'圖': '006.webp', 'url': ''},
         {'圖': '007.webp', 'url': ''},
@@ -562,14 +596,14 @@
         {'圖': '046.webp', 'url': ''},
         {'圖': '047.webp', 'url': 'https://lin.ee/xy1OdUd'},
         {'圖': 'C-og-image.jpg', 'url': ''},
+        // ... 其他產品展示內容 ...
       ];
 
       const 走馬燈內容 = [
         {'字': '🌟加LINE立即與韓哥免費諮詢接髮！✨', 'url': 'https://lin.ee/xy1OdUd'},
         {'字': '🌟點此！快速加LINE與韓哥了解接髮✨', 'url': 'https://lin.ee/xy1OdUd'}
       ];
-
-      const 關於我們 = [
+            const 關於我們 = [
         {'字':`
           百萬級強榜王者名師\n
           台北縮毛矯正專家\n
@@ -682,27 +716,22 @@
       <!-- 後台頁面 -->
       <div id="走馬燈page" class="section">
         <h2>走馬燈管理</h2>
-        <!-- 走馬燈管理內容 -->
       </div>
 
       <div id="產品展示page" class="section">
         <h2>產品展示管理</h2>
-        <!-- 產品展示管理內容 -->
       </div>
 
       <div id="關於我們page" class="section">
         <h2>關於我們管理</h2>
-        <!-- 關於我們管理內容 -->
       </div>
 
       <div id="聯絡資訊page" class="section">
         <h2>聯絡資訊管理</h2>
-        <!-- 聯絡資訊管理內容 -->
       </div>
 
       <div id="社交帳號page" class="section">
         <h2>社交帳號管理</h2>
-        <!-- 社交帳號管理內容 -->
       </div>
     </nav>
   </body>
