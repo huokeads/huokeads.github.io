@@ -3,7 +3,7 @@
   <head>
     
     
-    <title>1明星網紅首選！接髮+染髮只要4,999元｜韓哥Hange接髮｜台北市西門町</title>
+    <title>2明星網紅首選！接髮+染髮只要4,999元｜韓哥Hange接髮｜台北市西門町</title>
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -98,7 +98,7 @@
         width: 100%;
         display: flex;
         flex-direction: column;
-        transition: transform 0.5s ease-in-out;
+        transition: transform 1.2s ease-in-out;  /* 改為 1.2s 使動畫更平滑 */
       }
       .marquee-item {
         padding: 5px;
@@ -382,12 +382,12 @@
           $content.css('transform', `translateY(-${itemHeight * currentIndex}px)`);
         }
 
-        const intervalId = setInterval(scrollMarquee, 1500);
+const intervalId = setInterval(scrollMarquee, 5000);  // 5秒切換一次
 
-        $content.hover(
-          () => clearInterval(intervalId),
-          () => setInterval(scrollMarquee, 1500)
-        );
+$content.hover(
+  () => clearInterval(intervalId),
+  () => setInterval(scrollMarquee, 5000)
+);
       }
             // 輪播圖功能
       function _輪播圖動() {
