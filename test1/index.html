@@ -2,7 +2,7 @@
 <html>
   <head>
     
-    <title>5演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
+    <title>6演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -253,6 +253,51 @@
 
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
         <script>
+
+ document.addEventListener("DOMContentLoaded", function () {
+    const videoIframe = document.querySelector("iframe");
+
+    // 滾動範圍內控制影片播放
+    function checkVisibility() {
+      const rect = videoIframe.getBoundingClientRect();
+      const isVisible = rect.top >= 0 && rect.bottom <= window.innerHeight;
+
+      const player = new YT.Player(videoIframe, {
+        events: {
+          onReady: function (event) {
+            if (isVisible) {
+              event.target.playVideo();
+            } else {
+              event.target.pauseVideo();
+            }
+          },
+        },
+      });
+
+      window.addEventListener("scroll", () => {
+        const rect = videoIframe.getBoundingClientRect();
+        const isVisible = rect.top >= 0 && rect.bottom <= window.innerHeight;
+
+        if (isVisible) {
+          player.playVideo();
+        } else {
+          player.pauseVideo();
+        }
+      });
+    }
+
+    // 動態加載 YouTube API
+    if (typeof YT === "undefined" || typeof YT.Player === "undefined") {
+      const script = document.createElement("script");
+      script.src = "https://www.youtube.com/iframe_api";
+      script.onload = checkVisibility;
+      document.head.appendChild(script);
+    } else {
+      checkVisibility();
+    }
+  });
+
+          
       $(document).ready(function () {
         // 初始化所有功能
         _顯示LogoIcon();
@@ -280,12 +325,8 @@ else if (sel === '產品展示') {
   // YouTube 影片處理
   if (內容.產品展示圖 && 內容.產品展示圖.includes('youtube.com')) {
     all內容 = $(`<div class="image-container">
-      <iframe 
-        src="${內容.產品展示圖}?enablejsapi=1&autoplay=0&playsinline=1"  // 【修改】添加 playsinline=1
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"  // 【修改】添加 web-share
-        allowfullscreen>
-      </iframe>
+     <iframe src="https://www.youtube.com/embed/old-id" frameborder="0"></iframe>
+
     </div>`);
     
     // 添加 Intersection Observer 來控制視頻播放
