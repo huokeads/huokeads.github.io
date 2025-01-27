@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>6明星網紅首選！接髮+染髮只要4,999元｜韓哥Hange接髮｜台北市西門町</title>
-    
+    <title>1明星網紅首選！接髮+染髮只要4,999元｜韓哥Hange接髮｜台北市西門町</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -23,39 +22,36 @@
     <meta property="og:type" content="website">
     <meta property="fb:app_id" content="你的FacebookAppID">
 
+    
     <style>
-            :root {--主題色: #7F552F;--走馬燈文字色: #edff66;}
+      /*（本次新增的版本）*/
+      :root {--主題色: #7F552F;--走馬燈文字色: #edff66;}
       * {margin: 0;padding: 0;box-sizing: border-box;font-family: "Microsoft JhengHei", Arial, sans-serif;}
 
-      body {
-        margin-top: 80px;
-        width: 100%;
-        overflow-x: hidden;
-      }
-      
+      /* 上拉顯示logo位 下拉隱藏 */
+      body{margin-top: 80px;}
       .logo-container {
         height: 50px;
-        width: 100vw;
+        width: 100%;
         background-color: var(--主題色);
         display: flex;
         justify-content: center;
         align-items: center;
         position: fixed;
         top: 0;
-        left: 0;
         z-index: 11;
         transition: .5s;
         overflow: hidden;
       }
+
       .logo {color: white;font-size: 24px;font-weight: bold;}
       .logo img {
-        height: 100%;
+        height: 50px;
         width: auto;
         object-fit: contain;
-        padding: 5px;
-        max-height: 50px;
       }
 
+      /* 回頂鍵 */
       .scroll-top {
         position: fixed;
         bottom: 20px;
@@ -72,25 +68,24 @@
         box-shadow: 0 2px 5px rgba(0,0,0,0.2);
       }
 
+      /* 走馬燈 */
       .marquee-container {
         height: 30px;
-        width: 100vw;
+        width: 100%;
         position: fixed;
         top: 50px;
-        left: 0;
         overflow: hidden;
         background: #343434;
         z-index: 10;
         transition: 0.5s;
       }
-      
       .marquee-container:hover .marquee-content {animation-play-state: paused;}
       .marquee-content {
         position: absolute;
         width: 100%;
         display: flex;
         flex-direction: column;
-        transition: transform 1.2s ease-in-out;
+        transition: transform 0.5s ease-in-out;
       }
       .marquee-item {
         padding: 5px;
@@ -110,10 +105,10 @@
         z-index: 2;
       }
 
+      /* 產品展示 */
       .image-container {
         width: 100%;
         text-align: center;
-        line-height: 0;
       }
       .responsive-image {
         max-width: 100%;
@@ -121,25 +116,21 @@
         display: block;
         margin: 0 auto;
       }
-      
       @media (min-width: 768px) {
         .responsive-image,
         .輪播圖,
         .image-container iframe {
+          height: auto;
           width: 50%;
           max-width: 760px;
-          margin: 0 auto;
         }
       }
-      
       .image-container iframe {
-        width: 100%;
+        height: auto;
+        min-height: 300px;
         aspect-ratio: 16/9;
-        display: block;
-        border: none;
       }
-
-      .company-intro {
+            .company-intro {
         width: 90%;
         max-width: 760px;
         margin: 20px auto;
@@ -170,12 +161,11 @@
         transition: height 0.3s ease-in-out;
       }
 
-      /* 輪播圖相關樣式 */
+      /* 輪播圖 */
       .輪播圖 {
         position: relative;
         overflow: hidden;
         margin: auto;
-        line-height: 0;
       }
       .輪播圖-images {
         display: flex;
@@ -189,41 +179,19 @@
       }
       .輪播圖 button {
         position: absolute;
-        top: 0;
-        height: 100%;
-        width: 50%;
-        background: transparent;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(0, 0, 0, 0);
         border: none;
         cursor: pointer;
-        outline: none;
-        -webkit-tap-highlight-color: transparent;
+        z-index: 10;
+        width: 40%;
+        height: 80%;
       }
-      .輪播圖 button.prev {left: 0;}
-      .輪播圖 button.next {right: 0;}
+      .輪播圖 button.prev {left: 0px;}
+      .輪播圖 button.next {right: 0px;}
 
-      /* 輪播圖指示器 */
-      .carousel-indicators {
-        position: absolute;
-        bottom: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-        gap: 8px;
-        z-index: 2;
-      }
-      .indicator {
-        width: 30px;
-        height: 4px;
-        background: rgba(255, 255, 255, 0.5);
-        border-radius: 2px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-      }
-      .indicator.active {
-        background: white;
-        transform: scaleX(1.2) scaleY(1.2);
-      }
-
+      /* line圖示 */
       .social-links {margin: 20px;}
       .line-icon {width: 40px;height: 40px;}
       .line-icon:hover > path {fill: #00B900;}
@@ -273,8 +241,9 @@
         font-size: 1rem;
       }
     </style>
-        <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-    <script>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+        <script>
       $(document).ready(function () {
         // 初始化所有功能
         _顯示LogoIcon();
@@ -286,31 +255,31 @@
         _輪播圖動();
         _走馬燈動();
         _去後台();
-
-  // 修正頁尾年份顯示
-  const currentYear = new Date().getFullYear();
-  $('.copyright p').html(`© ${currentYear} 韓哥Hange接髮 版權所有`);
-});
+      });
 
       function _顯示內容(data, sel) {
         let cont = 0;
         for (let 內容 of data) {
           let all內容;
 
+          /***************** 走馬燈 ******************/
           if (sel === '走馬燈') {
             all內容 = `<div class="marquee-item"><a href="${內容.url}" target="_blank" rel="noopener noreferrer">${內容.字}</a></div>`;
           }
+          /***************** 產品展示 ******************/
           else if (sel === '產品展示') {
             // YouTube 影片處理
             if (內容.產品展示圖 && 內容.產品展示圖.includes('youtube.com')) {
               all內容 = $(`<div class="image-container">
                 <iframe 
-                  src="${內容.產品展示圖}?enablejsapi=1&autoplay=0&mute=1"
+                  src="${內容.產品展示圖}?enablejsapi=1&autoplay=0"
+                  frameborder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowfullscreen>
                 </iframe>
               </div>`);
               
+              // 添加 Intersection Observer 來控制視頻播放
               const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                   const iframe = entry.target.querySelector('iframe');
@@ -328,21 +297,12 @@
             else if (內容.產品展示圖 && 內容.產品展示圖.includes(',')) {
               let 整組輪播圖 = 內容.產品展示圖.split(',');
               let $輪播圖容器 = $('<div class="輪播圖-images"></div>');
-              let $indicators = $('<div class="carousel-indicators"></div>');
 
               for (let i = 0; i < 整組輪播圖.length; i++) {
-                let $輪圖 = $(`<img class="responsive-image" src="${整組輪播圖[i].trim()}" loading="lazy">`);
+                let $輪圖 = $(`<img class="responsive-image" src="${整組輪播圖[i]}" loading="lazy">`);
                 $輪播圖容器.append($輪圖);
-                
-                // 新增指示器
-                let $indicator = $(`<div class="indicator ${i === 0 ? 'active' : ''}"></div>`);
-                $indicators.append($indicator);
               }
-              
-              all內容 = $('<div class="輪播圖"></div>')
-                .append($輪播圖容器)
-                .append($indicators)
-                .append('<button class="prev"></button><button class="next"></button>');
+              all內容 = $('<div class="輪播圖"><button class="prev"></button><button class="next"></button></div>').append($輪播圖容器);
             }
             // 一般圖片處理
             else if (內容.圖) {
@@ -357,12 +317,15 @@
               });
             }
           }
+          /***************** 關於我們 ******************/
           else if (sel === '關於我們') {
             all內容 = `<p>${內容.字}</p>`;
           }
+          /***************** 聯絡資訊 ******************/
           else if (sel === '聯絡資訊') {
             all內容 = `<p>${內容.字}</p>`;
           }
+          /***************** 社交帳號 ******************/
           else if (sel === '社交帳號') {
             all內容 = 內容.html;
           }
@@ -372,159 +335,114 @@
           }
         }
       }
-
-      // 關走馬燈
+                // 關走馬燈
       function closeMarquee() {
         document.getElementById('marqueeContainer').style.display = 'none';
       }
 
       // 走馬燈功能
-function _走馬燈動() {
-  const $content = $('.marquee-content');
-  const $items = $('.marquee-item');
-  if (!$items.length) return;
+      function _走馬燈動() {
+        const $content = $('.marquee-content');
+        const $items = $('.marquee-item');
+        if (!$items.length) return;
 
-  const itemHeight = $items.outerHeight();
-  const itemCount = $items.length;
-  let currentIndex = 0;
-  let isVisible = true;
-  let intervalId = null;
+        const itemHeight = $items.outerHeight();
+        const itemCount = $items.length;
+        let currentIndex = 0;
+        let isVisible = true;
 
-  function scrollMarquee() {
-    if (!isVisible) return;
-    
-    currentIndex = (currentIndex + 1) % itemCount;
-    
-    $content.css({
-      'transition': 'transform 1.2s ease-in-out',
-      'transform': `translateY(-${itemHeight * currentIndex}px)`
-    });
-  }
-
-  // 重置到第一個項目
-  function resetMarquee() {
-    if (currentIndex === itemCount - 1) {
-      setTimeout(() => {
-        $content.css({
-          'transition': 'none',
-          'transform': 'translateY(0)'
+        const observer = new IntersectionObserver((entries) => {
+          isVisible = entries[0].isIntersecting;
         });
-        currentIndex = 0;
-      }, 1200);
-    }
-  }
-
-  // 設置新的計時器
-  intervalId = setInterval(() => {
-    scrollMarquee();
-    resetMarquee();
-  }, 1200);
-
-  // 滑鼠懸停時暫停
-  $content.hover(
-    () => {
-      if (intervalId) {
-        clearInterval(intervalId);
-        intervalId = null;
-      }
-    },
-    () => {
-      if (!intervalId) {
-        intervalId = setInterval(() => {
-          scrollMarquee();
-          resetMarquee();
-        }, 1200);
-      }
-    }
-  );
-}
-            // 輪播圖功能
-      function _輪播圖動() {
-        const $輪播圖 = $('.輪播圖');
         
-        $輪播圖.each(function() {
-          const $this = $(this);
-          const $images = $this.find('.輪播圖-images');
-          const $indicators = $this.find('.indicator');
-          const imageCount = $indicators.length;
-          let currentIndex = 0;
-          let autoPlayInterval;
-          let isTransitioning = false;
+        observer.observe($content[0]);
 
-          function updateCarousel() {
-            if (isTransitioning) return;
-            isTransitioning = true;
-            
-            const containerWidth = $this.width();
-            $images.css('transform', `translateX(-${currentIndex * containerWidth}px)`);
-            
-            // 更新指示器狀態
-            $indicators.removeClass('active')
-              .eq(currentIndex).addClass('active');
-            
-            setTimeout(() => {
-              isTransitioning = false;
-            }, 500);
-          }
+        function scrollMarquee() {
+          if (!isVisible) return;
+          currentIndex = (currentIndex + 1) % itemCount;
+          $content.css('transform', `translateY(-${itemHeight * currentIndex}px)`);
+        }
 
-          function nextSlide() {
-            currentIndex = (currentIndex + 1) % imageCount;
-            updateCarousel();
-          }
+        const intervalId = setInterval(scrollMarquee, 1500);
 
-          function prevSlide() {
-            currentIndex = (currentIndex - 1 + imageCount) % imageCount;
-            updateCarousel();
-          }
+        $content.hover(
+          () => clearInterval(intervalId),
+          () => setInterval(scrollMarquee, 1500)
+        );
+      }
 
-          // 點擊事件
-          $this.find('.prev').on('click', () => {
-            clearInterval(autoPlayInterval);
-            prevSlide();
-            autoPlayInterval = setInterval(nextSlide, 3000);
-          });
+      // 輪播圖功能
+      function _輪播圖動() {
+        const images = document.querySelector('.輪播圖-images');
+        if (!images) return;
 
-          $this.find('.next').on('click', () => {
-            clearInterval(autoPlayInterval);
-            nextSlide();
-            autoPlayInterval = setInterval(nextSlide, 3000);
-          });
+        const prevButton = document.querySelector('.prev');
+        const nextButton = document.querySelector('.next');
+        let currentIndex = 0;
+        const imageCount = images.children.length;
+        let autoPlayInterval;
+        let isTransitioning = false;
 
-          // 指示器點擊
-          $indicators.on('click', function() {
-            const index = $(this).index();
-            currentIndex = index;
-            updateCarousel();
-          });
-
-          // 觸控支援
-          let touchStartX = 0;
-          let touchEndX = 0;
-
-          $this.on('touchstart', e => {
-            touchStartX = e.touches[0].clientX;
-          });
-
-          $this.on('touchend', e => {
-            touchEndX = e.changedTouches[0].clientX;
-            const diff = touchStartX - touchEndX;
-
-            if (Math.abs(diff) > 50) {
-              if (diff > 0) {
-                nextSlide();
-              } else {
-                prevSlide();
-              }
-            }
-          });
-
-          // 自動播放
-          autoPlayInterval = setInterval(nextSlide, 3000);
+        function updateCarousel() {
+          if (isTransitioning) return;
+          isTransitioning = true;
           
-          // 視窗大小改變時更新
-          $(window).on('resize', updateCarousel);
+          const containerWidth = images.parentElement.clientWidth;
+          const offset = -currentIndex * containerWidth;
+          
+          images.style.transform = `translateX(${offset}px)`;
+          
+          setTimeout(() => {
+            isTransitioning = false;
+          }, 500);
+        }
+
+        function nextSlide() {
+          currentIndex = (currentIndex + 1) % imageCount;
           updateCarousel();
+        }
+
+        function prevSlide() {
+          currentIndex = (currentIndex - 1 + imageCount) % imageCount;
+          updateCarousel();
+        }
+
+        // 觸控支援
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        images.addEventListener('touchstart', e => {
+          touchStartX = e.touches[0].clientX;
         });
+
+        images.addEventListener('touchend', e => {
+          touchEndX = e.changedTouches[0].clientX;
+          const diff = touchStartX - touchEndX;
+
+          if (Math.abs(diff) > 50) {
+            if (diff > 0) {
+              nextSlide();
+            } else {
+              prevSlide();
+            }
+          }
+        });
+
+        prevButton?.addEventListener('click', () => {
+          clearInterval(autoPlayInterval);
+          prevSlide();
+          autoPlayInterval = setInterval(nextSlide, 3000);
+        });
+
+        nextButton?.addEventListener('click', () => {
+          clearInterval(autoPlayInterval);
+          nextSlide();
+          autoPlayInterval = setInterval(nextSlide, 3000);
+        });
+
+        autoPlayInterval = setInterval(nextSlide, 3000);
+        window.addEventListener('resize', updateCarousel);
+        updateCarousel();
       }
 
       function _顯示LogoIcon() {
@@ -571,8 +489,7 @@ function _走馬燈動() {
           btn.textContent = '+';
         }
       }
-
-      // 回頁頂
+                // 回頁頂
       function scrollToTop() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
@@ -608,12 +525,15 @@ function _走馬燈動() {
           $('.marquee-container').css('top', '50px');
         }
       }
-            const 產品展示內容 = [
+
+      const 產品展示內容 = [
         {'圖': '001.webp', 'url': ''},
         {'圖': '002.webp', 'url': ''},
         {'圖': '003.webp', 'url': ''},
         {'圖': '004.webp', 'url': ''},
-        {'產品展示圖': '001.webp,002.webp', '產品展示url': ','},
+
+                {'產品展示圖': '001.webp,002.webp', '產品展示url': ','},
+        
         {'圖': '005.webp', 'url': ''},
         {'圖': '006.webp', 'url': ''},
         {'圖': '007.webp', 'url': ''},
@@ -660,7 +580,7 @@ function _走馬燈動() {
         {'圖': '045.webp', 'url': 'https://lin.ee/xy1OdUd'},
         {'圖': '046.webp', 'url': ''},
         {'圖': '047.webp', 'url': 'https://lin.ee/xy1OdUd'},
-        {'圖': 'C-og-image.jpg', 'url': ''}
+        {'圖': 'C-og-image.jpg', 'url': ''},
       ];
 
       const 走馬燈內容 = [
@@ -669,32 +589,34 @@ function _走馬燈動() {
       ];
 
       const 關於我們 = [
-        {'字':`百萬級強榜王者名師
-台北縮毛矯正專家
-5星級超高接髮滿意度
-120%的耐心諮詢服務
-10多年專精接髮豐富經驗
-頭髮任何問題問韓哥就對了
-
-獨家接髮技術，專門為妳服務
-獨家髮束排列，不怕脫落
-接髮持久耐用
-
-給我2小時
-讓妳短髮瞬變長髮美女正妹
-變美真的很簡單
-
-客製化接髮｜縮毛矯正專家
-零感接髮｜質感染髮｜京喚羽護髮
-微分子接髮｜鉑金接髮｜天羽接髮
-處女髮｜金絲羽接髮｜仙女髮
-
-接到滿｜接到厚｜不限克數
-接到滿意
-
-接髮 + 染髮只要 $4999起
-安心接髮方案｜無卡12期
-每個月最低月付不到 500 !`}
+        {'字':`
+          百萬級強榜王者名師\n
+          台北縮毛矯正專家\n
+          5星級超高接髮滿意度\n
+          120%的耐心諮詢服務\n
+          10多年專精接髮豐富經驗\n
+          頭髮任何問題問韓哥就對了\n\n
+          
+          獨家接髮技術，專門為妳服務\n
+          獨家髮束排列，不怕脫落\n
+          接髮持久耐用\n\n
+          
+          給我2小時\n
+          讓妳短髮瞬變長髮美女正妹\n
+          變美真的很簡單\n\n
+          
+          客製化接髮｜縮毛矯正專家\n
+          零感接髮｜質感染髮｜京喚羽護髮\n
+          微分子接髮｜鉑金接髮｜天羽接髮\n
+          處女髮｜金絲羽接髮｜仙女髮\n\n
+          
+          接到滿｜接到厚｜不限克數\n
+          接到滿意\n\n
+          
+          接髮 + 染髮只要 $4999起\n
+          安心接髮方案｜無卡12期\n
+          每個月最低月付不到 500 !
+        `}
       ];
 
       const 聯絡資訊 = [
@@ -714,3 +636,93 @@ function _走馬燈動() {
       ];
     </script>
   </head>
+  
+  <body>
+    <!-- Logo區域 -->
+    <div class="logo-container">
+      <div class="logo">
+        <img id="logo" alt="韓哥Hange接髮">
+      </div>
+    </div>
+
+    <!-- 走馬燈 -->
+    <div id="marqueeContainer" class="marquee-container">
+      <div class="marquee-content" id="走馬燈">
+        <!-- 走馬燈內容會由 JavaScript 動態插入 -->
+      </div>
+      <div class="close-marquee" onclick="closeMarquee()">✕</div>
+    </div>
+
+    <!-- 主要內容區 -->
+    <main>
+      <!-- 產品展示區 -->
+      <div id="產品展示">
+        <!-- 產品展示內容會由 JavaScript 動態插入 -->
+      </div>
+
+      <!-- 關於我們 -->
+      <div class="company-intro" id="關於我們">
+        <!-- 關於我們內容會由 JavaScript 動態插入 -->
+      </div>
+
+      <!-- 聯絡資訊 -->
+      <div class="contact-section">
+        <div class="contact-title">
+          <span>聯絡資訊</span>
+          <span class="toggle-btn" onclick="toggleContact()">+</span>
+        </div>
+        <div class="contact-content" id="聯絡資訊">
+          <!-- 聯絡資訊內容會由 JavaScript 動態插入 -->
+        </div>
+      </div>
+
+      <!-- 社交連結 -->
+      <div class="social-links" id="社交帳號">
+        <!-- 社交帳號內容會由 JavaScript 動態插入 -->
+      </div>
+
+      <!-- 版權資訊 -->
+      <div class="copyright">
+        <p>© 2024 韓哥Hange接髮 版權所有</p>
+      </div>
+    </main>
+
+    <!-- 回到頂部按鈕 -->
+    <div id="scrollTop" class="scroll-top" onclick="scrollToTop()">↑</div>
+
+    <!-- 後台管理介面 -->
+    <nav>
+      <button class="btn" onclick="_導航換頁('走馬燈')">走馬燈</button>
+      <button class="btn" onclick="_導航換頁('產品展示')">產品展示</button>
+      <button class="btn" onclick="_導航換頁('關於我們')">關於我們</button>
+      <button class="btn" onclick="_導航換頁('聯絡資訊')">聯絡資訊</button>
+      <button class="btn" onclick="_導航換頁('社交帳號')">社交帳號</button>
+
+      <!-- 後台頁面 -->
+      <div id="走馬燈page" class="section">
+        <h2>走馬燈管理</h2>
+        <!-- 走馬燈管理內容 -->
+      </div>
+
+      <div id="產品展示page" class="section">
+        <h2>產品展示管理</h2>
+        <!-- 產品展示管理內容 -->
+      </div>
+
+      <div id="關於我們page" class="section">
+        <h2>關於我們管理</h2>
+        <!-- 關於我們管理內容 -->
+      </div>
+
+      <div id="聯絡資訊page" class="section">
+        <h2>聯絡資訊管理</h2>
+        <!-- 聯絡資訊管理內容 -->
+      </div>
+
+      <div id="社交帳號page" class="section">
+        <h2>社交帳號管理</h2>
+        <!-- 社交帳號管理內容 -->
+      </div>
+    </nav>
+  </body>
+</html>
