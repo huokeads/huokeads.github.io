@@ -2,7 +2,7 @@
 <html>
   <head>
     
-    <title>1演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
+    <title>2演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -347,24 +347,39 @@
         let currentIndex = 0;
         let isVisible = true;
 
+ let intervalId;
+
+  function scrollMarquee() {
+    if (!isVisible) return;
+    
+    $content.css('transition', 'transform 0.5s ease-in-out');
+    $content.css('transform', `translateY(-${itemHeight * currentIndex}px)`);
+    
+    currentIndex = (currentIndex + 1) % $items.length;
+  }
+
+  // 初始化定時器
+  intervalId = setInterval(scrollMarquee, 3000);
+
+  // 滑鼠懸停時暫停
+  $content.hover(
+    () => clearInterval(intervalId),
+    () => {
+      intervalId = setInterval(scrollMarquee, 3000);
+    }
+  );
+
+
+
+
+        
         const observer = new IntersectionObserver((entries) => {
           isVisible = entries[0].isIntersecting;
         });
         
         observer.observe($content[0]);
 
-        function scrollMarquee() {
-          if (!isVisible) return;
-          currentIndex = (currentIndex + 1) % itemCount;
-          $content.css('transform', `translateY(-${itemHeight * currentIndex}px)`);
-        }
-
-        const intervalId = setInterval(scrollMarquee, 1500);
-
-        $content.hover(
-          () => clearInterval(intervalId),
-          () => setInterval(scrollMarquee, 1500)
-        );
+       
       }
 
       // 輪播圖功能
