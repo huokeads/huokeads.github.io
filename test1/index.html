@@ -2,7 +2,7 @@
 <html>
   <head>
     
-    <title>3演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
+    <title>4演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -102,34 +102,43 @@
       }
 
       /* 產品展示 */
-      .image-container {
-        width: 100%;
-        text-align: center;
-        margin-bottom: 0;  /* 【新增】移除下方間隔 */
-      }
-      .responsive-image {
-        max-width: 100%;
-        height: auto;
-        display: block;
-        margin: 0 auto;
-      }
-      @media (min-width: 768px) {
-        .responsive-image,
-        .輪播圖,
-        .image-container iframe {
-          height: auto;
-          width: 50%;
-          max-width: 760px;
-        }
-      }
-/* 修改這段 - YouTube 影片容器 */
+      
+      /* 保留原本的圖片設定 */
+.responsive-image {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+/* 修改影片容器設定 */
+.image-container {
+  width: 100%;
+  text-align: center;
+  margin: 0 auto; /* 修改：移除上下間距 */
+  line-height: 0; /* 新增：移除底部間隙 */
+}
+
 .image-container iframe {
-  width: 100%;        /* 【修改】從 height: auto 改為 width: 100% */
-  max-width: 100%;    /* 【新增】確保不超出螢幕寬度 */
+  width: 100%;
   height: auto;
   min-height: 300px;
   aspect-ratio: 16/9;
-      }
+  margin: 0 auto; /* 新增：置中對齊 */
+  display: block; /* 新增：移除底部間隙 */
+}
+
+@media (min-width: 768px) {
+  .responsive-image,
+  .輪播圖,
+  .image-container iframe {
+    width: 50%;
+    max-width: 760px;
+    height: auto;
+    margin: 0 auto; /* 新增：確保電腦版置中 */
+  }
+}
+
             .company-intro {
         width: 90%;
         max-width: 760px;
