@@ -2,7 +2,7 @@
 <html>
   <head>
     
-    <title>4演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
+    <title>5演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -275,33 +275,49 @@
           if (sel === '走馬燈') {
             all內容 = `<div class="marquee-item"><a href="${內容.url}" target="_blank" rel="noopener noreferrer">${內容.字}</a></div>`;
           }
-          /***************** 產品展示 ******************/
-          else if (sel === '產品展示') {
-            // YouTube 影片處理
-            if (內容.產品展示圖 && 內容.產品展示圖.includes('youtube.com')) {
-              all內容 = $(`<div class="image-container">
-                <iframe 
-                  src="${內容.產品展示圖}?enablejsapi=1&autoplay=0"
-                  frameborder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen>
-                </iframe>
-              </div>`);
-              
-              // 添加 Intersection Observer 來控制視頻播放
-              const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                  const iframe = entry.target.querySelector('iframe');
-                  if (entry.isIntersecting) {
-                    iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
-                  } else {
-                    iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
-                  }
-                });
-              }, { threshold: 0.5 });
-              
-              observer.observe(all內容[0]);
-            }
+/***************** 產品展示 ******************/
+else if (sel === '產品展示') {
+  // YouTube 影片處理
+  if (內容.產品展示圖 && 內容.產品展示圖.includes('youtube.com')) {
+    all內容 = $(`<div class="image-container">
+      <iframe 
+        src="${內容.產品展示圖}?enablejsapi=1&autoplay=0&playsinline=1"  // 【修改】添加 playsinline=1
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"  // 【修改】添加 web-share
+        allowfullscreen>
+      </iframe>
+    </div>`);
+    
+    // 添加 Intersection Observer 來控制視頻播放
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const iframe = entry.target.querySelector('iframe');
+        if (entry.isIntersecting) {
+          // 【修改】確保正確發送播放命令
+          iframe.contentWindow.postMessage(JSON.stringify({
+            event: 'command',
+            func: 'playVideo',
+            args: ''
+          }), '*');
+        } else {
+          // 【修改】確保正確發送暫停命令
+          iframe.contentWindow.postMessage(JSON.stringify({
+            event: 'command',
+            func: 'pauseVideo',
+            args: ''
+          }), '*');
+        }
+      });
+    }, { 
+      threshold: 0.5,
+      rootMargin: '0px'  // 【新增】確保更精確的觀察
+    });
+    
+    // 【新增】確保 iframe 載入完成後再添加觀察者
+    setTimeout(() => {
+      observer.observe(all內容[0]);
+    }, 1000);
+  }
             // 輪播圖處理
             else if (內容.產品展示圖 && 內容.產品展示圖.includes(',')) {
               let 整組輪播圖 = 內容.產品展示圖.split(',');
