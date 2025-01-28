@@ -2,7 +2,7 @@
 <html>
   <head>
     
-    <title>3演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
+    <title>4演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -181,12 +181,12 @@
 
       /* 輪播圖 */
 /* 輪播圖相關樣式更新 */
-      /* 輪播圖 */
-/* 輪播圖相關樣式更新 */
 .輪播圖 {
   position: relative;
   overflow: hidden;
   margin: auto;
+  max-width: 100%;
+  width: 100%;
 }
 
 .輪播圖-images {
@@ -196,42 +196,34 @@
 }
 
 .輪播圖-images img {
-  object-fit: cover;
   width: 100%;
   height: auto;
+  object-fit: contain; /* 改為 contain */
+  max-height: 90vh;
   -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
 
-/* 移除按鈕的預設樣式和反饋效果 */
-.輪播圖 button {
+/* 左右點擊區域 */
+.輪播圖-click-area {
   position: absolute;
   top: 0;
   height: 100%;
   width: 50%;
-  background: transparent;
-  border: none;
   cursor: pointer;
-  outline: none;
   -webkit-tap-highlight-color: transparent;
 }
 
-.輪播圖 button:focus {
-  outline: none;
-}
-
-.輪播圖 button.prev {
+.輪播圖-click-area.prev {
   left: 0;
 }
 
-.輪播圖 button.next {
+.輪播圖-click-area.next {
   right: 0;
 }
 
-/* 輪播圖指示器樣式 */
-.carousel-indicators {
+/* 指示器樣式 */
+.輪播圖-indicators {
   position: absolute;
   bottom: 20px;
   left: 50%;
@@ -241,16 +233,23 @@
   z-index: 2;
 }
 
-.indicator {
-  width: 20px;
-  height: 3px;
+.輪播圖-indicator {
+  width: 30px;
+  height: 4px;
   background: rgba(255, 255, 255, 0.5);
   transition: all 0.3s ease;
+  cursor: pointer;
 }
 
-.indicator.active {
+.輪播圖-indicator.active {
   background: #fff;
-  width: 30px;
+  width: 45px;
+}
+
+@media (min-width: 768px) {
+  .輪播圖 {
+    max-width: 760px;
+  }
 }
 
 
@@ -486,94 +485,110 @@ else if (內容.產品展示圖 && 內容.產品展示圖.includes(',')) {
 
       // 輪播圖功能
 function _輪播圖動() {
-  const images = document.querySelector('.輪播圖-images');
-  if (!images) return;
+  const 輪播圖們 = document.querySelectorAll('.輪播圖');
+  
+  輪播圖們.forEach(輪播圖 => {
+    const images = 輪播圖.querySelector('.輪播圖-images');
+    if (!images) return;
 
-  const prevButton = document.querySelector('.prev');
-  const nextButton = document.querySelector('.next');
-  let currentIndex = 0;
-  const imageCount = images.children.length;
-  let autoPlayInterval;
-  let isTransitioning = false;
+    const imageCount = images.children.length;
+    let currentIndex = 0;
+    let autoPlayInterval;
+    let isTransitioning = false;
 
-  // 創建指示器
-  const indicators = document.createElement('div');
-  indicators.className = 'carousel-indicators';
-  for (let i = 0; i < imageCount; i++) {
-    const indicator = document.createElement('div');
-    indicator.className = `indicator ${i === 0 ? 'active' : ''}`;
-    indicators.appendChild(indicator);
-  }
-  images.parentElement.appendChild(indicators);
+    // 創建左右點擊區域
+    const prevArea = document.createElement('div');
+    const nextArea = document.createElement('div');
+    prevArea.className = '輪播圖-click-area prev';
+    nextArea.className = '輪播圖-click-area next';
+    輪播圖.appendChild(prevArea);
+    輪播圖.appendChild(nextArea);
 
-  function updateCarousel() {
-    if (isTransitioning) return;
-    isTransitioning = true;
-    
-    const containerWidth = images.parentElement.clientWidth;
-    const offset = -currentIndex * containerWidth;
-    
-    images.style.transform = `translateX(${offset}px)`;
-    
-    // 更新指示器狀態
-    const allIndicators = indicators.children;
-    for (let i = 0; i < allIndicators.length; i++) {
-      allIndicators[i].className = `indicator ${i === currentIndex ? 'active' : ''}`;
+    // 創建指示器
+    const indicators = document.createElement('div');
+    indicators.className = '輪播圖-indicators';
+    for (let i = 0; i < imageCount; i++) {
+      const indicator = document.createElement('div');
+      indicator.className = `輪播圖-indicator ${i === 0 ? 'active' : ''}`;
+      indicator.addEventListener('click', () => {
+        if (isTransitioning) return;
+        currentIndex = i;
+        updateCarousel();
+      });
+      indicators.appendChild(indicator);
     }
-    
-    setTimeout(() => {
-      isTransitioning = false;
-    }, 500);
-  }
+    輪播圖.appendChild(indicators);
 
-  function nextSlide() {
-    currentIndex = (currentIndex + 1) % imageCount;
-    updateCarousel();
-  }
-
-  function prevSlide() {
-    currentIndex = (currentIndex - 1 + imageCount) % imageCount;
-    updateCarousel();
-  }
-
-  // 觸控支援
-  let touchStartX = 0;
-  let touchEndX = 0;
-
-  images.addEventListener('touchstart', e => {
-    touchStartX = e.touches[0].clientX;
-  });
-
-  images.addEventListener('touchend', e => {
-    touchEndX = e.changedTouches[0].clientX;
-    const diff = touchStartX - touchEndX;
-
-    if (Math.abs(diff) > 50) {
-      if (diff > 0) {
-        nextSlide();
-      } else {
-        prevSlide();
+    function updateCarousel() {
+      if (isTransitioning) return;
+      isTransitioning = true;
+      
+      const containerWidth = 輪播圖.clientWidth;
+      images.style.transform = `translateX(${-currentIndex * containerWidth}px)`;
+      
+      // 更新指示器
+      const allIndicators = indicators.children;
+      for (let i = 0; i < allIndicators.length; i++) {
+        allIndicators[i].className = `輪播圖-indicator ${i === currentIndex ? 'active' : ''}`;
       }
+      
+      setTimeout(() => {
+        isTransitioning = false;
+      }, 500);
     }
-  });
 
-  prevButton?.addEventListener('click', () => {
-    clearInterval(autoPlayInterval);
-    prevSlide();
+    function nextSlide() {
+      currentIndex = (currentIndex + 1) % imageCount;
+      updateCarousel();
+    }
+
+    function prevSlide() {
+      currentIndex = (currentIndex - 1 + imageCount) % imageCount;
+      updateCarousel();
+    }
+
+    // 觸控支援
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    輪播圖.addEventListener('touchstart', e => {
+      touchStartX = e.touches[0].clientX;
+    });
+
+    輪播圖.addEventListener('touchend', e => {
+      touchEndX = e.changedTouches[0].clientX;
+      const diff = touchStartX - touchEndX;
+
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) {
+          nextSlide();
+        } else {
+          prevSlide();
+        }
+      }
+    });
+
+    // 點擊事件
+    prevArea.addEventListener('click', () => {
+      clearInterval(autoPlayInterval);
+      prevSlide();
+      autoPlayInterval = setInterval(nextSlide, 3000);
+    });
+
+    nextArea.addEventListener('click', () => {
+      clearInterval(autoPlayInterval);
+      nextSlide();
+      autoPlayInterval = setInterval(nextSlide, 3000);
+    });
+
+    // 自動播放
     autoPlayInterval = setInterval(nextSlide, 3000);
+    
+    // 視窗大小改變時更新
+    window.addEventListener('resize', updateCarousel);
+    updateCarousel();
   });
-
-  nextButton?.addEventListener('click', () => {
-    clearInterval(autoPlayInterval);
-    nextSlide();
-    autoPlayInterval = setInterval(nextSlide, 3000);
-  });
-
-  autoPlayInterval = setInterval(nextSlide, 3000);
-  window.addEventListener('resize', updateCarousel);
-  updateCarousel();
 }
-
 
           
 
