@@ -2,7 +2,7 @@
 <html>
   <head>
     
-    <title>1演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
+    <title>2演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -38,15 +38,22 @@
   top: 0;
   z-index: 11;
   transition: .5s;
-  overflow: hidden;
+  overflow: hidden;  /* 確保內容不會超出容器 */
+}
+
+.logo {
+  height: 50px;  /* 限制 .logo 容器的高度 */
+  display: flex;
+  align-items: center;  /* 垂直居中 */
+  justify-content: center;  /* 水平居中 */
+  overflow: hidden;  /* 確保圖片不會超出容器 */
 }
 
 .logo img {
-  height: 50px;  /* 強制圖片高度為50px */
+  height: 100%;  /* 圖片高度與容器一致 */
   width: auto;   /* 寬度自動調整，保持比例 */
   object-fit: cover;  /* 確保圖片覆蓋整個容器 */
   object-position: center center;  /* 將圖片的中心對齊容器的中心 */
-  transform: translateY(1px);  /* 微調圖片位置，根據需要調整數值 */
 }
 
       /* 回頂鍵 */
