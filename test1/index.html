@@ -2,7 +2,7 @@
 <html>
   <head>
     
-    <title>1演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
+    <title>2演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -264,6 +264,14 @@
         _輪播圖動();
         _走馬燈動();
         _去後台();
+        
+  // 恢復影片的播放狀態
+  const videoElements = document.querySelectorAll('iframe');
+  videoElements.forEach(iframe => {
+    const videoId = iframe.id.split('_')[1];
+    const savedTime = localStorage.getItem(`videoTime_${videoId}`) || 0;
+    iframe.src += `&start=${savedTime}`;
+  });
       });
 
       function _顯示內容(data, sel) {
@@ -276,32 +284,62 @@
             all內容 = `<div class="marquee-item"><a href="${內容.url}" target="_blank" rel="noopener noreferrer">${內容.字}</a></div>`;
           }
           /***************** 產品展示 ******************/
-          else if (sel === '產品展示') {
-            // YouTube 影片處理
-            if (內容.產品展示圖 && 內容.產品展示圖.includes('youtube.com')) {
-              all內容 = $(`<div class="image-container">
-                <iframe 
-                  src="${內容.產品展示圖}?enablejsapi=1&autoplay=0"
-                  frameborder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen>
-                </iframe>
-              </div>`);
-              
-              // 添加 Intersection Observer 來控制視頻播放
-              const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                  const iframe = entry.target.querySelector('iframe');
-                  if (entry.isIntersecting) {
-                    iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
-                  } else {
-                    iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
-                  }
-                });
-              }, { threshold: 0.5 });
-              
-              observer.observe(all內容[0]);
-            }
+// 在 _顯示內容 函數中找到 YouTube 影片處理的部分，並進行如下修改：
+else if (sel === '產品展示') {
+  // YouTube 影片處理
+  if (內容.產品展示圖 && 內容.產品展示圖.includes('youtube.com')) {
+    const videoId = 內容.產品展示圖.split('/').pop(); // 獲取影片 ID
+    const savedTime = localStorage.getItem(`videoTime_${videoId}`) || 0; // 從 localStorage 中獲取保存的播放時間
+
+    all內容 = $(`<div class="image-container">
+      <iframe 
+        id="ytplayer_${videoId}"
+        src="${內容.產品展示圖}?enablejsapi=1&autoplay=0&start=${savedTime}"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>`);
+
+    // 添加 Intersection Observer 來控制視頻播放
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const iframe = entry.target.querySelector('iframe');
+        if (entry.isIntersecting) {
+          iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+        } else {
+          iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+        }
+      });
+    }, { threshold: 0.5 });
+
+    observer.observe(all內容[0]);
+
+    // 監聽影片播放時間並保存到 localStorage
+    const iframe = all內容.find('iframe')[0];
+    iframe.onload = () => {
+      const player = iframe.contentWindow;
+      setInterval(() => {
+        player.postMessage('{"event":"listening","id":"ytplayer"}', '*');
+      }, 1000);
+
+      window.addEventListener('message', (event) => {
+        if (event.origin !== 'https://www.youtube.com') return;
+        if (event.data.info && event.data.info.currentTime) {
+          localStorage.setItem(`videoTime_${videoId}`, event.data.info.currentTime);
+        }
+      });
+    };
+  }
+  // 其他處理邏輯保持不變
+}
+            
+
+
+
+
+
+            
             // 輪播圖處理
             else if (內容.產品展示圖 && 內容.產品展示圖.includes(',')) {
               let 整組輪播圖 = 內容.產品展示圖.split(',');
