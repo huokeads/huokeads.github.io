@@ -2,7 +2,7 @@
 <html>
   <head>
     
-    <title>7演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
+    <title>8演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -185,8 +185,6 @@
   position: relative;
   overflow: hidden;
   margin: auto;
-    max-width: 100%; /* 新增：限制最大寬度 */
-  width: 100%;     /* 新增：確保響應式 */
 }
 
 .輪播圖-images {
@@ -196,21 +194,13 @@
 }
 
 .輪播圖-images img {
+  object-fit: cover;
   width: 100%;
   height: auto;
-  object-fit: contain; /* 修改：從 cover 改為 contain */
-  max-height: 90vh;    /* 新增：限制最大高度 */
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-}
-
-      /* 在大螢幕上限制最大寬度 */
-@media (min-width: 768px) {
-  .輪播圖 {
-    max-width: 760px; /* 或其他你想要的最大寬度 */
-  }
 }
 
 /* 移除按鈕的預設樣式和反饋效果 */
@@ -393,7 +383,7 @@ function _顯示內容(data, sel) {
   }
 
       // 輪播圖處理
- else if (內容.產品展示圖 && 內容.產品展示圖.includes(',')) {
+else if (內容.產品展示圖 && 內容.產品展示圖.includes(',')) {
   let 整組輪播圖 = 內容.產品展示圖.split(',');
   let $輪播圖容器 = $('<div class="輪播圖-images"></div>');
 
@@ -420,7 +410,7 @@ else if (內容.圖) {
   $內容圖.on("error", function () {
     all內容.remove();
   });
-
+}
     /***************** 關於我們 ******************/
     else if (sel === '關於我們') {
       all內容 = `<p>${內容.字}</p>`;
@@ -864,4 +854,5 @@ function _輪播圖動() {
     </nav>
   </body>
 </html>
+
 
