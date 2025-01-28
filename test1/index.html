@@ -2,7 +2,7 @@
 <html>
   <head>
     
-    <title>3演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
+    <title>4演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -265,14 +265,16 @@
         _走馬燈動();
         _去後台();
         
-  // 恢復影片的播放狀態
+         // 恢復影片的播放狀態
   const videoElements = document.querySelectorAll('iframe');
   videoElements.forEach(iframe => {
     const videoId = iframe.id.split('_')[1];
     const savedTime = localStorage.getItem(`videoTime_${videoId}`) || 0;
     iframe.src += `&start=${savedTime}`;
   });
-      });
+});
+
+
 
       function _顯示內容(data, sel) {
         let cont = 0;
@@ -284,7 +286,6 @@
             all內容 = `<div class="marquee-item"><a href="${內容.url}" target="_blank" rel="noopener noreferrer">${內容.字}</a></div>`;
           }
           /***************** 產品展示 ******************/
-// 在 _顯示內容 函數中找到 YouTube 影片處理的部分，並進行如下修改：
 else if (sel === '產品展示') {
   // YouTube 影片處理
   if (內容.產品展示圖 && 內容.產品展示圖.includes('youtube.com')) {
@@ -331,6 +332,7 @@ else if (sel === '產品展示') {
       });
     };
   }
+}
 
             
 
