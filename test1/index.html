@@ -2,7 +2,7 @@
 <html>
   <head>
     
-    <title>4演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
+    <title>5演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -180,34 +180,76 @@
       }
 
       /* 輪播圖 */
-      .輪播圖 {
-        position: relative;
-        overflow: hidden;
-        margin: auto;
-      }
-      .輪播圖-images {
-        display: flex;
-        transition: transform 0.5s ease-in-out;
-        width: 100%;
-      }
-      .輪播圖-images img {
-        object-fit: cover;
-        width: 100%;
-        height: auto;
-      }
-      .輪播圖 button {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        background-color: rgba(0, 0, 0, 0);
-        border: none;
-        cursor: pointer;
-        z-index: 10;
-        width: 40%;
-        height: 80%;
-      }
-      .輪播圖 button.prev {left: 0px;}
-      .輪播圖 button.next {right: 0px;}
+/* 輪播圖相關樣式更新 */
+.輪播圖 {
+  position: relative;
+  overflow: hidden;
+  margin: auto;
+}
+
+.輪播圖-images {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  width: 100%;
+}
+
+.輪播圖-images img {
+  object-fit: cover;
+  width: 100%;
+  height: auto;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* 移除按鈕的預設樣式和反饋效果 */
+.輪播圖 button {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 50%;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.輪播圖 button:focus {
+  outline: none;
+}
+
+.輪播圖 button.prev {
+  left: 0;
+}
+
+.輪播圖 button.next {
+  right: 0;
+}
+
+/* 輪播圖指示器樣式 */
+.carousel-indicators {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 2;
+}
+
+.indicator {
+  width: 20px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.5);
+  transition: all 0.3s ease;
+}
+
+.indicator.active {
+  background: #fff;
+  width: 30px;
+}
 
       /* line圖示 */
       .social-links {margin: 20px;}
@@ -434,78 +476,97 @@ function _顯示內容(data, sel) {
       }
 
       // 輪播圖功能
-      function _輪播圖動() {
-        const images = document.querySelector('.輪播圖-images');
-        if (!images) return;
+function _輪播圖動() {
+  const images = document.querySelector('.輪播圖-images');
+  if (!images) return;
 
-        const prevButton = document.querySelector('.prev');
-        const nextButton = document.querySelector('.next');
-        let currentIndex = 0;
-        const imageCount = images.children.length;
-        let autoPlayInterval;
-        let isTransitioning = false;
+  const prevButton = document.querySelector('.prev');
+  const nextButton = document.querySelector('.next');
+  let currentIndex = 0;
+  const imageCount = images.children.length;
+  let autoPlayInterval;
+  let isTransitioning = false;
 
-        function updateCarousel() {
-          if (isTransitioning) return;
-          isTransitioning = true;
-          
-          const containerWidth = images.parentElement.clientWidth;
-          const offset = -currentIndex * containerWidth;
-          
-          images.style.transform = `translateX(${offset}px)`;
-          
-          setTimeout(() => {
-            isTransitioning = false;
-          }, 500);
-        }
+  // 創建指示器
+  const indicators = document.createElement('div');
+  indicators.className = 'carousel-indicators';
+  for (let i = 0; i < imageCount; i++) {
+    const indicator = document.createElement('div');
+    indicator.className = `indicator ${i === 0 ? 'active' : ''}`;
+    indicators.appendChild(indicator);
+  }
+  images.parentElement.appendChild(indicators);
 
-        function nextSlide() {
-          currentIndex = (currentIndex + 1) % imageCount;
-          updateCarousel();
-        }
+  function updateCarousel() {
+    if (isTransitioning) return;
+    isTransitioning = true;
+    
+    const containerWidth = images.parentElement.clientWidth;
+    const offset = -currentIndex * containerWidth;
+    
+    images.style.transform = `translateX(${offset}px)`;
+    
+    // 更新指示器狀態
+    const allIndicators = indicators.children;
+    for (let i = 0; i < allIndicators.length; i++) {
+      allIndicators[i].className = `indicator ${i === currentIndex ? 'active' : ''}`;
+    }
+    
+    setTimeout(() => {
+      isTransitioning = false;
+    }, 500);
+  }
 
-        function prevSlide() {
-          currentIndex = (currentIndex - 1 + imageCount) % imageCount;
-          updateCarousel();
-        }
+  function nextSlide() {
+    currentIndex = (currentIndex + 1) % imageCount;
+    updateCarousel();
+  }
 
-        // 觸控支援
-        let touchStartX = 0;
-        let touchEndX = 0;
+  function prevSlide() {
+    currentIndex = (currentIndex - 1 + imageCount) % imageCount;
+    updateCarousel();
+  }
 
-        images.addEventListener('touchstart', e => {
-          touchStartX = e.touches[0].clientX;
-        });
+  // 觸控支援
+  let touchStartX = 0;
+  let touchEndX = 0;
 
-        images.addEventListener('touchend', e => {
-          touchEndX = e.changedTouches[0].clientX;
-          const diff = touchStartX - touchEndX;
+  images.addEventListener('touchstart', e => {
+    touchStartX = e.touches[0].clientX;
+  });
 
-          if (Math.abs(diff) > 50) {
-            if (diff > 0) {
-              nextSlide();
-            } else {
-              prevSlide();
-            }
-          }
-        });
+  images.addEventListener('touchend', e => {
+    touchEndX = e.changedTouches[0].clientX;
+    const diff = touchStartX - touchEndX;
 
-        prevButton?.addEventListener('click', () => {
-          clearInterval(autoPlayInterval);
-          prevSlide();
-          autoPlayInterval = setInterval(nextSlide, 3000);
-        });
-
-        nextButton?.addEventListener('click', () => {
-          clearInterval(autoPlayInterval);
-          nextSlide();
-          autoPlayInterval = setInterval(nextSlide, 3000);
-        });
-
-        autoPlayInterval = setInterval(nextSlide, 3000);
-        window.addEventListener('resize', updateCarousel);
-        updateCarousel();
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) {
+        nextSlide();
+      } else {
+        prevSlide();
       }
+    }
+  });
+
+  prevButton?.addEventListener('click', () => {
+    clearInterval(autoPlayInterval);
+    prevSlide();
+    autoPlayInterval = setInterval(nextSlide, 3000);
+  });
+
+  nextButton?.addEventListener('click', () => {
+    clearInterval(autoPlayInterval);
+    nextSlide();
+    autoPlayInterval = setInterval(nextSlide, 3000);
+  });
+
+  autoPlayInterval = setInterval(nextSlide, 3000);
+  window.addEventListener('resize', updateCarousel);
+  updateCarousel();
+}
+
+
+          
 
       function _顯示LogoIcon() {
         const logoImage = "A-頁首LOGO.png";
