@@ -2,7 +2,7 @@
 <html>
   <head>
     
-    <title>6演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
+    <title>7演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -414,9 +414,9 @@ else if (內容.產品展示圖 && 內容.產品展示圖.includes(',')) {
       }
     }
     /***************** 關於我們 ******************/
-    else if (sel === '關於我們') {
-      all內容 = `<p>${內容.字}</p>`;
-    }
+else if (sel === '關於我們') {
+  $(`#${sel}`).html(`<p>${內容.字}</p>`);  // 使用 html() 替代 append()
+}
     /***************** 聯絡資訊 ******************/
     else if (sel === '聯絡資訊') {
       all內容 = `<p>${內容.字}</p>`;
