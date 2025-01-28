@@ -2,7 +2,7 @@
 <html>
   <head>
     
-    <title>8演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
+    <title>9演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -384,33 +384,34 @@ function _顯示內容(data, sel) {
 
       // 輪播圖處理
 else if (內容.產品展示圖 && 內容.產品展示圖.includes(',')) {
-  let 整組輪播圖 = 內容.產品展示圖.split(',');
-  let $輪播圖容器 = $('<div class="輪播圖-images"></div>');
+        let 整組輪播圖 = 內容.產品展示圖.split(',');
+        let $輪播圖容器 = $('<div class="輪播圖-images"></div>');
 
-  for (let i = 0; i < 整組輪播圖.length; i++) {
-    let $輪圖 = $(`<img class="responsive-image" src="${整組輪播圖[i]}" loading="lazy">`);
-    $輪播圖容器.append($輪圖);
-  }
-  
-  let $輪播圖區塊 = $('<div class="輪播圖"></div>');
-  $輪播圖區塊.append('<button class="prev"></button>');
-  $輪播圖區塊.append('<button class="next"></button>');
-  $輪播圖區塊.append($輪播圖容器);
-  
-  all內容 = $輪播圖區塊;
-}
-// 一般圖片處理
-else if (內容.圖) {
-  let $內容圖 = $(`<img class="responsive-image" src="${內容.圖}" loading="lazy">`);
-  let 單個內容 = $內容圖;
-  if (內容.url) {
-    單個內容 = $(`<a href="${內容.url}" target="_blank" rel="noopener noreferrer"></a>`).append($內容圖);
-  }
-  all內容 = $(`<div class="image-container"></div>`).append(單個內容);
-  $內容圖.on("error", function () {
-    all內容.remove();
-  });
-}
+        for (let i = 0; i < 整組輪播圖.length; i++) {
+          let $輪圖 = $(`<img class="responsive-image" src="${整組輪播圖[i]}" loading="lazy">`);
+          $輪播圖容器.append($輪圖);
+        }
+        
+        let $輪播圖區塊 = $('<div class="輪播圖"></div>');
+        $輪播圖區塊.append('<button class="prev"></button>');
+        $輪播圖區塊.append('<button class="next"></button>');
+        $輪播圖區塊.append($輪播圖容器);
+        
+        all內容 = $輪播圖區塊;
+      }
+      // 一般圖片處理
+      else if (內容.圖) {
+        let $內容圖 = $(`<img class="responsive-image" src="${內容.圖}" loading="lazy">`);
+        let 單個內容 = $內容圖;
+        if (內容.url) {
+          單個內容 = $(`<a href="${內容.url}" target="_blank" rel="noopener noreferrer"></a>`).append($內容圖);
+        }
+        all內容 = $(`<div class="image-container"></div>`).append(單個內容);
+        $內容圖.on("error", function () {
+          all內容.remove();
+        });
+      }
+    }
     /***************** 關於我們 ******************/
     else if (sel === '關於我們') {
       all內容 = `<p>${內容.字}</p>`;
