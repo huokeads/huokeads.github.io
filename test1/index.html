@@ -2,7 +2,7 @@
 <html>
   <head>
     
-    <title>9演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
+    <title>1演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,27 +26,28 @@
 
       /* 上拉顯示logo位 下拉隱藏 */
       body{margin-top: 80px;}
-      .logo-container {
-        height: 50px;
-        width: 100%;
-        background-color: var(--主題色);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: fixed;
-        top: 0;
-        z-index: 11;
-        transition: .5s;
-        overflow: hidden;
-      }
+.logo-container {
+  height: 50px;  /* 容器高度 */
+  line-height: 50px;  /* 確保垂直居中 */
+  width: 100%;
+  background-color: var(--主題色);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  z-index: 11;
+  transition: .5s;
+  overflow: hidden;
+}
 
-      .logo {color: white;font-size: 24px;font-weight: bold;}
-      .logo img {
-        height: 50px;
-        width: auto;
-          object-fit: cover;  /* 確保圖片覆蓋整個容器 */
+.logo img {
+  height: 50px;  /* 強制圖片高度為50px */
+  width: auto;   /* 寬度自動調整，保持比例 */
+  object-fit: cover;  /* 確保圖片覆蓋整個容器 */
   object-position: center center;  /* 將圖片的中心對齊容器的中心 */
-      }
+  transform: translateY(1px);  /* 微調圖片位置，根據需要調整數值 */
+}
 
       /* 回頂鍵 */
       .scroll-top {
