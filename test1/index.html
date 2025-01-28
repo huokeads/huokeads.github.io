@@ -2,7 +2,7 @@
 <html>
   <head>
     
-    <title>1演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
+    <title>2演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -112,42 +112,6 @@
 
       /* 產品展示 */
       
-      /* 保留原本的圖片設定 */
-.responsive-image {
-  max-width: 100%;
-  height: auto;
-  display: block;
-  margin: 0 auto;
-}
-
-/* 修改影片容器設定 */
-.image-container {
-  width: 100%;
-  text-align: center;
-  margin: 0 auto; /* 修改：移除上下間距 */
-  line-height: 0; /* 新增：移除底部間隙 */
-}
-
-.image-container iframe {
-  width: 100%;
-  height: auto;
-  min-height: 300px;
-  aspect-ratio: 16/9;
-  margin: 0 auto; /* 新增：置中對齊 */
-  display: block; /* 新增：移除底部間隙 */
-}
-
-@media (min-width: 768px) {
-  .responsive-image,
-  .輪播圖,
-  .image-container iframe {
-    width: 50%;
-    max-width: 760px;
-    height: auto;
-    margin: 0 auto;
-  }
-}
-
             .company-intro {
         width: 90%;
         max-width: 760px;
@@ -179,14 +143,38 @@
         transition: height 0.3s ease-in-out;
       }
 
-      /* 輪播圖 */
-/* 輪播圖相關樣式更新 */
+/* 一般圖片設定 */
+.responsive-image {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+/* 基本容器設定 */
+.image-container {
+  width: 100%;
+  text-align: center;
+  margin: 0 auto;
+  line-height: 0;
+}
+
+/* 影片容器設定 */
+.image-container iframe {
+  width: 100%;
+  height: auto;
+  min-height: 300px;
+  aspect-ratio: 16/9;
+  margin: 0 auto;
+  display: block;
+}
+
+/* 輪播圖基本設定 */
 .輪播圖 {
   position: relative;
   overflow: hidden;
-  margin: auto;
-  max-width: 100%;
   width: 100%;
+  margin: 0 auto;
 }
 
 .輪播圖-images {
@@ -198,13 +186,23 @@
 .輪播圖-images img {
   width: 100%;
   height: auto;
-  object-fit: contain; /* 改為 contain */
+  object-fit: cover;
   object-position: top;
   max-height: 90vh;
   -webkit-user-select: none;
   user-select: none;
 }
 
+/* 電腦版統一寬度設定 */
+@media (min-width: 768px) {
+  .image-container {
+    width: 50%;
+    max-width: 760px;
+  }
+}
+
+
+/* 輪播圖 */
 /* 左右點擊區域 */
 .輪播圖-click-area {
   position: absolute;
