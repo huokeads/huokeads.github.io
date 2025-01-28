@@ -2,7 +2,7 @@
 <html>
   <head>
     
-    <title>8演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
+    <title>9演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -138,10 +138,8 @@
 }
 
 @media (min-width: 768px) {
-  .image-container,
   .responsive-image,
   .輪播圖,
-  .輪播圖-images,  /* 新增這行 */
   .image-container iframe {
     width: 50%;
     max-width: 760px;
@@ -524,7 +522,7 @@ function _輪播圖動() {
       if (isTransitioning) return;
       isTransitioning = true;
       
-      const containerWidth = 輪播圖.clientWidth;
+      const containerWidth = images.offsetWidth;
       images.style.transform = `translateX(${-currentIndex * containerWidth}px)`;
       
       // 更新指示器
