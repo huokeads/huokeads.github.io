@@ -2,7 +2,7 @@
 <html>
   <head>
     
-    <title>5演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
+    <title>6演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -253,136 +253,125 @@
 
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
         <script>
-      $(document).ready(function () {
-        // 初始化所有功能
-        _顯示LogoIcon();
-        _顯示內容(產品展示內容, '產品展示');
-        _顯示內容(走馬燈內容, '走馬燈');
-        _顯示內容(關於我們, '關於我們');
-        _顯示內容(聯絡資訊, '聯絡資訊');
-        _顯示內容(社交帳號, '社交帳號');
-        _輪播圖動();
-        _走馬燈動();
-        _去後台();
-        
-         // 恢復影片的播放狀態
+   $(document).ready(function () {
+  // 初始化所有功能
+  _顯示LogoIcon();
+  _顯示內容(產品展示內容, '產品展示');
+  _顯示內容(走馬燈內容, '走馬燈');
+  _顯示內容(關於我們, '關於我們');
+  _顯示內容(聯絡資訊, '聯絡資訊');
+  _顯示內容(社交帳號, '社交帳號');
+  _輪播圖動();
+  _走馬燈動();
+  _去後台();
+
+  // 恢復影片的播放狀態
   const videoElements = document.querySelectorAll('iframe');
   videoElements.forEach(iframe => {
     const videoId = iframe.id.split('_')[1];
     const savedTime = localStorage.getItem(`videoTime_${videoId}`) || 0;
     iframe.src += `&start=${savedTime}`;
   });
+});
 
+function _顯示內容(data, sel) {
+  let cont = 0;
+  for (let 內容 of data) {
+    let all內容;
 
+    /***************** 走馬燈 ******************/
+    if (sel === '走馬燈') {
+      all內容 = `<div class="marquee-item"><a href="${內容.url}" target="_blank" rel="noopener noreferrer">${內容.字}</a></div>`;
+    }
+    /***************** 產品展示 ******************/
+    else if (sel === '產品展示') {
+      // YouTube 影片處理
+      if (內容.產品展示圖 && 內容.產品展示圖.includes('youtube.com')) {
+        const videoId = 內容.產品展示圖.split('/').pop(); // 獲取影片 ID
+        const savedTime = localStorage.getItem(`videoTime_${videoId}`) || 0; // 從 localStorage 中獲取保存的播放時間
 
+        all內容 = $(`<div class="image-container">
+          <iframe 
+            id="ytplayer_${videoId}"
+            src="${內容.產品展示圖}?enablejsapi=1&autoplay=0&start=${savedTime}"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+        </div>`);
 
-      function _顯示內容(data, sel) {
-        let cont = 0;
-        for (let 內容 of data) {
-          let all內容;
+        // 添加 Intersection Observer 來控制視頻播放
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            const iframe = entry.target.querySelector('iframe');
+            if (entry.isIntersecting) {
+              iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+            } else {
+              iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+            }
+          });
+        }, { threshold: 0.5 });
 
-          /***************** 走馬燈 ******************/
-          if (sel === '走馬燈') {
-            all內容 = `<div class="marquee-item"><a href="${內容.url}" target="_blank" rel="noopener noreferrer">${內容.字}</a></div>`;
-          }
-          /***************** 產品展示 ******************/
-else if (sel === '產品展示') {
-  // YouTube 影片處理
-  if (內容.產品展示圖 && 內容.產品展示圖.includes('youtube.com')) {
-    const videoId = 內容.產品展示圖.split('/').pop(); // 獲取影片 ID
-    const savedTime = localStorage.getItem(`videoTime_${videoId}`) || 0; // 從 localStorage 中獲取保存的播放時間
+        observer.observe(all內容[0]);
 
-    all內容 = $(`<div class="image-container">
-      <iframe 
-        id="ytplayer_${videoId}"
-        src="${內容.產品展示圖}?enablejsapi=1&autoplay=0&start=${savedTime}"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen>
-      </iframe>
-    </div>`);
+        // 監聽影片播放時間並保存到 localStorage
+        const iframe = all內容.find('iframe')[0];
+        iframe.onload = () => {
+          const player = iframe.contentWindow;
+          setInterval(() => {
+            player.postMessage('{"event":"listening","id":"ytplayer"}', '*');
+          }, 1000);
 
-    // 添加 Intersection Observer 來控制視頻播放
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        const iframe = entry.target.querySelector('iframe');
-        if (entry.isIntersecting) {
-          iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
-        } else {
-          iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+          window.addEventListener('message', (event) => {
+            if (event.origin !== 'https://www.youtube.com') return;
+            if (event.data.info && event.data.info.currentTime) {
+              localStorage.setItem(`videoTime_${videoId}`, event.data.info.currentTime);
+            }
+          });
+        };
+      }
+      // 輪播圖處理
+      else if (內容.產品展示圖 && 內容.產品展示圖.includes(',')) {
+        let 整組輪播圖 = 內容.產品展示圖.split(',');
+        let $輪播圖容器 = $('<div class="輪播圖-images"></div>');
+
+        for (let i = 0; i < 整組輪播圖.length; i++) {
+          let $輪圖 = $(`<img class="responsive-image" src="${整組輪播圖[i]}" loading="lazy">`);
+          $輪播圖容器.append($輪圖);
         }
-      });
-    }, { threshold: 0.5 });
-
-    observer.observe(all內容[0]);
-
-    // 監聽影片播放時間並保存到 localStorage
-    const iframe = all內容.find('iframe')[0];
-    iframe.onload = () => {
-      const player = iframe.contentWindow;
-      setInterval(() => {
-        player.postMessage('{"event":"listening","id":"ytplayer"}', '*');
-      }, 1000);
-
-      window.addEventListener('message', (event) => {
-        if (event.origin !== 'https://www.youtube.com') return;
-        if (event.data.info && event.data.info.currentTime) {
-          localStorage.setItem(`videoTime_${videoId}`, event.data.info.currentTime);
+        all內容 = $('<div class="輪播圖"><button class="prev"></button><button class="next"></button></div>').append($輪播圖容器);
+      }
+      // 一般圖片處理
+      else if (內容.圖) {
+        let $內容圖 = $(`<img class="responsive-image" src="${內容.圖}" loading="lazy">`);
+        let 單個內容 = $內容圖;
+        if (內容.url) {
+          單個內容 = $(`<a href="${內容.url}" target="_blank" rel="noopener noreferrer"></a>`).append($內容圖);
         }
-      });
-    };
+        all內容 = $(`<div class="image-container"></div>`).append(單個內容);
+        $內容圖.on("error", function () {
+          all內容.remove();
+        });
+      }
+    }
+    /***************** 關於我們 ******************/
+    else if (sel === '關於我們') {
+      all內容 = `<p>${內容.字}</p>`;
+    }
+    /***************** 聯絡資訊 ******************/
+    else if (sel === '聯絡資訊') {
+      all內容 = `<p>${內容.字}</p>`;
+    }
+    /***************** 社交帳號 ******************/
+    else if (sel === '社交帳號') {
+      all內容 = 內容.html;
+    }
+
+    if (all內容) {
+      $(`#${sel}`).append(all內容);
+    }
   }
 }
-
-            
-
-
-
-
-
-            
-            // 輪播圖處理
-            else if (內容.產品展示圖 && 內容.產品展示圖.includes(',')) {
-              let 整組輪播圖 = 內容.產品展示圖.split(',');
-              let $輪播圖容器 = $('<div class="輪播圖-images"></div>');
-
-              for (let i = 0; i < 整組輪播圖.length; i++) {
-                let $輪圖 = $(`<img class="responsive-image" src="${整組輪播圖[i]}" loading="lazy">`);
-                $輪播圖容器.append($輪圖);
-              }
-              all內容 = $('<div class="輪播圖"><button class="prev"></button><button class="next"></button></div>').append($輪播圖容器);
-            }
-            // 一般圖片處理
-            else if (內容.圖) {
-              let $內容圖 = $(`<img class="responsive-image" src="${內容.圖}" loading="lazy">`);
-              let 單個內容 = $內容圖;
-              if (內容.url) {
-                單個內容 = $(`<a href="${內容.url}" target="_blank" rel="noopener noreferrer"></a>`).append($內容圖);
-              }
-              all內容 = $(`<div class="image-container"></div>`).append(單個內容);
-              $內容圖.on("error", function () {
-                all內容.remove();
-              });
-            }
-          }
-          /***************** 關於我們 ******************/
-          else if (sel === '關於我們') {
-            all內容 = `<p>${內容.字}</p>`;
-          }
-          /***************** 聯絡資訊 ******************/
-          else if (sel === '聯絡資訊') {
-            all內容 = `<p>${內容.字}</p>`;
-          }
-          /***************** 社交帳號 ******************/
-          else if (sel === '社交帳號') {
-            all內容 = 內容.html;
-          }
-
-          if (all內容) {
-            $(`#${sel}`).append(all內容);
-          }
-        }
-      }
                 // 關走馬燈
       function closeMarquee() {
         document.getElementById('marqueeContainer').style.display = 'none';
