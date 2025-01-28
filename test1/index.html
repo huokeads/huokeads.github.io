@@ -2,7 +2,7 @@
 <html>
   <head>
     
-    <title>9演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
+    <title>1演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -247,11 +247,7 @@
   width: 45px;
 }
 
-@media (min-width: 768px) {
-  .輪播圖 {
-    max-width: 760px;
-  }
-}
+
 
 
       /* line圖示 */
@@ -391,15 +387,18 @@ else if (內容.產品展示圖 && 內容.產品展示圖.includes(',')) {
   let $輪播圖容器 = $('<div class="輪播圖-images"></div>');
 
   for (let i = 0; i < 整組輪播圖.length; i++) {
-    let $輪圖 = $(`<img class="responsive-image" src="${整組輪播圖[i]}" loading="lazy">`);
+    let $輪圖 = $(`<img src="${整組輪播圖[i]}" loading="lazy">`);  // 移除 responsive-image class
     $輪播圖容器.append($輪圖);
   }
   
   let $輪播圖區塊 = $('<div class="輪播圖"></div>');
   $輪播圖區塊.append($輪播圖容器);
   
-  all內容 = $輪播圖區塊;
-      }
+  all內容 = $('<div class="image-container"></div>').append($輪播圖區塊);  // 新增外層容器
+}
+
+
+    
       // 一般圖片處理
       else if (內容.圖) {
         let $內容圖 = $(`<img class="responsive-image" src="${內容.圖}" loading="lazy">`);
