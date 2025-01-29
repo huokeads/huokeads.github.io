@@ -2,7 +2,7 @@
 <html>
   <head>
     
-    <title>4演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
+    <title>5演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -189,10 +189,10 @@
 
 .輪播圖-images img {
   flex-shrink: 0;
-  width: 100% !important;  /* 修改：強制圖片寬度 100% */
-  height: auto !important;  /* 修改：強制高度自適應 */
-  object-fit: cover;  /* 修改：改為 cover 確保寬度滿版 */
-  max-height: none !important;  /* 修改：移除最大高度限制 */
+  width: 100%;
+  height: auto;
+  object-fit: contain;  /* 改回 contain */
+  object-position: top;  /* 確保靠上對齊 */
   -webkit-user-select: none;
   user-select: none;
 }
@@ -204,9 +204,21 @@
     max-width: 768px;  /* 修改：設定最大寬度 */
   }
 
-    .輪播圖-images img {
-    max-width: 768px;  /* 新增：確保最大寬度一致 */
-    margin: 0 auto;  /* 新增：水平置中 */
+  .輪播圖 {
+    width: 100%;
+    min-height: 200px;  /* 新增：確保容器至少有基本高度 */
+  }
+  
+  .輪播圖-images {
+    height: auto;
+    min-height: 200px;  /* 新增：確保容器至少有基本高度 */
+  }
+  
+  .輪播圖-images img {
+    width: 100%;
+    height: auto;
+    max-width: 768px;
+    margin: 0 auto;
   }
   
 }
