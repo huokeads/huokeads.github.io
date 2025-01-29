@@ -2,7 +2,7 @@
 <html>
   <head>
     
-    <title>1演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
+    <title>2演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -186,7 +186,9 @@
 }
 
 .輪播圖-images img {
-  width: auto;           /* 改為 auto，不強制 100% 寬度 */
+    flex-shrink: 0;  /* 新增：防止圖片被壓縮 */
+  width: 100%;     /* 修改：確保圖片佔滿容器寬度 */
+
   max-width: 100%;       /* 新增：確保不會超出容器 */
   height: auto;
   object-fit: contain;   /* 改為 contain，保持原始比例 */
