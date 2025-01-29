@@ -2,7 +2,7 @@
 <html>
   <head>
     
-    <title>5演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
+    <title>6演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -287,39 +287,6 @@
         100% {transform: translateY(-100%);}
       }
 
-      /* admin */
-      .btn {
-        border: none;
-        padding: 10px 20px;
-        cursor: pointer;
-        border-radius: 5px;
-        margin-top: 10px;
-        width: auto;
-        text-align: center;
-      }
-      .section,
-      nav {display: none;}
-      nav {padding: 1%;}
-      .active {display: block;}
-      .container {
-        max-width: 760px;
-        margin: 2rem auto;
-        padding: 0 1rem;
-      }
-    
-      h1,h2,h3,label {
-        display: block;
-        margin-bottom: 0.5rem;
-        color: var(--標題色);
-      }
-      input,
-      select {
-        width: 100%;
-        padding: 0.8rem;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        font-size: 1rem;
-      }
     </style>
 
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
@@ -334,7 +301,7 @@
   _顯示內容(社交帳號, '社交帳號');
   _輪播圖動();
   _走馬燈動();
-  _去後台();
+
 
   // 恢復影片的播放狀態
   const videoElements = document.querySelectorAll('iframe');
@@ -629,16 +596,6 @@ function _輪播圖動() {
         }
       }
 
-      function _去後台() {
-        admin明文 = false;
-        if ((location.href).indexOf('???') != -1) admin明文 = decodeURIComponent(location.href.split('???')[1]);
-        if (sha256(admin明文) == adp) $('nav').addClass('active');
-      }
-
-      function _導航換頁(page) {
-        $('.section').removeClass('active');
-        $(`#${page}page`).addClass('active');
-      }
 
       // 開闢聯絡卡
       function toggleContact() {
@@ -861,40 +818,7 @@ const 關於我們 = [
     <!-- 回到頂部按鈕 -->
     <div id="scrollTop" class="scroll-top" onclick="scrollToTop()">↑</div>
 
-    <!-- 後台管理介面 -->
-    <nav>
-      <button class="btn" onclick="_導航換頁('走馬燈')">走馬燈</button>
-      <button class="btn" onclick="_導航換頁('產品展示')">產品展示</button>
-      <button class="btn" onclick="_導航換頁('關於我們')">關於我們</button>
-      <button class="btn" onclick="_導航換頁('聯絡資訊')">聯絡資訊</button>
-      <button class="btn" onclick="_導航換頁('社交帳號')">社交帳號</button>
 
-      <!-- 後台頁面 -->
-      <div id="走馬燈page" class="section">
-        <h2>走馬燈管理</h2>
-        <!-- 走馬燈管理內容 -->
-      </div>
-
-      <div id="產品展示page" class="section">
-        <h2>產品展示管理</h2>
-        <!-- 產品展示管理內容 -->
-      </div>
-
-      <div id="關於我們page" class="section">
-        <h2>關於我們管理</h2>
-        <!-- 關於我們管理內容 -->
-      </div>
-
-      <div id="聯絡資訊page" class="section">
-        <h2>聯絡資訊管理</h2>
-        <!-- 聯絡資訊管理內容 -->
-      </div>
-
-      <div id="社交帳號page" class="section">
-        <h2>社交帳號管理</h2>
-        <!-- 社交帳號管理內容 -->
-      </div>
-    </nav>
   </body>
 </html>
 
