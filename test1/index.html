@@ -2,7 +2,7 @@
 <html>
   <head>
     
-    <title>7演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
+    <title>8演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -281,6 +281,13 @@
         padding: 20px;
         background: #f8f8f8;
       }
+
+      .copyright {
+  text-align: center; /* 讓文字置中 */
+  font-size: 14px;  /* 根據需求調整字體大小 */
+  line-height: 1.6; /* 增加行距，讓排版更清晰 */
+  color: #666; /* 使用較柔和的顏色，看起來更專業 */
+}
 
       @keyframes scrollUp {
         0% {transform: translateY(100%);}
@@ -806,10 +813,16 @@ const 關於我們 = [
         <!-- 社交帳號內容會由 JavaScript 動態插入 -->
       </div>
 
+
+
       <!-- 版權資訊 -->
-  <div class="copyright">  
-    <script> $('.copyright').text(`© ${new Date().getFullYear()} All rights reserved by 韓哥接髮`)</script>
-  </div>
+<div class="copyright">
+  <script>
+    const year = new Date().getFullYear();
+    const companyName = "韓哥hange接髮"; // 這裡填入你的公司名稱
+    $('.copyright').html(`© ${year} ${companyName}<br>All rights reserved.`);
+  </script>
+</div>
 
 
       
