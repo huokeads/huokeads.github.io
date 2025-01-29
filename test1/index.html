@@ -2,7 +2,7 @@
 <html>
   <head>
     
-    <title>2演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
+    <title>3演藝界指定！接髮首席設計師｜Morgan摩根｜台北市西門町、新北市、桃園市、基隆縣</title>
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -525,7 +525,9 @@ function _輪播圖動() {
       if (isTransitioning) return;
       isTransitioning = true;
       
-      const containerWidth = images.offsetWidth;
+  const containerWidth = 輪播圖.offsetWidth;  // 修改：使用輪播圖容器的寬度
+  const offset = -currentIndex * containerWidth;
+      
       images.style.transform = `translateX(${-currentIndex * containerWidth}px)`;
       
       // 更新指示器
