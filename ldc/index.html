@@ -33,22 +33,7 @@ send_to: "AW-16941880129/bFlYCI7d6bAaEMGmwo4_",
 });
 </script>
 
-<!-- Event snippet for 無GTM連結的LINE連結點擊 conversion page
-In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. -->
-<script>
-function gtag_report_conversion(url) {
-  var callback = function () {
-    if (typeof(url) != 'undefined') {
-      window.location = url;
-    }
-  };
-  gtag('event', 'conversion', {
-      'send_to': 'AW-16941880129/bFlYCI7d6bAaEMGmwo4_',
-      'event_callback': callback
-  });
-  return false;
-}
-</script>
+
 
     
     <meta charset="UTF-8">
