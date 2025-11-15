@@ -132,6 +132,30 @@
             transition: height 0.3s ease-in-out;
         }
 
+        /* Google Map container */
+        .map-section {
+            width: 90%;
+            /* 寬度為90%，不完全吃滿 */
+            max-width: 760px;
+            /* 最大寬度與其他內容對齊 */
+            margin: 30px auto;
+            /* 上下邊距30px，左右自動置中 */
+            text-align: center;
+            /* 讓標題文字置中 */
+        }
+
+        .map-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            /* 標題與地圖之間的距離 */
+        }
+
+        .map-iframe-container {
+            border: 1px solid #ddd;
+            /* 為地圖加上一個淺灰色邊框 */
+        }
+
         /* line圖示 */
         .social-links {
             margin: 20px;
@@ -327,27 +351,29 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
                 客服與聯絡資訊
                 <span class="toggle-btn" onclick="toggleContact()">+</span>
             </div>
-            <div id="聯絡資訊" class="contact-content">
-                <p>LINE ID：<a href="https://lin.ee/Vu5Gngn" target="_blank" rel="noreferrer noopener">@975hnirv</a></p>
-                <p>營業時間：週一 至 週日｜08:00 - 23:00｜24H皆可加LINE留言盡速回應</p>
-                <p>聯絡電話：0958-700-219</p>
-                <p>聯絡地址：433 台中市沙鹿區文昌街134號</p>
-                <p>
-                    <a href=""></a>
-                </p>
+            <div id="聯絡資訊" class="contact-content"><!-- JS 聯絡資訊內容 --></div>
+        </div>
+
+        <!-- Google Maps Section -->
+        <div class="map-section">
+            <div class="map-title">忠錸搬運 - 總部</div>
+            <div class="map-iframe-container">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3638.397642199952!2d120.5617203759972!3d24.22748897834955!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346915a5554f6f2b%3A0x8f0c29a8f2780e8!2zNDMz5Y-w5Lit5biC5rKZ6bm_5Y2A5paH5piM6KGXMTM06Jmf!5e0!3m2!1szh-TW!2stw!4v1672531200000!5m2!1szh-TW!2stw"
+                    width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
 
-        <!-- Google Map Section -->
-        <div class="map-container">
-            <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3638.397642199952!2d120.56172037534888!3d24.22748897834955!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346915a5554f6f2b%3A0x8f0c29a8f2780e8!2zNDMz5Y-w5Lit5biC5rKZ6bm_5Y2A5paH5piM6KGXMTM06Jmf!5e0!3m2!1szh-TW!2stw!4v1672531200000!5m2!1szh-TW!2stw"
-                style="border:0;" allowfullscreen="" loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <div class="map-section">
+            <div class="map-title">忠錸搬運 - 南區分部</div>
+            <div class="map-iframe-container">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3641.144994970994!2d120.65990837599456!3d24.13131997841318!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34693d9a572a7eaf%3A0x19315f3314d45808!2zNDAy5Y-w5Lit5biC5Y2X5Y2A5b-g5piO5Y2X6LevNzg56Jmf!5e0!3m2!1szh-TW!2stw!4v1731665888000!5m2!1szh-TW!2stw"
+                    width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
         </div>
-
-
-
 
         <div id="社交帳號" class="social-links"><!-- JS 社交帳號內容 --></div>
 
@@ -422,16 +448,24 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
         // 開闢 聯絡卡
         function toggleContact() {
             const content = document.getElementById('聯絡資訊');
-            const btn = document.querySelector('.contact-title .toggle-btn');
+            const btn = document.querySelector('.toggle-btn');
 
-            // 使用 classList.toggle 來切換 is-open class
-            const isOpen = content.classList.toggle('is-open');
-
-            // 根據是否展開來更新按鈕文字
-            if (isOpen) {
-                btn.textContent = '−'; // 使用減號
+            if (content.style.height === '0px' || content.style.height === '') {
+                // 開啟
+                content.style.height = 'auto';
+                const height = content.offsetHeight + 'px'; // 取得實際高度
+                content.style.height = '0px'; // 先設定為 0 以便觸發過渡
+                setTimeout(() => {
+                    content.style.height = height; // 再設定為實際高度
+                }, 0);
+                btn.textContent = '-';
             } else {
-                btn.textContent = '+'; // 使用加號
+                // 關閉
+                content.style.height = content.offsetHeight + 'px'; // 設定為當前高度以觸發過渡
+                setTimeout(() => {
+                    content.style.height = '0px'; // 再設定為 0
+                }, 0);
+                btn.textContent = '+';
             }
         }
 
@@ -553,6 +587,14 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 `}
         ];
+
+        const 聯絡資訊 = [
+            { '字': `LINE ID：<a href="https://lin.ee/Vu5Gngn" target="_blank" rel="noreferrer noopener">@975hnirv</a>` },
+            { '字': `營業時間：週一 至 週日｜08:00 - 23:00｜24H皆可加LINE留言盡速回應` },
+
+            { '字': `聯絡電話：0958-700-219` },
+
+            { '字': `聯絡地址：433 台中市沙鹿區文昌街134號` }];
 
 
         const 社交帳號 = [
@@ -774,6 +816,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
         _顯示內容(走馬燈內容, '走馬燈')
         _顯示內容(關於我們, '關於我們')
+        _顯示內容(聯絡資訊, '聯絡資訊')
         _顯示內容(社交帳號, '社交帳號')
 
         _去後台()
