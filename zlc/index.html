@@ -1,8 +1,10 @@
 <html>
 
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 
     <style>
         * {
@@ -11,6 +13,7 @@
             box-sizing: border-box;
             font-family: "Microsoft JhengHei", Arial, sans-serif;
         }
+
 
         .logo-container {
             height: 50px;
@@ -21,16 +24,19 @@
             align-items: center;
         }
 
+
         .logo {
             color: white;
             font-size: 24px;
             font-weight: bold;
         }
 
+
         .logo img {
             height: 100%;
             width: auto;
         }
+
 
         /* 走馬燈  qqq 修改每段停一下 qqq */
         .marquee-container {
@@ -41,9 +47,11 @@
             background: #343434;
         }
 
+
         .marquee-container:hover .marquee-content {
             animation-play-state: paused;
         }
+
 
         .marquee-content {
             position: absolute;
@@ -52,6 +60,7 @@
             flex-direction: column;
             animation: scrollUp 10s linear infinite;
         }
+
 
         .marquee-item {
             padding: 5px;
@@ -62,14 +71,17 @@
             justify-content: center;
         }
 
+
         .marquee-item a {
             text-decoration: none;
             color: #edff66;
         }
 
+
         .marquee-item a:hover {
             text-decoration: underline;
         }
+
 
         .close-marquee {
             position: absolute;
@@ -79,15 +91,18 @@
             z-index: 2;
         }
 
+
         .image-container {
             width: 100%;
             text-align: center;
         }
 
+
         .responsive-image {
             max-width: 100%;
             height: auto;
         }
+
 
         @media (min-width: 768px) {
             .responsive-image {
@@ -96,6 +111,7 @@
                 max-width: 760px;
             }
         }
+
 
         .company-intro {
             width: 90%;
@@ -106,12 +122,14 @@
             text-align: center;
         }
 
+
         .contact-section {
             width: auto;
             margin: 0 2%;
             padding: 20px;
             line-height: 2;
         }
+
 
         .contact-title {
             font-size: 24px;
@@ -121,16 +139,19 @@
             align-items: center;
         }
 
+
         .toggle-btn {
             cursor: pointer;
             font-size: 24px;
         }
+
 
         .contact-content {
             height: 0;
             overflow: hidden;
             transition: height 0.3s ease-in-out;
         }
+
 
         /* Google Map container */
         .map-section {
@@ -144,6 +165,7 @@
             /* 讓標題文字置中 */
         }
 
+
         .map-title {
             font-size: 1.2em;
             font-weight: bold;
@@ -151,30 +173,36 @@
             /* 標題與地圖之間的距離 */
         }
 
+
         .map-iframe-container {
             border: 1px solid #ddd;
             /* 為地圖加上一個淺灰色邊框 */
         }
+
 
         /* line圖示 */
         .social-links {
             margin: 20px;
         }
 
+
         .line-icon {
             width: 40px;
             height: 40px;
         }
 
+
         .line-icon:hover>path {
             fill: #00B900;
         }
+
 
         .copyright {
             text-align: center;
             padding: 20px;
             background: #f8f8f8;
         }
+
 
         .scroll-top {
             position: fixed;
@@ -192,15 +220,18 @@
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
 
+
         @keyframes scrollUp {
             0% {
                 transform: translateY(100%);
             }
 
+
             100% {
                 transform: translateY(-100%);
             }
         }
+
 
         /* admin */
         .btn {
@@ -213,24 +244,29 @@
             text-align: center;
         }
 
+
         .section,
         nav {
             display: none;
         }
 
+
         nav {
             padding: 1%;
         }
 
+
         .active {
             display: block;
         }
+
 
         .container {
             max-width: 760px;
             margin: 2rem auto;
             padding: 0 1rem;
         }
+
 
         h1,
         h2,
@@ -240,6 +276,7 @@
             margin-bottom: 0.5rem;
             color: var(--標題色);
         }
+
 
         input,
         select {
@@ -251,19 +288,25 @@
         }
     </style>
 
+
     <title>5星級最強服務！居家垃圾、事業大型廢棄物清運｜忠錸清運｜中部地區首選｜台中市、彰化縣、苗栗縣、南投縣</title>
+
 
     <meta name="description"
         content="忠錸清運，大台中地區搬家清運你不悔的選擇！加LINE即可享有免費到府、免費線上估價！如：大小型垃圾清運、居家、家庭廢棄物清運、大小型生活雜物、鍋碗瓢盆、廢家電清運、搬家清運、大型家具清運、大型廢棄物清運、大型傢俱清運、事業、裝潢廢棄物清運….等，你想的到的全都一條龍幫你服務到家！就是讓你完全不用擔心任何麻煩！">
 
+
     <meta content="忠錸清運" name="copyright">
+
 
     <meta property="og:site_name" content="忠錸清運">
     <meta property="og:title" content="5星級最強服務！居家垃圾、事業大型廢棄物清運｜忠錸清運｜中部地區首選｜台中市、彰化縣、苗栗縣、南投縣">
     <meta property="og:description"
         content="忠錸清運，大台中地區搬家清運你不悔的選擇！加LINE即可享有免費到府、免費線上估價！如：大小型垃圾清運、居家、家庭廢棄物清運、大小型生活雜物、鍋碗瓢盆、廢家電清運、搬家清運、大型家具清運、大型廢棄物清運、大型傢俱清運、事業、裝潢廢棄物清運….等，你想的到的全都一條龍幫你服務到家！就是讓你完全不用擔心任何麻煩！">
 
+
     <meta property="og:url" content="https://huokeads.github.io/zlc">
+
 
     <meta property="og:image" content="https://huokeads.github.io/zlc/C-og-image.jpg">
     <meta property="og:image:alt" content="5星級最強服務！居家垃圾、事業大型廢棄物清運｜忠錸清運｜中部地區首選｜台中市、彰化縣、苗栗縣、南投縣">
@@ -272,7 +315,12 @@
     <meta property="og:type" content="website">
     <meta property="fb:app_id" content="你的FacebookAppID">
 
+
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+
+
+
+
 
 
 
@@ -283,9 +331,14 @@
 
 
 
+
+
+
 </head>
 
+
 <body>
+
 
     <!-- Google Tag Manager (noscript) --> <noscript><iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-NXS2MBFS" height="0" width="0"
@@ -309,9 +362,29 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <!--
 /* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
 
       :::::::::       ::::::::       :::::::::    :::   :::
      :+:    :+:     :+:    :+:      :+:    :+:   :+:   :+:
@@ -321,9 +394,11 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
  #+#    #+#     #+#    #+#      #+#    #+#      #+#
 #########       ########       #########       ###
 
+
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
 -->
+
 
     <nav style="text-align: center;">
         <button class="btn" id="主頁btn" onclick="_導航換頁('主頁')">主頁</button>
@@ -331,20 +406,27 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     </nav>
 
 
+
+
     <section id="主頁page" class="section active">
+
 
         <div class="logo-container">
             <div class="logo"><img id="logo" alt="忠錸清運"></div>
         </div>
+
 
         <div class="marquee-container" id="marqueeContainer">
             <div class="close-marquee" onclick="closeMarquee()">×</div>
             <div id="走馬燈" class="marquee-content"><!-- JS 走馬燈內容 --></div>
         </div>
 
+
         <div id="產品展示"><!-- JS 產品展示內容 --></div>
 
+
         <div id="關於我們" class="company-intro"><!-- JS 關於我們內容 --></div>
+
 
         <div class="contact-section">
             <div class="contact-title">
@@ -354,16 +436,18 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
             <div id="聯絡資訊" class="contact-content"><!-- JS 聯絡資訊內容 --></div>
         </div>
 
+
         <!-- Google Maps Section -->
         <div class="map-section">
             <div class="map-title">忠錸搬運 - 總部</div>
             <div class="map-iframe-container">
                 <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3638.397642199952!2d120.56172037535069!3d24.22748897834955!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346915a5554f6f2b%3A0x8f0c29a8f2780e8!2z5b-g6Y6u5ouJ5a62!5e0!3m2!1szh-TW!2stw!4v1731666123456!5m2!1szh-TW!2stw"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3637.971842881109!2d120.5624431!3d24.242037499999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346915698865e9d1%3A0xc75882d9ec759636!2zLeW_oOmMuOaQrOacrOS7o-iZn-WPsOS4reWKoOWFjeWPsOS4reWKoOWFjeWFs-WPsOS4reWKoOWIhuWIq-WPsOS4reWFs-aWh-e1oeW6l-aOpS_msLTpmL_liqDlhY3msLTpmL_liqDlhY3lhbPlpY3lj7Dlm57ph4zotoXliqDlhY0!5e0!3m2!1szh-TW!2stw!4v1731666240000!5m2!1szh-TW!2stw"
                     width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy"
                     referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
+
 
         <div class="map-section">
             <div class="map-title">忠錸搬運 - 南區分部</div>
@@ -375,15 +459,24 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
             </div>
         </div>
 
+
         <div id="社交帳號" class="social-links"><!-- JS 社交帳號內容 --></div>
+
 
         <div class="copyright">
             <script> $('.copyright').text(`© ${new Date().getFullYear()} All rights reserved by 忠錸清運`)</script>
         </div>
 
+
         <div class="scroll-top" id="scrollTop" onclick="scrollToTop()">↑</div>
 
+
     </section>
+
+
+
+
+
 
 
 
@@ -391,17 +484,41 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
     <section id="設置page" class="section">
 
+
         <div class="container">
+
 
             <h2>您的商家名稱</h2>
             <input type="text" id="公司名Input" placeholder="請修改您的商家名稱" title="請修改您的商家名稱">
+
+
 
 
             <button class="btn"
                 onclick="_更222新野('公司資料', ['公司名Input','公司簡介Input', '公司wsInput', '公司地址Input', '營業時間Input', '打烊時間Input', '每時段Input', '時段做客上限Input', '主題色Input', '按鈕色Input', '標題色Input', '文字色Input'])">更新公司資料</button>
         </div>
 
+
     </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -423,9 +540,10 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
     <script>
 
+
         /* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
         $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-  
+ 
               ::::::::       ::::::::       ::::::::
             :+:    :+:     :+:    :+:     :+:    :+:
           +:+            +:+            +:+
@@ -433,9 +551,13 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
         +#+                   +#+            +#+
         #+#    #+#     #+#    #+#     #+#    #+#
         ########       ########       ########
-  
+ 
         @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
         @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+
+
+
+
 
 
 
@@ -445,10 +567,12 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
             document.getElementById('marqueeContainer').style.display = 'none';
         }
 
+
         // 開闢 聯絡卡
         function toggleContact() {
             const content = document.getElementById('聯絡資訊');
             const btn = document.querySelector('.toggle-btn');
+
 
             if (content.style.height === '0px' || content.style.height === '') {
                 // 開啟
@@ -469,6 +593,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
             }
         }
 
+
         // 回頁頂
         function scrollToTop() {
             window.scrollTo({
@@ -477,11 +602,13 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
             });
         }
 
+
         // 捲動顯示回頂鍵
         window.onscroll = function () {
             const scrollTop = document.getElementById('scrollTop');
             const logo = document.querySelector('.logo-container');
             const logoBottom = logo.offsetTop + logo.offsetHeight;
+
 
             if (window.pageYOffset > logoBottom) {
                 scrollTop.style.display = 'flex';
@@ -513,9 +640,33 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         /* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
         $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-  
+ 
               :::::::::           :::    :::::::::::           :::
             :+:    :+:        :+: :+:      :+:             :+: :+:
             +:+    +:+       +:+   +:+     +:+            +:+   +:+
@@ -523,9 +674,11 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
           +#+    +#+      +#+     +#+    +#+           +#+     +#+
         #+#    #+#      #+#     #+#    #+#           #+#     #+#
         #########       ###     ###    ###           ###     ###
-  
+ 
         @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
         @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+
+
 
 
         let 產品展示內容 = [
@@ -554,9 +707,14 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
             { '圖': '023.webp', 'url': '' },
             { '圖': '024.webp', 'url': 'https://lin.ee/Vu5Gngn' },
 
+
             { '圖': 'C-og-image.jpg', 'url': '' },
 
+
         ];
+
+
+
 
 
 
@@ -565,48 +723,57 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
             { '字': '🌟 點這裡！即可快速加LINE使用最高優惠 ✨', 'url': 'https://lin.ee/Vu5Gngn' }
         ];
 
+
         const 關於我們 = [
             {
                 '字': `
 
+
 忠錸清運<br>
-搬家清運找我就對了！	<br>
-中部地區5星級最強清運首選！	<br>
-各式各樣大型小型清運皆可	<br>
+搬家清運找我就對了！    <br>
+中部地區5星級最強清運首選！ <br>
+各式各樣大型小型清運皆可    <br>
 <br>
-廢棄物清運｜大小型垃圾清運	<br>
-居家、家庭廢棄物清運	<br>
-大小型生活雜物、鍋碗瓢盆	<br>
-廢家電清運｜搬家清運	<br>
+廢棄物清運｜大小型垃圾清運  <br>
+居家、家庭廢棄物清運    <br>
+大小型生活雜物、鍋碗瓢盆    <br>
+廢家電清運｜搬家清運    <br>
 <br>
-大型家具清運 | 廢棄物清運公司	<br>
-家庭廢棄清運｜生活廢棄物清運	<br>
-事業廢棄物清運｜各式特殊物清運	<br>
-商店運營物清運｜家電廢棄物清運	<br>
-一般垃圾類清運	<br>
+大型家具清運 | 廢棄物清運公司   <br>
+家庭廢棄清運｜生活廢棄物清運    <br>
+事業廢棄物清運｜各式特殊物清運  <br>
+商店運營物清運｜家電廢棄物清運  <br>
+一般垃圾類清運  <br>
 <br>
-台中廢棄物清運｜彰化廢棄物清運	<br>
-南投廢棄物清運｜苗栗廢棄物清運	<br>
-大型廢棄物清運｜大型傢俱清運	<br>
-垃圾清運｜大型垃圾清運	<br>
-環保清運｜環保垃圾清運	<br>
-環保廢棄物清運｜大型傢俱丟棄….等	<br>
-我們全都可以一條龍幫你服務到家！	<br>
+台中廢棄物清運｜彰化廢棄物清運  <br>
+南投廢棄物清運｜苗栗廢棄物清運  <br>
+大型廢棄物清運｜大型傢俱清運    <br>
+垃圾清運｜大型垃圾清運  <br>
+環保清運｜環保垃圾清運  <br>
+環保廢棄物清運｜大型傢俱丟棄….等    <br>
+我們全都可以一條龍幫你服務到家！    <br>
 <br>
-加LINE發問即可享有免費線上估價！	<br>
-廢棄物清運價格線上立即諮詢！	<br>
+加LINE發問即可享有免費線上估價！    <br>
+廢棄物清運價格線上立即諮詢！    <br>
+
+
 
 
 `}
         ];
 
+
         const 聯絡資訊 = [
             { '字': `LINE ID：<a href="https://lin.ee/Vu5Gngn" target="_blank" rel="noreferrer noopener">@975hnirv</a>` },
             { '字': `營業時間：週一 至 週日｜08:00 - 23:00｜24H皆可加LINE留言盡速回應` },
 
+
             { '字': `聯絡電話：0958-700-219` },
 
+
             { '字': `聯絡地址：433 台中市沙鹿區文昌街134號` }];
+
+
 
 
         const 社交帳號 = [
@@ -642,6 +809,30 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         /* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
         $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
               :::::::::           :::        ::::::::       ::::::::::
@@ -651,26 +842,32 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
           +#+             +#+     +#+   +#+   +#+#      +#+
          #+#             #+#     #+#   #+#    #+#      #+#
         ###             ###     ###    ########       ##########
-        
+       
         @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
         @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
 
+
         // 顯示內容
         function _顯示內容(data, sel) {
+
 
             cont = 0;
             for (let 內容 of data) {
                 let 單個內容, all內容
 
+
                 /***************** 走馬燈 ******************/
                 if (sel == '走馬燈') all內容 = `<div class="marquee-item"><a href="${內容.url}" target="_blank" rel="noopener noreferrer">${內容.字}</a></div>`;
+
 
                 /***************** 產品展示 ******************/
                 if (sel == '產品展示') {
                     $內容圖 = $(`<img class="responsive-image" src="${內容.圖}" >`);
                     單個內容 = $內容圖
 
+
                     if (內容.url != '') 單個內容 = $(`<a href="${內容.url}" target="_blank"></a>`).append($內容圖); // 包裹連結並插入圖片
+
 
                     all內容 = $(`<div class="image-container"></div>`).append(單個內容); // 包裹圖片容器
                     // 加載錯誤時隱藏該圖片
@@ -679,14 +876,18 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
                     });
                 }
 
+
                 /***************** 關於我們 ******************/
                 if (sel == '關於我們') all內容 = `<p>${內容.字}</p>`;
+
 
                 /***************** 聯絡資訊 ******************/
                 if (sel == '聯絡資訊') all內容 = `<p>${內容.字}</p>`;
 
+
                 /***************** 社交帳號 ******************/
                 if (sel == '社交帳號') all內容 = 內容.html;
+
 
                 // 加入DOM
                 $(`#${sel}`).append(all內容);
@@ -695,18 +896,26 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 
 
+
+
+
         function _顯示LogoIcon() {
+
+
+
 
 
 
             const logoImage = "A-頁首LOGO.png"; // LOGO 圖片路徑
             const newFavicon = "B-Favicon分頁圖示.png";// 新的分頁圖示檔案名稱
 
+
             // 將 LOGO 圖片設置到 <img> 標籤
             $("#logo").attr("src", logoImage).on("error", function () {
                 // 如果圖片加載失敗，替換為預設圖片
                 $(this).attr("src", defaultImage);
             });
+
 
             // Icon
             // 檢查是否已存在 <link rel="icon">
@@ -721,7 +930,35 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
                 );
             }
 
+
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -758,9 +995,10 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
           +#+     +#+    +#+    +#+      +#+       +#+         +#+           +#+  +#+#+#
          #+#     #+#    #+#    #+#      #+#       #+#         #+#           #+#   #+#+#
         ###     ###    #########       ###       ###     ###########       ###    ####
-        
+       
         @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
         @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+
 
         function _去後台() {
             admin明文 = false;
@@ -768,12 +1006,43 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
             if (sha256(admin明文) == adp) $('nav').addClass('active');
         }
 
+
         function _導航換頁(page) {
             // 隱頁 - .active
             $('.section').removeClass('active');
             // 顯頁 + .active
             $(`#${page}page`).addClass('active');
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -818,11 +1087,19 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 
 
+
+
+
         _顯示LogoIcon()
+
+
 
 
         //_產品展示BBB()
         _顯示內容(產品展示內容, '產品展示')
+
+
+
 
 
 
@@ -831,7 +1108,19 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
         _顯示內容(聯絡資訊, '聯絡資訊')
         _顯示內容(社交帳號, '社交帳號')
 
+
         _去後台()
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -846,4 +1135,6 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     </script>
 </body>
 
+
 </html>
+
