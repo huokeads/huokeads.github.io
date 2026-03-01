@@ -9,13 +9,16 @@
             document.title = "良遷搬家｜北部最強首選！專業精緻搬遷，從套房到廠辦都能搬！";});
     </script>
 
-<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16603650596"></script>
+
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
+
+  // 2. 在這裡初始化兩個帳戶
   gtag('config', 'AW-16603650596');
+  gtag('config', 'AW-16954481160');
 </script>
 
 <script>
@@ -24,12 +27,20 @@ window.addEventListener("load", function(event) {
         var dom = e.target.closest('[href*="lin.ee"]');
         if(dom == null) return;
         
+        // 3. 點擊時，同時向兩個帳戶發送轉換
         gtag('event', 'conversion', {
-            send_to: "AW-16603650596/A5XTCIXwk4AcEKS0nu09",
+            'send_to': 'AW-16603650596/A5XTCIXwk4AcEKS0nu09'
+        }); 
+
+        gtag('event', 'conversion', {
+            'send_to': 'AW-16954481160/nenYCJXM67UaEIi0w5Q_'
         }); 
     });
 });
 </script>
+
+
+
  
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -881,6 +892,7 @@ const 關於我們 = [
 
   </body>
 </html>
+
 
 
 
