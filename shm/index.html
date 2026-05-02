@@ -19,6 +19,31 @@
     <meta property="og:type" content="website">
     <meta property="fb:app_id" content="你的FacebookAppID">
 
+
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-16603650596"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-16603650596');
+</script>
+
+<script>
+window.addEventListener("load", function(event) { 
+    document.addEventListener('click', function(e){
+        var dom = e.target.closest('[href*="lin.ee"]');
+        if(dom == null) return;
+        
+        gtag('event', 'conversion', {
+            send_to: "AW-16603650596/nS4uCLmXl6YcEKS0nu09",
+        }); 
+    });
+});
+</script>
+
+
 <!-- Google Tag Manager --> <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-5ZV62WRD');</script> <!-- End Google Tag Manager -->
 
     <style>
