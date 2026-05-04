@@ -3,6 +3,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-16639727125"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-16639727125');
+</script>
+
+<script>
+window.addEventListener("load", function(event) { 
+    document.addEventListener('click', function(e){
+        var dom = e.target.closest('[href*="lin.ee"]');
+        if(dom == null) return;
+        
+        gtag('event', 'conversion', {
+            send_to: "AW-16639727125/Ckx-CMaPuqYcEJWsuP49",
+        }); 
+    });
+});
+</script>
+
+
+
     <style>
       * {margin: 0;padding: 0;box-sizing: border-box;font-family: "Microsoft JhengHei", Arial, sans-serif;}
       .logo-container {height: 50px;width: 100%;background-color: #04B6AB;display: flex;justify-content: center;align-items: center;}
